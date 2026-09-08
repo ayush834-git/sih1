@@ -1,0 +1,30 @@
+{
+  "experiment_name": "security_bridge_validation_v1",
+  "timestamp": "2026-08-29T14:37:16.471129",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "random_seed": 42,
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "fixture_results_json": "artifacts\\experiments\\security_bridge_validation_v1\\fixture_results.json",
+    "discrimination_summary_json": "artifacts\\experiments\\security_bridge_validation_v1\\discrimination_summary.json",
+    "stage_collapse_report_json": "artifacts\\experiments\\security_bridge_validation_v1\\stage_collapse_report.json",
+    "forecast_evidence_examples_json": "artifacts\\experiments\\security_bridge_validation_v1\\forecast_evidence_examples.json",
+    "attack_technique_hypotheses_json": "artifacts\\experiments\\security_bridge_validation_v1\\attack_technique_hypotheses.json",
+    "results_summary_json": "artifacts\\experiments\\security_bridge_validation_v1\\results_summary.json"
+  }
+}

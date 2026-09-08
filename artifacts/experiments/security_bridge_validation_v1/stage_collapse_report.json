@@ -1,0 +1,22 @@
+{
+  "evaluation": "Anti-Stage-Collapse Check",
+  "status": "PASS",
+  "total_fixtures": 6,
+  "distinct_primary_stages": 5,
+  "stage_distribution": {
+    "Collection / Exfiltration": 1,
+    "Reconnaissance": 2,
+    "Impact / Denial of Service": 1,
+    "Initial Access / Delivery": 1,
+    "Unknown": 1
+  },
+  "fixture_to_stage_mapping": {
+    "1_benign_baseline": "Unknown",
+    "2_port_exploration": "Reconnaissance",
+    "3_connection_flooding": "Impact / Denial of Service",
+    "4_sustained_outbound_surge": "Collection / Exfiltration",
+    "5_timing_anomaly": "Initial Access / Delivery",
+    "6_ambiguous_mixed": "Reconnaissance"
+  },
+  "conclusion": "PASS: Controlled fixtures produce distinct, non-collapsed stage hypotheses across benign, reconnaissance, flooding, exfiltration, and timing patterns."
+}

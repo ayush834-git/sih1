@@ -1,0 +1,13 @@
+{
+  "run_id": "live-run-20260905-170226",
+  "total_packets": 726,
+  "syn_packets": 133,
+  "ack_packets": 658,
+  "rst_packets": 0,
+  "fin_packets": 132,
+  "psh_packets": 132,
+  "total_wire_bytes": 39084,
+  "total_payload_bytes": 5544,
+  "distinct_src_ports": 75,
+  "distinct_dst_ports": 72
+}

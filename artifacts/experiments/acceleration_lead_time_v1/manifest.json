@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "experiment_id": "acceleration_lead_time_comparative_v1",
+    "timestamp": "2026-09-07T22:25:53.636298",
+    "action_duration_default_s": 20,
+    "sensitivity_durations_s": [
+      5,
+      10,
+      20,
+      30
+    ],
+    "calibration_metadata": {
+      "calibration_dataset": "Thursday-01-03-2018_TrafficForML_CICFlowMeter.states.jsonl",
+      "calibration_window": "2018-03-01T04:00:00Z to 2018-03-01T08:00:00Z",
+      "n_calibration_windows": 625,
+      "held_out_attack_blocks_accessed": false,
+      "parameter_selection_method": "Empirical pre-test distribution quantile & robust dispersion"
+    },
+    "frozen_accel_thresholds": {
+      "dst_port_diversity": 10.0,
+      "flow_count": 50.0,
+      "byte_rate": 25000.0
+    }
+  },
+  "control_baseline": {
+    "lead_vs_base_stats": {
+      "mean": 12.5,
+      "median": 10.0,
+      "std": 15.0,
+      "min": 0.0,
+      "max": 30.0,
+      "iqr": 22.5,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 25.0
+    },
+    "lead_vs_actual_stats": {
+      "mean": 30.0,
+      "median": 30.0,
+      "std": 0.0,
+      "min": 30.0,
+      "max": 30.0,
+      "iqr": 0.0,
+      "ci_95_lower": 30.0,
+      "ci_95_upper": 30.0
+    },
+    "sensitivity_table": {
+      "5s": {
+        "duration_s": 5,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "10s": {
+        "duration_s": 10,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "20s": {
+        "duration_s": 20,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "30s": {
+        "duration_s": 30,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      }
+    },
+    "failure_counts": {
+      "NONE": 4,
+      "MISSED": 0,
+      "LATE_VS_BASELINE": 2,
+      "INSUFFICIENT_TIME": 0,
+      "FALSE_EARLY": 2
+    }
+  },
+  "treatment_acceleration": {
+    "lead_vs_base_stats": {
+      "mean": 12.5,
+      "median": 10.0,
+      "std": 15.0,
+      "min": 0.0,
+      "max": 30.0,
+      "iqr": 22.5,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 25.0
+    },
+    "lead_vs_actual_stats": {
+      "mean": 30.0,
+      "median": 30.0,
+      "std": 0.0,
+      "min": 30.0,
+      "max": 30.0,
+      "iqr": 0.0,
+      "ci_95_lower": 30.0,
+      "ci_95_upper": 30.0
+    },
+    "sensitivity_table": {
+      "5s": {
+        "duration_s": 5,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "10s": {
+        "duration_s": 10,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "20s": {
+        "duration_s": 20,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      },
+      "30s": {
+        "duration_s": 30,
+        "actionable_count": 2,
+        "total": 4,
+        "actionable_percent": 50.0
+      }
+    },
+    "failure_counts": {
+      "NONE": 4,
+      "MISSED": 0,
+      "LATE_VS_BASELINE": 2,
+      "INSUFFICIENT_TIME": 0,
+      "FALSE_EARLY": 2
+    }
+  },
+  "per_slice_comparison": [
+    {
+      "slice_id": "Infiltration_block-1-wed_idx252",
+      "scenario": "Infiltration",
+      "actual_onset_w": 3,
+      "base_alert_w": 3,
+      "ctrl_alert_w": 0,
+      "treat_alert_w": 0,
+      "ctrl_lead_vs_base_s": 30.0,
+      "treat_lead_vs_base_s": 30.0,
+      "ctrl_lead_vs_actual_s": 30.0,
+      "treat_lead_vs_actual_s": 30.0,
+      "ctrl_actionable_20s": true,
+      "treat_actionable_20s": true,
+      "ctrl_failure_category": "NONE",
+      "treat_failure_category": "NONE"
+    },
+    {
+      "slice_id": "Infiltration_block-2-wed_idx3540",
+      "scenario": "Infiltration",
+      "actual_onset_w": 3,
+      "base_alert_w": 2,
+      "ctrl_alert_w": 0,
+      "treat_alert_w": 0,
+      "ctrl_lead_vs_base_s": 20.0,
+      "treat_lead_vs_base_s": 20.0,
+      "ctrl_lead_vs_actual_s": 30.0,
+      "treat_lead_vs_actual_s": 30.0,
+      "ctrl_actionable_20s": true,
+      "treat_actionable_20s": true,
+      "ctrl_failure_category": "NONE",
+      "treat_failure_category": "NONE"
+    },
+    {
+      "slice_id": "Infiltration_block-3-thu_idx4680",
+      "scenario": "Infiltration",
+      "actual_onset_w": 3,
+      "base_alert_w": 0,
+      "ctrl_alert_w": 0,
+      "treat_alert_w": 0,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 30.0,
+      "treat_lead_vs_actual_s": 30.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "LATE_VS_BASELINE",
+      "treat_failure_category": "LATE_VS_BASELINE"
+    },
+    {
+      "slice_id": "Infiltration_block-4-thu_idx7542",
+      "scenario": "Infiltration",
+      "actual_onset_w": 3,
+      "base_alert_w": 0,
+      "ctrl_alert_w": 0,
+      "treat_alert_w": 0,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 30.0,
+      "treat_lead_vs_actual_s": 30.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "LATE_VS_BASELINE",
+      "treat_failure_category": "LATE_VS_BASELINE"
+    },
+    {
+      "slice_id": "Benign_Control_1",
+      "scenario": "Benign",
+      "actual_onset_w": null,
+      "base_alert_w": null,
+      "ctrl_alert_w": null,
+      "treat_alert_w": null,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 0.0,
+      "treat_lead_vs_actual_s": 0.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "NONE",
+      "treat_failure_category": "NONE"
+    },
+    {
+      "slice_id": "Benign_Control_2",
+      "scenario": "Benign",
+      "actual_onset_w": null,
+      "base_alert_w": null,
+      "ctrl_alert_w": 1,
+      "treat_alert_w": 1,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 0.0,
+      "treat_lead_vs_actual_s": 0.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "FALSE_EARLY",
+      "treat_failure_category": "FALSE_EARLY"
+    },
+    {
+      "slice_id": "Benign_Control_3",
+      "scenario": "Benign",
+      "actual_onset_w": null,
+      "base_alert_w": null,
+      "ctrl_alert_w": 0,
+      "treat_alert_w": 0,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 0.0,
+      "treat_lead_vs_actual_s": 0.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "FALSE_EARLY",
+      "treat_failure_category": "FALSE_EARLY"
+    },
+    {
+      "slice_id": "Benign_Control_4",
+      "scenario": "Benign",
+      "actual_onset_w": null,
+      "base_alert_w": null,
+      "ctrl_alert_w": null,
+      "treat_alert_w": null,
+      "ctrl_lead_vs_base_s": 0.0,
+      "treat_lead_vs_base_s": 0.0,
+      "ctrl_lead_vs_actual_s": 0.0,
+      "treat_lead_vs_actual_s": 0.0,
+      "ctrl_actionable_20s": false,
+      "treat_actionable_20s": false,
+      "ctrl_failure_category": "NONE",
+      "treat_failure_category": "NONE"
+    }
+  ],
+  "n_slices": 8,
+  "n_attack_slices": 4,
+  "n_control_slices": 4
+}

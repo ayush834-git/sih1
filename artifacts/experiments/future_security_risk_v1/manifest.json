@@ -1,0 +1,30 @@
+{
+  "experiment_id": "future_security_risk_v1",
+  "timestamp": "2026-08-29T19:07:55.982626",
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "artifacts": {
+    "fixture_results_csv": "artifacts\\experiments\\future_security_risk_v1\\fixture_results.csv",
+    "contradiction_results_csv": "artifacts\\experiments\\future_security_risk_v1\\contradiction_results.csv",
+    "infiltration_block_summary_csv": "artifacts\\experiments\\future_security_risk_v1\\infiltration_block_summary.csv",
+    "horizon_risk_csv": "artifacts\\experiments\\future_security_risk_v1\\horizon_risk.csv",
+    "risk_explanations_jsonl": "artifacts\\experiments\\future_security_risk_v1\\risk_explanations.jsonl",
+    "risk_scores_jsonl": "artifacts\\experiments\\future_security_risk_v1\\risk_scores.jsonl",
+    "results_summary_json": "artifacts\\experiments\\future_security_risk_v1\\results_summary.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "scenario": "demo_recon_15s",
+  "timeline_window": "w06 (060s)",
+  "ui_headline": "WHY RECONNAISSANCE HYPOTHESIS STRENGTHENED",
+  "primary_stage": "Reconnaissance",
+  "confidence": 0.85,
+  "trust_level": "HIGH",
+  "top_contributing_factors": [
+    {
+      "feature": "dst_port_diversity",
+      "direction": "POSITIVE",
+      "current_value": 16.0,
+      "predicted_delta": 10.0,
+      "evidence_type": "BOTH",
+      "explanation_text": "Observed dst_port_diversity elevation (16.0) is reinforced by forecasted growth (+10.0)."
+    },
+    {
+      "feature": "flow_count",
+      "direction": "POSITIVE",
+      "current_value": 45.0,
+      "predicted_delta": 0.0,
+      "evidence_type": "CURRENT",
+      "explanation_text": "Observed flow_count is currently elevated (45.0) relative to baseline (12.0)."
+    },
+    {
+      "feature": "syn_ratio",
+      "direction": "POSITIVE",
+      "current_value": 0.25,
+      "predicted_delta": 0.0,
+      "evidence_type": "CURRENT",
+      "explanation_text": "Observed syn_ratio is currently elevated (0.2) relative to baseline (0.1)."
+    }
+  ],
+  "current_evidence_summary": "Observed destination port diversity elevated to 16 distinct ports with positive SYN activity.",
+  "forecast_evidence_summary": "Model projects multi-step continuation of port scanning across upcoming 10-30s windows.",
+  "counter_evidence_and_alternatives": {
+    "counter_evidence": [
+      "Target endpoints responding normally",
+      "No lateral fan-out telemetry available"
+    ],
+    "alternative_explanations": [
+      "Service discovery / network inventory scanning",
+      "Administrative vulnerability assessment"
+    ]
+  },
+  "scientific_disclaimer": "Feature contributions indicate statistical alignment with known behavioural scanning dynamics, not verified attacker intent or causal attribution."
+}

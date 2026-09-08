@@ -1,0 +1,24 @@
+{
+  "experiment_name": "demo_validation_v1",
+  "timestamp": "2026-08-29T14:54:12.284221",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "artifact_paths": {
+    "results_summary_json": "artifacts\\experiments\\demo_validation_v1\\results_summary.json"
+  }
+}

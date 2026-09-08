@@ -1,0 +1,3 @@
+dataset_name,attack_family,relationship_to_training,normalized_mae,directional_accuracy,directional_accuracy_nonzero,sample_count
+Thursday-01 Test Split (Within-Family Held-Out),Infiltration,Held-Out Chronological Split (Same Attack Family),188.37,0.681,0.6956,1682
+Wednesday-21 Slice (Cross-Family Unseen),DDoS-HOIC,Unseen Attack Family (Zero Training Exposure),1.88,0.5383,0.646,40

@@ -1,0 +1,69 @@
+{
+  "experiment_name": "delta_baseline_v2",
+  "timestamp": "2026-08-29T13:51:53.933432",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "history_depth": 6,
+  "source_hashes": {
+    "wednesday": "8d9d6377bfb619b46ce780f6b99628afe950197226ed39f55281ef090b4f8572",
+    "thursday": "ccff194830c3e43f75b638901a64152df99fde2de535868c9f04a40da0b08d12"
+  },
+  "feature_names": [
+    "flow_count",
+    "byte_rate",
+    "packet_rate",
+    "mean_flow_duration",
+    "dst_port_diversity",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "syn_ratio",
+    "rst_ratio",
+    "iat_mean",
+    "iat_std",
+    "pkt_size_mean",
+    "pkt_size_std",
+    "byte_variance"
+  ],
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "scaler_method": "RobustScaleStatistics(IQR with MAD/std fallback)",
+  "training_scales": {
+    "flow_count": 101.25,
+    "byte_rate": 22080.449999999997,
+    "packet_rate": 106.44999999999999,
+    "mean_flow_duration": 11.134270584081989,
+    "dst_port_diversity": 14.0,
+    "syn_count": 12.0,
+    "ack_count": 30.0,
+    "rst_count": 28.0,
+    "syn_ratio": 0.010487405127076953,
+    "rst_ratio": 0.01496085782291364,
+    "iat_mean": 1.545413509614613,
+    "iat_std": 1.1545547271648522,
+    "pkt_size_mean": 38.78865231968877,
+    "pkt_size_std": 61.60741834470337,
+    "byte_variance": 32070171.62299914
+  },
+  "artifact_paths": {
+    "comparison_table_csv": "artifacts\\experiments\\delta_baseline_v2\\comparison_table.csv",
+    "per_feature_results_csv": "artifacts\\experiments\\delta_baseline_v2\\per_feature_results.csv",
+    "ar_order_sensitivity_csv": "artifacts\\experiments\\delta_baseline_v2\\ar_order_sensitivity.csv",
+    "behavioural_dimensions_csv": "artifacts\\experiments\\delta_baseline_v2\\behavioural_dimensions.csv",
+    "per_block_results_csv": "artifacts\\experiments\\delta_baseline_v2\\per_block_results.csv",
+    "summary_json": "artifacts\\experiments\\delta_baseline_v2\\results_summary.json"
+  }
+}

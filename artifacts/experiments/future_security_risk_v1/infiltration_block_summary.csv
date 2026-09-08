@@ -1,0 +1,5 @@
+block_id,block_name,source_day,state_count,dominant_stage,mean_risk_r0,median_risk_r0,mean_risk_r1_10s,mean_risk_r2_20s,mean_risk_r3_30s,min_risk,max_risk
+block-1-wed,Wednesday Block 1 (01:42 - 02:39),Wednesday,343,Reconnaissance,0.3256,0.3443,0.2895,0.2075,0.1383,0.1463,0.6828
+block-2-wed,Wednesday Block 2 (10:50 - 12:04),Wednesday,445,Reconnaissance,0.3368,0.3443,0.2994,0.2147,0.1431,0.1463,0.6828
+block-3-thu,Thursday Block 3 (02:00 - 03:36),Thursday,577,Reconnaissance,0.2909,0.2525,0.2585,0.1854,0.1236,0.1463,0.6828
+block-4-thu,Thursday Block 4 (09:57 - 10:54),Thursday,343,Reconnaissance,0.2904,0.2525,0.2582,0.1851,0.1234,0.1463,0.6828

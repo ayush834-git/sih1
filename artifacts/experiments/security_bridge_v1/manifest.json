@@ -1,0 +1,51 @@
+{
+  "experiment_name": "security_bridge_v1",
+  "timestamp": "2026-08-29T14:33:25.444201",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "random_seed": 42,
+  "source_hashes": {
+    "wednesday": "8d9d6377bfb619b46ce780f6b99628afe950197226ed39f55281ef090b4f8572",
+    "thursday": "ccff194830c3e43f75b638901a64152df99fde2de535868c9f04a40da0b08d12"
+  },
+  "feature_names": [
+    "flow_count",
+    "byte_rate",
+    "packet_rate",
+    "mean_flow_duration",
+    "dst_port_diversity",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "syn_ratio",
+    "rst_ratio",
+    "iat_mean",
+    "iat_std",
+    "pkt_size_mean",
+    "pkt_size_std",
+    "byte_variance"
+  ],
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "signature_results_jsonl": "artifacts\\experiments\\security_bridge_v1\\signature_results.jsonl",
+    "stage_hypotheses_jsonl": "artifacts\\experiments\\security_bridge_v1\\stage_hypotheses.jsonl",
+    "attack_technique_hypotheses_jsonl": "artifacts\\experiments\\security_bridge_v1\\attack_technique_hypotheses.jsonl",
+    "block_summary_csv": "artifacts\\experiments\\security_bridge_v1\\block_summary.csv",
+    "reconsideration_examples_json": "artifacts\\experiments\\security_bridge_v1\\reconsideration_examples.json",
+    "results_summary_json": "artifacts\\experiments\\security_bridge_v1\\results_summary.json"
+  }
+}

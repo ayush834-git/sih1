@@ -1,0 +1,4 @@
+hypothesis,perturbed_feature,base_value,perturbed_value,base_confidence,perturbed_confidence,confidence_shift,expected_direction,direction_validated
+Reconnaissance,dst_port_diversity,5.0,25.0,0.55,0.85,0.3,INCREASING,True
+Impact / Denial of Service,flow_count + rst_ratio,50 flows / 0.05 RST,500 flows / 0.45 RST,0.0,0.85,0.85,INCREASING,True
+Collection / Exfiltration,byte_rate + pkt_size_mean,"5,000 B/s / 100 B","250,000 B/s / 600 B",0.0,0.8,0.8,INCREASING,True

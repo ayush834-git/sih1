@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "npm run dev --prefix ui",
+    "build": "npm run build --prefix ui"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.7.0",
+    "@shadergradient/react": "^2.4.20",
+    "camera-controls": "^3.1.0",
+    "three": "^0.185.1",
+    "three-stdlib": "^2.36.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.185.4"
+  }
+}

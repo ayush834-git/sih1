@@ -1,0 +1,5 @@
+horizon_step,horizon_seconds,label,mean_uncertainty,nominal_trust,decay_behavior
+0,0.0,NOW,0.1,0.85,Observation-anchored
+1,10.0,+10s,0.2,0.85,Active predictive momentum
+2,20.0,+20s,0.35,0.73,Open-loop trust decay
+3,30.0,+30s,0.5,0.61,Variance dispersion attenuation

@@ -1,0 +1,153 @@
+{
+  "manifest_version": "1.0.0",
+  "project_id": "SIH_26153",
+  "project_title": "Predictive Cyber Defense: AI-Based Network Attack Forecasting & Behavioral Security Decision Layer",
+  "status": "AUTHORITATIVE_FROZEN",
+  "frozen_at": "2026-08-29T18:50:00Z",
+  "data": {
+    "window_size_seconds": 10.0,
+    "wednesday_states_count": 4320,
+    "thursday_states_count": 4320,
+    "total_states_count": 8640,
+    "wednesday_raw_rows": 613104,
+    "thursday_raw_rows": 331125,
+    "total_raw_rows": 944229,
+    "wednesday_retained_flows": 600245,
+    "thursday_retained_flows": 330891,
+    "total_retained_flows": 931136,
+    "wednesday_empty_windows": 914,
+    "thursday_empty_windows": 913,
+    "total_empty_windows": 1827,
+    "overall_sparsity_percentage": 21.15,
+    "available_csv_features_count": 15,
+    "unavailable_topology_features_count": 6,
+    "source_dataset": "CSE-CIC-IDS2018 (Wednesday-28-02-2018 and Thursday-01-03-2018 NetFlow CSV)",
+    "caveat": "CSVs contain flow summary statistics without endpoint IPs or packet payloads; 6 host topology features are strictly marked UNAVAILABLE and zeroed out."
+  },
+  "dynamics": {
+    "baseline_ladder_directional_accuracy": {
+      "b1_zero_change": 0.0211,
+      "b2_persistence": 0.3289,
+      "b3_ewma": 0.3022,
+      "b4_ar5": 0.6810,
+      "b5_ridge": 0.6591,
+      "b6_gbdt": 0.6449
+    },
+    "ar5_onestep_directional_accuracy": 0.6810,
+    "ar5_onestep_directional_accuracy_nonzero": 0.6956,
+    "ar5_median_normalized_mae": 0.4052,
+    "ar3_test_directional_accuracy": 0.6680,
+    "ar5_test_directional_accuracy": 0.6864,
+    "ar5_vs_ar3_accuracy_gain": 0.0184,
+    "ar5_vs_ar3_availability_loss_rate": 0.0029,
+    "ar5_vs_ar3_states_lost": 25,
+    "attack_blocks_forecasts_lost": 0,
+    "open_loop_multistep_directional_accuracy": {
+      "h1_10s": 0.6809,
+      "h2_20s": 0.5095,
+      "h3_30s": 0.5021
+    },
+    "rolling_observation_refresh_directional_accuracy": {
+      "h1_10s": 0.6809,
+      "h2_20s": 0.6809,
+      "h3_30s": 0.6811
+    },
+    "caveat": "AR(5) achieves robust 68.1% directional accuracy for 10-second horizons; open-loop recursive forecasting without new observations degrades to 50.2% by 30s. Continuous observation refresh is essential."
+  },
+  "uncertainty": {
+    "methodology": "Training-only empirical residual bootstrap with K=3 continuous scenario trajectories",
+    "coverage_80pct_nominal": {
+      "nominal": 0.80,
+      "observed": 0.8192,
+      "error": 0.0192
+    },
+    "coverage_90pct_nominal": {
+      "nominal": 0.90,
+      "observed": 0.8971,
+      "error": -0.0029
+    },
+    "coverage_95pct_nominal": {
+      "nominal": 0.95,
+      "observed": 0.9385,
+      "error": -0.0115
+    },
+    "caveat": "Bootstrap intervals reflect marginal per-feature state variance, not a calibrated full joint probability distribution across high-dimensional network graph space."
+  },
+  "security": {
+    "behavioral_discrimination_status": "VALIDATED",
+    "anti_stage_collapse_pass_rate": 1.0,
+    "total_fixtures_tested": 6,
+    "distinct_primary_stages_produced": 5,
+    "benign_baseline_behavior": "Abstains cleanly to Unknown stage (Confidence=0.85) with zero false attack signatures",
+    "ambiguous_traffic_behavior": "Generates competing hypotheses with capped confidence (<=0.55) and preserves Unknown",
+    "forecast_reinforcement_behavior": "Consistent forecast growth escalates stage confidence (e.g. Recon 0.55 -> 0.85)",
+    "forecast_contradiction_behavior": "Contradictory forecast suppresses confidence (0.75 -> 0.40) and attaches counter-evidence",
+    "candidate_mitre_techniques": ["T1046", "T1498", "T1048", "T1071"],
+    "unavailable_mitre_techniques": ["T1021"],
+    "caveat": "MITRE ATT&CK techniques are mapped as explanatory hypotheses from macroscopic transport dynamics, not as supervised ML classification labels."
+  },
+  "decision": {
+    "safety_invariants_total": 13,
+    "safety_invariants_passed": 13,
+    "safety_invariants_pass_rate": 1.0,
+    "human_gating_enforcement": "100% (Every response recommendation requires explicit human operator approval)",
+    "autonomous_destructive_execution": "0% (Zero autonomous execution capability exists in the system)",
+    "duplicate_alert_suppression": "100% (Bitwise duplicate states generate zero spam notifications)",
+    "role_routing_policy": {
+      "reconnaissance": ["SOC_ANALYST", "NETWORK_DEFENDER"],
+      "exfiltration": ["SOC_ANALYST", "NETWORK_DEFENDER", "DATA_PROTECTION"],
+      "endpoint_analyst": "Excluded when host endpoint telemetry is UNAVAILABLE",
+      "benign_unknown": "0 notifications dispatched"
+    },
+    "caveat": "The decision layer provides decision support and prioritized advisory routing; all suggested mitigations are strictly reversible."
+  },
+  "response": {
+    "evaluation_protocol": "Controlled deterministic timeline replay across 5 standardized scenarios",
+    "scenarios_evaluated_count": 5,
+    "valid_attack_progressions_count": 3,
+    "average_raw_lead_time_seconds": 10.0,
+    "simulated_action_duration_seconds": 20.0,
+    "average_useful_response_window_gain_seconds": 10.0,
+    "defender_a_current_state_completion_seconds": 70.0,
+    "defender_b_predictive_completion_seconds": 60.0,
+    "sustained_event_onset_seconds": 60.0,
+    "false_positives_benign_burst": 0,
+    "false_positives_ambiguous_noise": 0,
+    "caveat": "This is a controlled simulated useful-response-window result under fixed 20-second action execution models; it does NOT measure live human SOC analyst cognitive triage latency."
+  },
+  "explainability": {
+    "methodology": "Mathematically exact AR(5) signed lag decomposition (beta * Delta_x) with scale-normalized feature ranking",
+    "recon_port_diversity_perturbation_shift": "+0.30 (0.55 -> 0.85, INCREASING)",
+    "dos_connection_flood_perturbation_shift": "+0.85 (0.00 -> 0.85, INCREASING)",
+    "exfil_byte_surge_perturbation_shift": "+0.80 (0.00 -> 0.80, INCREASING)",
+    "deterministic_idempotence": "PASS (100% bitwise match)",
+    "bounded_perturbation_coherence": "PASS (2% irrelevant feature noise preserves explanation ranking)",
+    "caveat": "Explanations reflect internal statistical model contributions, not global causal proofs or deep payload inspectability."
+  },
+  "future_security_risk": {
+    "mathematical_formulation": "R(t+h) = clip(Severity * Conf * Trust * (1 - Uncertainty) * 1.5, 0.0, 1.0)",
+    "semantic_definition": "Relative security-risk intensity of the predicted behavioural trajectory under current evidence and model trust.",
+    "fixtures_tested_count": 6,
+    "benign_baseline_risk_range": [0.0622, 0.1463],
+    "port_exploration_risk_range": [0.1462, 0.3443],
+    "connection_flooding_risk_range": [0.2901, 0.6828],
+    "outbound_surge_risk_range": [0.2535, 0.5967],
+    "contradiction_suppression_delta": 0.3140,
+    "caveat": "R(t+h) is a bounded uncalibrated composite risk index, NOT a calibrated Bayesian posterior probability of attack."
+  },
+  "statistical_hardening": {
+    "ar5_directional_accuracy_95ci": [0.6732, 0.6887],
+    "ar5_standard_error": 0.0040,
+    "ar5_vs_ar3_gain_test_95ci": [0.0023, 0.0138],
+    "ar5_vs_ar3_cohens_dz": 0.0695,
+    "ar5_vs_ar3_mcnemar_p_value": 0.000274,
+    "infiltration_blocks_gain_mean": 0.0169,
+    "infiltration_blocks_gain_range": [0.0091, 0.0216],
+    "response_window_sample_size": 3,
+    "false_positive_evaluated_windows": 32,
+    "false_positive_clopper_pearson_95_upper_bound": 0.1089,
+    "resampling_protocol": "Moving Block Bootstrap (B=12 / 120s block, n_boot=2000)",
+    "caveat": "Temporal autocorrelation is explicitly preserved via block bootstrapping; N=4 blocks and N=3 response progressions are reported descriptively without ungrounded asymptotic claims."
+  }
+}
+

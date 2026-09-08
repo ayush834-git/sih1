@@ -1,0 +1,10 @@
+{
+  "window_size_seconds": 10,
+  "history_depth": 3,
+  "trajectory_count": 3,
+  "forecast_horizon": 1,
+  "scaler": "RobustScaler",
+  "model_hierarchy": ["Persistence", "EWMA", "AR-style", "Ridge", "GBDT"],
+  "long_gap_seconds": 300,
+  "max_timestamp_failure_fraction": 0.01
+}

@@ -1,0 +1,304 @@
+{
+  "1_benign_baseline": {
+    "fixture_name": "1_benign_baseline",
+    "primary_stage": "Unknown",
+    "primary_confidence": 0.85,
+    "active_signatures": [],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-unknown-87b77f8e-c0d6-4ee6-8516-40199c6341b4",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.85,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": true
+      }
+    ],
+    "candidate_attack_techniques": [],
+    "counter_evidence": [],
+    "alternative_explanations": [
+      "Benign baseline operational traffic",
+      "Insufficient behavioural deviation"
+    ]
+  },
+  "2_port_exploration": {
+    "fixture_name": "2_port_exploration",
+    "primary_stage": "Reconnaissance",
+    "primary_confidence": 0.75,
+    "active_signatures": [
+      "RECONNAISSANCE_PORT_EXPLORATION"
+    ],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-recon-ff040e53-a7bb-459b-bc92-9fa9249e0bf0",
+        "candidate_stage": "Reconnaissance",
+        "supporting_signatures": [
+          "RECONNAISSANCE_PORT_EXPLORATION"
+        ],
+        "counter_evidence": [
+          "Target endpoints responding normally",
+          "No lateral fan-out telemetry available"
+        ],
+        "confidence": 0.75,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Service discovery / network inventory scanning",
+          "Administrative vulnerability assessment"
+        ],
+        "is_primary": true
+      },
+      {
+        "hypothesis_id": "hyp-unknown-07293fe0-7248-466d-a446-b5e8d0fef119",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.15,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": false
+      }
+    ],
+    "candidate_attack_techniques": [
+      "T1046 (Network Service Discovery)"
+    ],
+    "counter_evidence": [
+      "Target endpoints responding normally",
+      "No lateral fan-out telemetry available"
+    ],
+    "alternative_explanations": [
+      "Service discovery / network inventory scanning",
+      "Administrative vulnerability assessment"
+    ]
+  },
+  "3_connection_flooding": {
+    "fixture_name": "3_connection_flooding",
+    "primary_stage": "Impact / Denial of Service",
+    "primary_confidence": 0.7,
+    "active_signatures": [
+      "CONNECTION_FLOODING_RESOURCE_PRESSURE",
+      "TIMING_BEHAVIOURAL_ANOMALY"
+    ],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-dos-8fc4060c-8f5f-449a-b34a-40c14f2fe054",
+        "candidate_stage": "Impact / Denial of Service",
+        "supporting_signatures": [
+          "CONNECTION_FLOODING_RESOURCE_PRESSURE"
+        ],
+        "counter_evidence": [
+          "No complete service outage confirmed",
+          "Packet rate within transport headroom"
+        ],
+        "confidence": 0.7,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Legitimate high-volume user traffic surge",
+          "Misconfigured service retry storm"
+        ],
+        "is_primary": true
+      },
+      {
+        "hypothesis_id": "hyp-c2-a948c1b6-d786-4962-965e-0c89845f056e",
+        "candidate_stage": "Initial Access / Delivery",
+        "supporting_signatures": [
+          "TIMING_BEHAVIOURAL_ANOMALY"
+        ],
+        "counter_evidence": [
+          "Payload contents uninspected in NetFlow aggregation"
+        ],
+        "confidence": 0.4,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Automated telemetry heartbeat polling",
+          "NTP synchronization client"
+        ],
+        "is_primary": false
+      },
+      {
+        "hypothesis_id": "hyp-unknown-26dff316-e77d-45d0-ba05-bdcde4ca3c37",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.15,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": false
+      }
+    ],
+    "candidate_attack_techniques": [
+      "T1498 (Network Denial of Service)",
+      "T1071 (Application Layer Protocol)"
+    ],
+    "counter_evidence": [
+      "No complete service outage confirmed",
+      "Packet rate within transport headroom"
+    ],
+    "alternative_explanations": [
+      "Legitimate high-volume user traffic surge",
+      "Misconfigured service retry storm"
+    ]
+  },
+  "4_sustained_outbound_surge": {
+    "fixture_name": "4_sustained_outbound_surge",
+    "primary_stage": "Collection / Exfiltration",
+    "primary_confidence": 0.65,
+    "active_signatures": [
+      "EXFILTRATION_OUTBOUND_SURGE"
+    ],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-exfil-da02588d-7ec8-4b14-82ed-9682ef5d9710",
+        "candidate_stage": "Collection / Exfiltration",
+        "supporting_signatures": [
+          "EXFILTRATION_OUTBOUND_SURGE"
+        ],
+        "counter_evidence": [
+          "Transfer volume consistent with routine backup schedule"
+        ],
+        "confidence": 0.65,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Scheduled database archive replication",
+          "Software distribution repository synchronization"
+        ],
+        "is_primary": true
+      },
+      {
+        "hypothesis_id": "hyp-unknown-584e0c81-bbd9-4843-9f24-ffd9cadaecc1",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.15,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": false
+      }
+    ],
+    "candidate_attack_techniques": [
+      "T1048 (Exfiltration Over Alternative Protocol)"
+    ],
+    "counter_evidence": [
+      "Transfer volume consistent with routine backup schedule"
+    ],
+    "alternative_explanations": [
+      "Scheduled database archive replication",
+      "Software distribution repository synchronization"
+    ]
+  },
+  "5_timing_anomaly": {
+    "fixture_name": "5_timing_anomaly",
+    "primary_stage": "Initial Access / Delivery",
+    "primary_confidence": 0.4,
+    "active_signatures": [
+      "TIMING_BEHAVIOURAL_ANOMALY"
+    ],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-c2-052fc0b0-8b98-4e85-ab0d-059585f3512a",
+        "candidate_stage": "Initial Access / Delivery",
+        "supporting_signatures": [
+          "TIMING_BEHAVIOURAL_ANOMALY"
+        ],
+        "counter_evidence": [
+          "Payload contents uninspected in NetFlow aggregation"
+        ],
+        "confidence": 0.4,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Automated telemetry heartbeat polling",
+          "NTP synchronization client"
+        ],
+        "is_primary": true
+      },
+      {
+        "hypothesis_id": "hyp-unknown-e6b9a254-9ae9-46fb-a288-0bfd91712b59",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.15,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": false
+      }
+    ],
+    "candidate_attack_techniques": [
+      "T1071 (Application Layer Protocol)"
+    ],
+    "counter_evidence": [
+      "Payload contents uninspected in NetFlow aggregation"
+    ],
+    "alternative_explanations": [
+      "Automated telemetry heartbeat polling",
+      "NTP synchronization client"
+    ]
+  },
+  "6_ambiguous_mixed": {
+    "fixture_name": "6_ambiguous_mixed",
+    "primary_stage": "Reconnaissance",
+    "primary_confidence": 0.55,
+    "active_signatures": [
+      "RECONNAISSANCE_PORT_EXPLORATION"
+    ],
+    "all_hypotheses": [
+      {
+        "hypothesis_id": "hyp-recon-103a52fb-5884-4674-80f9-24da4304b6bd",
+        "candidate_stage": "Reconnaissance",
+        "supporting_signatures": [
+          "RECONNAISSANCE_PORT_EXPLORATION"
+        ],
+        "counter_evidence": [
+          "Target endpoints responding normally",
+          "No lateral fan-out telemetry available"
+        ],
+        "confidence": 0.55,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Service discovery / network inventory scanning",
+          "Administrative vulnerability assessment"
+        ],
+        "is_primary": true
+      },
+      {
+        "hypothesis_id": "hyp-unknown-90d312ea-03d5-4808-8b79-701181622c56",
+        "candidate_stage": "Unknown",
+        "supporting_signatures": [],
+        "counter_evidence": [],
+        "confidence": 0.15,
+        "trust_level": "HIGH",
+        "alternative_explanations": [
+          "Benign baseline operational traffic",
+          "Insufficient behavioural deviation"
+        ],
+        "is_primary": false
+      }
+    ],
+    "candidate_attack_techniques": [
+      "T1046 (Network Service Discovery)"
+    ],
+    "counter_evidence": [
+      "Target endpoints responding normally",
+      "No lateral fan-out telemetry available"
+    ],
+    "alternative_explanations": [
+      "Service discovery / network inventory scanning",
+      "Administrative vulnerability assessment"
+    ]
+  }
+}

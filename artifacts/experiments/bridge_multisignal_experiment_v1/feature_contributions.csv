@@ -1,0 +1,5 @@
+Signal,Benign_Mean_Z,Benign_Prop_GE_3,Benign_Primary_Attribution_Pct,Attack_B4_Mean_Z,Attack_B4_Prop_GE_3,Attack_B4_Primary_Attribution_Pct
+port,0.7,0.062,29.8,3.193,0.0671,27.1
+flow,0.534,0.0269,11.4,0.573,0.0496,7.3
+byte,0.565,0.0336,22.9,0.69,0.0554,28.0
+timing,0.359,0.0045,9.6,0.337,0.0,15.5

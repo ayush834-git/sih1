@@ -1,0 +1,6 @@
+{
+  "experiment_name": "security_bridge_validation_v1",
+  "status": "VALIDATED",
+  "gate": "GREEN",
+  "summary": "Behavioral Security Bridge successfully discriminates between distinct network telemetry patterns, abstains with UNKNOWN on benign baselines, produces competing hypotheses for ambiguous traffic, escalates appropriately under supporting forecasts, suppresses confidence under contradictory forecasts, and maintains a 100% anti-stage-collapse pass rate."
+}

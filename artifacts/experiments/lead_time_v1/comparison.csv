@@ -1,0 +1,18 @@
+run_id,run_tier,scenario_name,total_windows,w_suspicious,w_pred_alert,w_base_alert,w_actual_onset,lead_time_vs_base_s,lead_time_vs_actual_s,is_actionable_default_20s,is_false_early,is_missed,failure_category,predicted_stage,actual_stage
+live_run_01_recon_progression,LIVE_CONTROLLED,recon_progression,5,2,2,3,3,10.0,10.0,False,False,False,INSUFFICIENT_TIME,Reconnaissance,Controlled Escalation
+live_run_02_recon_progression,LIVE_CONTROLLED,recon_progression,5,2,2,3,3,10.0,10.0,False,False,False,INSUFFICIENT_TIME,Reconnaissance,Controlled Escalation
+live_run_03_churn_progression,LIVE_CONTROLLED,churn_progression,5,2,2,,3,0.0,10.0,False,False,False,INSUFFICIENT_TIME,Impact / Denial of Service,Controlled Escalation
+live_run_04_churn_progression,LIVE_CONTROLLED,churn_progression,5,2,2,,3,0.0,10.0,False,False,False,INSUFFICIENT_TIME,Impact / Denial of Service,Controlled Escalation
+live_run_05_clean_baseline,LIVE_CONTROLLED,clean_baseline,5,,,,,0.0,0.0,False,False,False,NONE,None,Baseline
+Infiltration_block-1-wed_idx252,DATASET_GROUND_TRUTH,Infiltration,7,0,0,3,3,30.0,30.0,True,False,False,NONE,Impact / Denial of Service,Ground Truth Attack
+Infiltration_block-2-wed_idx3540,DATASET_GROUND_TRUTH,Infiltration,7,0,0,2,3,20.0,30.0,True,False,False,NONE,Impact / Denial of Service,Ground Truth Attack
+Benign_Control_1,DATASET_GROUND_TRUTH,Benign,7,0,,,,0.0,0.0,False,False,False,NONE,None,Benign Baseline
+Benign_Control_2,DATASET_GROUND_TRUTH,Benign,7,0,1,,,0.0,0.0,False,True,False,FALSE_EARLY,Reconnaissance,Benign Baseline
+Benign_Control_3,DATASET_GROUND_TRUTH,Benign,7,0,0,,,0.0,0.0,False,True,False,FALSE_EARLY,Reconnaissance,Benign Baseline
+Benign_Control_4,DATASET_GROUND_TRUTH,Benign,7,0,,,,0.0,0.0,False,False,False,NONE,None,Benign Baseline
+Infiltration_block-3-thu_idx360,DATASET_GROUND_TRUTH,Infiltration,7,0,0,0,3,0.0,30.0,False,False,False,LATE_VS_BASELINE,Reconnaissance,Ground Truth Attack
+Infiltration_block-4-thu_idx3222,DATASET_GROUND_TRUTH,Infiltration,7,0,0,0,3,0.0,30.0,False,False,False,LATE_VS_BASELINE,Reconnaissance,Ground Truth Attack
+Benign_Control_1,DATASET_GROUND_TRUTH,Benign,7,0,,,,0.0,0.0,False,False,False,NONE,None,Benign Baseline
+Benign_Control_2,DATASET_GROUND_TRUTH,Benign,7,0,0,5,,50.0,0.0,False,True,False,FALSE_EARLY,Reconnaissance,Benign Baseline
+Benign_Control_3,DATASET_GROUND_TRUTH,Benign,7,0,5,5,,0.0,0.0,False,True,False,FALSE_EARLY,Reconnaissance,Benign Baseline
+Benign_Control_4,DATASET_GROUND_TRUTH,Benign,7,0,3,3,,0.0,0.0,False,True,False,FALSE_EARLY,Collection / Exfiltration,Benign Baseline

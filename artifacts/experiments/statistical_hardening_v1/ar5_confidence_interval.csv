@@ -1,0 +1,2 @@
+metric_name,sample_count_transitions,total_feature_evaluations,point_estimate,bootstrap_mean,standard_error,ci_95_lower,ci_95_upper,resampling_method,block_length_windows,block_duration_seconds,bootstrap_replicates,temporal_dependence_justification
+AR(5) Directional Accuracy (Test Split),1682,25230,0.681,0.6808,0.004,0.6732,0.6887,Moving Block Bootstrap,12,120,2000,Preserves serial autocorrelation (120s continuous blocks) across 10s adjacent telemetry states.

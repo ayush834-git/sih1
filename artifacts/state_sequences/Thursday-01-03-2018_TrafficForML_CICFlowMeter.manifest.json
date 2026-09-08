@@ -1,0 +1,42 @@
+{
+  "artifact_sha256": "ccff194830c3e43f75b638901a64152df99fde2de535868c9f04a40da0b08d12",
+  "cleaning": {
+    "duplicates_removed": 209,
+    "inf_values_seen": 4004,
+    "malformed_rows": 0,
+    "nan_or_inf_rows": 2919,
+    "nan_values_seen": 1834,
+    "numeric_invalid_rows": 2919,
+    "repeated_headers_removed": 25,
+    "rows_read": 331125,
+    "rows_removed": 234,
+    "rows_removed_for_invalid_timestamp": 0,
+    "rows_removed_for_other_unrecoverable_reason": 0,
+    "rows_retained": 330891,
+    "rows_with_invalid_numeric_values": 2919,
+    "timestamp_parse_failures": 0
+  },
+  "config": {
+    "forecast_horizon": 1,
+    "history_depth": 3,
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01,
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "scaler": "RobustScaler",
+    "trajectory_count": 3,
+    "window_size_seconds": 10
+  },
+  "empty_window_count": 913,
+  "pipeline_version": "day2-v1",
+  "session_count": 2,
+  "source_file": "C:\\Users\\ayush\\Downloads\\Thursday-01-03-2018_TrafficForML_CICFlowMeter.csv",
+  "source_sha256": "b0534c5d7d8b41e03df71c6966c995d116a8ed28e61f377c8b14cdf5d28f4edf",
+  "state_count": 4320,
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+}

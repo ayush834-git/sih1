@@ -1,0 +1,1000 @@
+{
+  "experiment_id": "delta_baseline_v2",
+  "created_at": "2026-08-29T13:51:53.904239",
+  "runtime_seconds": 48.97,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "numpy_version": "2.5.2",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "audit_v1": {
+    "1_target_construction": "Valid adjacent difference Delta_S_t = S_{t+1} - S_t constructed exclusively from within-session contiguous future states.",
+    "2_feature_matrix_construction": "History [S_{t-h+1}, ..., S_t] drawn strictly from NetworkState.feature_values().",
+    "3_missing_features_handling": "6 topology features marked UNAVAILABLE are strictly omitted from feature vectors; 15 available CSV features used.",
+    "4_scaler_fitting_behavior": "RobustScaler was fit strictly on train X. Target y was unscaled raw values.",
+    "5_ar_implementation": "Per-feature LinearRegression on historical deltas across lag order p.",
+    "6_ridge_implementation": "Ridge fitted on scaled X to unscaled raw y. Minimizing unscaled MSE caused high-variance features (byte_variance) to dominate loss by 10^16x over low-variance ratios.",
+    "7_gbdt_implementation": "HistGradientBoostingRegressor per feature. Model selection in v1 used unscaled raw MAE which was dominated by byte_variance.",
+    "8_split_construction": "Strict chronological 60/15/25 train/val/test and leave-one-observed-infiltration-block-out folds.",
+    "9_per_feature_metrics_availability": "Per-feature raw MAE was tracked, but normalized error metrics were absent.",
+    "10_global_mae_dominance": "CONFIRMED: byte_variance (raw MAE ~7.7e10) accounted for >99.99% of global raw MAE. Normalization is essential for multi-feature evaluation."
+  },
+  "training_scales": {
+    "flow_count": 101.25,
+    "byte_rate": 22080.449999999997,
+    "packet_rate": 106.44999999999999,
+    "mean_flow_duration": 11.134270584081989,
+    "dst_port_diversity": 14.0,
+    "syn_count": 12.0,
+    "ack_count": 30.0,
+    "rst_count": 28.0,
+    "syn_ratio": 0.010487405127076953,
+    "rst_ratio": 0.01496085782291364,
+    "iat_mean": 1.545413509614613,
+    "iat_std": 1.1545547271648522,
+    "pkt_size_mean": 38.78865231968877,
+    "pkt_size_std": 61.60741834470337,
+    "byte_variance": 32070171.62299914
+  },
+  "ar_order_sensitivity": [
+    {
+      "p": 1,
+      "raw_mae": 5586181137.054255,
+      "raw_rmse": 266862367698.94598,
+      "normalized_mae": 175.0164869983801,
+      "median_normalized_mae": 0.41429848939879943,
+      "directional_accuracy": 0.6417756638921919,
+      "directional_accuracy_nonzero": 0.6555996436958458,
+      "per_feature_norm_mae": {
+        "flow_count": 0.7401682732152564,
+        "byte_rate": 2.9582192333585744,
+        "packet_rate": 1.0460469738503886,
+        "mean_flow_duration": 0.5519657913544246,
+        "dst_port_diversity": 1.298321887579294,
+        "syn_count": 0.4582497423026609,
+        "ack_count": 0.4006994371316879,
+        "rst_count": 0.5209120310562289,
+        "syn_ratio": 0.7937990967134089,
+        "rst_ratio": 0.490892903138242,
+        "iat_mean": 1.5611005861328344,
+        "iat_std": 0.5932613447845078,
+        "pkt_size_mean": 0.5425455972220424,
+        "pkt_size_std": 0.5002575846036664,
+        "byte_variance": 2612.790864493258
+      },
+      "per_feature_da": {
+        "flow_count": 0.6242568370986921,
+        "byte_rate": 0.6581450653983353,
+        "packet_rate": 0.6397146254458977,
+        "mean_flow_duration": 0.6623067776456599,
+        "dst_port_diversity": 0.6040428061831153,
+        "syn_count": 0.5487514863258026,
+        "ack_count": 0.6236623067776457,
+        "rst_count": 0.6200951248513674,
+        "syn_ratio": 0.6331747919143876,
+        "rst_ratio": 0.6813317479191439,
+        "iat_mean": 0.6819262782401903,
+        "iat_std": 0.6593341260404281,
+        "pkt_size_mean": 0.6593341260404281,
+        "pkt_size_std": 0.6872770511296076,
+        "byte_variance": 0.643281807372176
+      }
+    },
+    {
+      "p": 2,
+      "raw_mae": 5697391499.021115,
+      "raw_rmse": 266998822481.9375,
+      "normalized_mae": 178.46606159424093,
+      "median_normalized_mae": 0.40727204133862993,
+      "directional_accuracy": 0.6619896948077685,
+      "directional_accuracy_nonzero": 0.6762490889950603,
+      "per_feature_norm_mae": {
+        "flow_count": 0.7223290834463605,
+        "byte_rate": 2.9512272423743937,
+        "packet_rate": 1.032672700299633,
+        "mean_flow_duration": 0.5342797873645954,
+        "dst_port_diversity": 1.2834528524594582,
+        "syn_count": 0.4418428073983101,
+        "ack_count": 0.3896569569805669,
+        "rst_count": 0.5117987800419052,
+        "syn_ratio": 0.7646543714347523,
+        "rst_ratio": 0.4814702023776508,
+        "iat_mean": 1.5137697815810902,
+        "iat_std": 0.5619160166969681,
+        "pkt_size_mean": 0.5173227927195039,
+        "pkt_size_std": 0.4778673651761741,
+        "byte_variance": 2664.8066631732627
+      },
+      "per_feature_da": {
+        "flow_count": 0.6468489892984542,
+        "byte_rate": 0.652794292508918,
+        "packet_rate": 0.6539833531510107,
+        "mean_flow_duration": 0.6884661117717004,
+        "dst_port_diversity": 0.6266349583828775,
+        "syn_count": 0.5992865636147443,
+        "ack_count": 0.6474435196195006,
+        "rst_count": 0.6325802615933412,
+        "syn_ratio": 0.6599286563614745,
+        "rst_ratio": 0.683115338882283,
+        "iat_mean": 0.678359096313912,
+        "iat_std": 0.702140309155767,
+        "pkt_size_mean": 0.678359096313912,
+        "pkt_size_std": 0.7057074910820452,
+        "byte_variance": 0.6741973840665874
+      }
+    },
+    {
+      "p": 3,
+      "raw_mae": 5668797481.840395,
+      "raw_rmse": 265710062152.13895,
+      "normalized_mae": 177.55630503194263,
+      "median_normalized_mae": 0.40731081078215847,
+      "directional_accuracy": 0.6728101466508125,
+      "directional_accuracy_nonzero": 0.6873026155964046,
+      "per_feature_norm_mae": {
+        "flow_count": 0.7104902543220675,
+        "byte_rate": 2.9053289070904786,
+        "packet_rate": 1.010849848555716,
+        "mean_flow_duration": 0.514993657422046,
+        "dst_port_diversity": 1.2714609881947503,
+        "syn_count": 0.43461879882581134,
+        "ack_count": 0.3788238524103823,
+        "rst_count": 0.4962733524283973,
+        "syn_ratio": 0.7413206149508682,
+        "rst_ratio": 0.4671405869651342,
+        "iat_mean": 1.469561372734218,
+        "iat_std": 0.5477402225636689,
+        "pkt_size_mean": 0.4999251598385259,
+        "pkt_size_std": 0.4634708310324632,
+        "byte_variance": 2651.432577031805
+      },
+      "per_feature_da": {
+        "flow_count": 0.6593341260404281,
+        "byte_rate": 0.6587395957193817,
+        "packet_rate": 0.6629013079667063,
+        "mean_flow_duration": 0.7051129607609988,
+        "dst_port_diversity": 0.664090368608799,
+        "syn_count": 0.5998810939357907,
+        "ack_count": 0.6741973840665874,
+        "rst_count": 0.6516052318668252,
+        "syn_ratio": 0.6676575505350772,
+        "rst_ratio": 0.683115338882283,
+        "iat_mean": 0.6854934601664685,
+        "iat_std": 0.7057074910820452,
+        "pkt_size_mean": 0.6932223543400713,
+        "pkt_size_std": 0.7122473246135553,
+        "byte_variance": 0.66884661117717
+      }
+    },
+    {
+      "p": 4,
+      "raw_mae": 5860181161.924287,
+      "raw_rmse": 264290663535.47232,
+      "normalized_mae": 183.52218562108482,
+      "median_normalized_mae": 0.4080694584157484,
+      "directional_accuracy": 0.6782401902497027,
+      "directional_accuracy_nonzero": 0.6928496234512916,
+      "per_feature_norm_mae": {
+        "flow_count": 0.7013555968069444,
+        "byte_rate": 3.00891092064061,
+        "packet_rate": 1.0206444485311787,
+        "mean_flow_duration": 0.5028369990067965,
+        "dst_port_diversity": 1.25186822015823,
+        "syn_count": 0.4268029760361825,
+        "ack_count": 0.3575432955970388,
+        "rst_count": 0.4908444361926066,
+        "syn_ratio": 0.7286090898720471,
+        "rst_ratio": 0.45993514302970584,
+        "iat_mean": 1.4465952443097927,
+        "iat_std": 0.5389313425236174,
+        "pkt_size_mean": 0.49142992264827146,
+        "pkt_size_std": 0.45916459609033444,
+        "byte_variance": 2740.947312084829
+      },
+      "per_feature_da": {
+        "flow_count": 0.6706302021403091,
+        "byte_rate": 0.6414982164090368,
+        "packet_rate": 0.6593341260404281,
+        "mean_flow_duration": 0.7033293697978596,
+        "dst_port_diversity": 0.6765755053507729,
+        "syn_count": 0.6064209274673008,
+        "ack_count": 0.7051129607609988,
+        "rst_count": 0.6486325802615933,
+        "syn_ratio": 0.6611177170035671,
+        "rst_ratio": 0.6997621878715814,
+        "iat_mean": 0.6979785969084423,
+        "iat_std": 0.7098692033293698,
+        "pkt_size_mean": 0.7063020214030915,
+        "pkt_size_std": 0.718192627824019,
+        "byte_variance": 0.66884661117717
+      }
+    },
+    {
+      "p": 5,
+      "raw_mae": 6015775423.294755,
+      "raw_rmse": 263037222437.9963,
+      "normalized_mae": 188.36779077183508,
+      "median_normalized_mae": 0.4051693093696608,
+      "directional_accuracy": 0.680975029726516,
+      "directional_accuracy_nonzero": 0.69564337193295,
+      "per_feature_norm_mae": {
+        "flow_count": 0.6966593353411629,
+        "byte_rate": 3.0122259806301233,
+        "packet_rate": 1.013412828033431,
+        "mean_flow_duration": 0.4935053859955864,
+        "dst_port_diversity": 1.2404130091156398,
+        "syn_count": 0.4234930078913754,
+        "ack_count": 0.3521465636021685,
+        "rst_count": 0.4897497807356481,
+        "syn_ratio": 0.7237525630171647,
+        "rst_ratio": 0.4532619396800492,
+        "iat_mean": 1.4287528562435698,
+        "iat_std": 0.5312008482768926,
+        "pkt_size_mean": 0.4840810449135855,
+        "pkt_size_std": 0.4516726472468694,
+        "byte_variance": 2813.7225337868035
+      },
+      "per_feature_da": {
+        "flow_count": 0.6724137931034483,
+        "byte_rate": 0.6403091557669441,
+        "packet_rate": 0.6605231866825209,
+        "mean_flow_duration": 0.7110582639714625,
+        "dst_port_diversity": 0.6813317479191439,
+        "syn_count": 0.6141498216409037,
+        "ack_count": 0.7003567181926278,
+        "rst_count": 0.6414982164090368,
+        "syn_ratio": 0.667063020214031,
+        "rst_ratio": 0.6950059453032105,
+        "iat_mean": 0.7074910820451843,
+        "iat_std": 0.7170035671819263,
+        "pkt_size_mean": 0.7205707491082045,
+        "pkt_size_std": 0.7265160523186682,
+        "byte_variance": 0.6593341260404281
+      }
+    }
+  ],
+  "global_metrics": {
+    "B1_ZeroChange": {
+      "delta_mae_raw": 5223494476.68256,
+      "delta_rmse_raw": 272023642623.47183,
+      "delta_mae_normalized": 163.76377045102384,
+      "delta_rmse_normalized": 8482.141746607917,
+      "median_mae_normalized": 0.43247010300400346,
+      "directional_accuracy": 0.021086008719778043,
+      "directional_accuracy_nonzero": 0.0,
+      "interval_coverage_90": "N/A",
+      "per_feature_normalized_mae": {
+        "flow_count": 0.7695130723271826,
+        "byte_rate": 2.925576283283768,
+        "packet_rate": 1.0634647853184243,
+        "mean_flow_duration": 0.6370093487523533,
+        "dst_port_diversity": 1.3189655172413792,
+        "syn_count": 0.4919242964724534,
+        "ack_count": 0.43499801823226314,
+        "rst_count": 0.5636572108034653,
+        "syn_ratio": 0.8724997445695659,
+        "rst_ratio": 0.5790437289119539,
+        "iat_mean": 1.7778323444861979,
+        "iat_std": 0.6691005554540378,
+        "pkt_size_mean": 0.6154861839886824,
+        "pkt_size_std": 0.5839797178068699,
+        "byte_variance": 2443.1535059577086
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.01070154577883472,
+        "byte_rate": 0.0,
+        "packet_rate": 0.0005945303210463733,
+        "mean_flow_duration": 0.0,
+        "dst_port_diversity": 0.0535077288941736,
+        "syn_count": 0.12306777645659929,
+        "ack_count": 0.034482758620689655,
+        "rst_count": 0.05826397146254459,
+        "syn_ratio": 0.0356718192627824,
+        "rst_ratio": 0.0,
+        "iat_mean": 0.0,
+        "iat_std": 0.0,
+        "pkt_size_mean": 0.0,
+        "pkt_size_std": 0.0,
+        "byte_variance": 0.0
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.0535077288941736,
+        "syn_behaviour": 0.07936979785969084,
+        "rst_behaviour": 0.029131985731272295,
+        "rate_behaviour": 0.00029726516052318666,
+        "timing_iat_behaviour": 0.0,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {}
+    },
+    "B2_Persistence": {
+      "delta_mae_raw": 8892392300.960953,
+      "delta_rmse_raw": 435635456297.2527,
+      "delta_mae_normalized": 278.85185128582526,
+      "delta_rmse_normalized": 13583.825582738298,
+      "median_mae_normalized": 0.8,
+      "directional_accuracy": 0.32885453824811733,
+      "directional_accuracy_nonzero": 0.33213215644991495,
+      "interval_coverage_90": "N/A",
+      "per_feature_normalized_mae": {
+        "flow_count": 1.3880183790607887,
+        "byte_rate": 5.257239138935268,
+        "packet_rate": 1.8901026479358434,
+        "mean_flow_duration": 1.095555690006407,
+        "dst_port_diversity": 2.453626634958383,
+        "syn_count": 0.8578577090764963,
+        "ack_count": 0.7462544589774077,
+        "rst_count": 0.9987897061321557,
+        "syn_ratio": 1.5630074735567892,
+        "rst_ratio": 1.0067485823594442,
+        "iat_mean": 3.095695287321529,
+        "iat_std": 1.161323744964146,
+        "pkt_size_mean": 1.0578792107198598,
+        "pkt_size_std": 1.0209477849314594,
+        "byte_variance": 4159.184722838443
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.35850178359096313,
+        "byte_rate": 0.3412604042806183,
+        "packet_rate": 0.35850178359096313,
+        "mean_flow_duration": 0.3388822829964328,
+        "dst_port_diversity": 0.31093935790725324,
+        "syn_count": 0.30202140309155767,
+        "ack_count": 0.32520808561236625,
+        "rst_count": 0.29607609988109396,
+        "syn_ratio": 0.3281807372175981,
+        "rst_ratio": 0.31866825208085614,
+        "iat_mean": 0.31807372175980975,
+        "iat_std": 0.3400713436385256,
+        "pkt_size_mean": 0.34066587395957193,
+        "pkt_size_std": 0.31212841854934603,
+        "byte_variance": 0.3436385255648038
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.31093935790725324,
+        "syn_behaviour": 0.3151010701545779,
+        "rst_behaviour": 0.30737217598097505,
+        "rate_behaviour": 0.3498810939357907,
+        "timing_iat_behaviour": 0.32907253269916764,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {}
+    },
+    "B3_EWMA": {
+      "delta_mae_raw": 6457196219.3201275,
+      "delta_rmse_raw": 310631749001.2595,
+      "delta_mae_normalized": 202.37892889860188,
+      "delta_rmse_normalized": 9686.005636686194,
+      "median_mae_normalized": 0.5212308529982086,
+      "directional_accuracy": 0.3022195798652398,
+      "directional_accuracy_nonzero": 0.30848651712689285,
+      "interval_coverage_90": "N/A",
+      "per_feature_normalized_mae": {
+        "flow_count": 0.898964278747894,
+        "byte_rate": 3.5167808687286706,
+        "packet_rate": 1.250882739807323,
+        "mean_flow_duration": 0.7231688251690404,
+        "dst_port_diversity": 1.5762751362225162,
+        "syn_count": 0.5638415169244203,
+        "ack_count": 0.49531472282550537,
+        "rst_count": 0.6521666925703967,
+        "syn_ratio": 1.0011366801722776,
+        "rst_ratio": 0.6584711366723203,
+        "iat_mean": 2.0314318111164615,
+        "iat_std": 0.7639266638508513,
+        "pkt_size_mean": 0.7015871771680059,
+        "pkt_size_std": 0.6645490570500663,
+        "byte_variance": 3020.1854361720034
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.3258026159334126,
+        "byte_rate": 0.33590963139120095,
+        "packet_rate": 0.32996432818073723,
+        "mean_flow_duration": 0.3055885850178359,
+        "dst_port_diversity": 0.26456599286563615,
+        "syn_count": 0.2746730083234245,
+        "ack_count": 0.2788347205707491,
+        "rst_count": 0.30023781212841855,
+        "syn_ratio": 0.27764565992865636,
+        "rst_ratio": 0.3097502972651605,
+        "iat_mean": 0.2984542211652794,
+        "iat_std": 0.3145065398335315,
+        "pkt_size_mean": 0.29607609988109396,
+        "pkt_size_std": 0.2901307966706302,
+        "byte_variance": 0.33115338882282996
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.26456599286563615,
+        "syn_behaviour": 0.27615933412604043,
+        "rst_behaviour": 0.30499405469678953,
+        "rate_behaviour": 0.3329369797859691,
+        "timing_iat_behaviour": 0.30648038049940546,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "alpha": 0.1,
+        "val_norm_mae": 14.836897709051506
+      }
+    },
+    "B4_AR_best": {
+      "delta_mae_raw": 6015775423.294755,
+      "delta_rmse_raw": 263037222437.9963,
+      "delta_mae_normalized": 188.36779077183508,
+      "delta_rmse_normalized": 8201.930388779814,
+      "median_mae_normalized": 0.4051693093696608,
+      "directional_accuracy": 0.680975029726516,
+      "directional_accuracy_nonzero": 0.69564337193295,
+      "interval_coverage_90": "N/A",
+      "per_feature_normalized_mae": {
+        "flow_count": 0.6966593353411629,
+        "byte_rate": 3.0122259806301233,
+        "packet_rate": 1.013412828033431,
+        "mean_flow_duration": 0.4935053859955864,
+        "dst_port_diversity": 1.2404130091156398,
+        "syn_count": 0.4234930078913754,
+        "ack_count": 0.3521465636021685,
+        "rst_count": 0.4897497807356481,
+        "syn_ratio": 0.7237525630171647,
+        "rst_ratio": 0.4532619396800492,
+        "iat_mean": 1.4287528562435698,
+        "iat_std": 0.5312008482768926,
+        "pkt_size_mean": 0.4840810449135855,
+        "pkt_size_std": 0.4516726472468694,
+        "byte_variance": 2813.7225337868035
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.6724137931034483,
+        "byte_rate": 0.6403091557669441,
+        "packet_rate": 0.6605231866825209,
+        "mean_flow_duration": 0.7110582639714625,
+        "dst_port_diversity": 0.6813317479191439,
+        "syn_count": 0.6141498216409037,
+        "ack_count": 0.7003567181926278,
+        "rst_count": 0.6414982164090368,
+        "syn_ratio": 0.667063020214031,
+        "rst_ratio": 0.6950059453032105,
+        "iat_mean": 0.7074910820451843,
+        "iat_std": 0.7170035671819263,
+        "pkt_size_mean": 0.7205707491082045,
+        "pkt_size_std": 0.7265160523186682,
+        "byte_variance": 0.6593341260404281
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.6813317479191439,
+        "syn_behaviour": 0.6406064209274673,
+        "rst_behaviour": 0.6682520808561236,
+        "rate_behaviour": 0.6504161712247325,
+        "timing_iat_behaviour": 0.7122473246135553,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "p": 5,
+        "val_norm_mae": 11.79903870192604
+      }
+    },
+    "B5_Ridge": {
+      "delta_mae_raw": 20415310048.299347,
+      "delta_rmse_raw": 298017943440.6676,
+      "delta_mae_normalized": 637.4256560989566,
+      "delta_rmse_normalized": 9292.685555094731,
+      "median_mae_normalized": 0.5081005720385618,
+      "directional_accuracy": 0.6590566785572731,
+      "directional_accuracy_nonzero": 0.6732528949712527,
+      "interval_coverage_90": 0.9110582639714625,
+      "per_feature_normalized_mae": {
+        "flow_count": 0.6961102216855587,
+        "byte_rate": 3.929428845439214,
+        "packet_rate": 1.151198698787191,
+        "mean_flow_duration": 0.47178392907291933,
+        "dst_port_diversity": 1.1309031229750106,
+        "syn_count": 0.419809588685389,
+        "ack_count": 0.3506231461404512,
+        "rst_count": 0.5394912126208071,
+        "syn_ratio": 0.665982675206644,
+        "rst_ratio": 0.4384015578154949,
+        "iat_mean": 1.439979399504132,
+        "iat_std": 0.49767094279604945,
+        "pkt_size_mean": 0.46820447859028663,
+        "pkt_size_std": 0.45045837568162295,
+        "byte_variance": 9548.734795289347
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.6349583828775267,
+        "byte_rate": 0.5784780023781213,
+        "packet_rate": 0.6224732461355529,
+        "mean_flow_duration": 0.7241379310344828,
+        "dst_port_diversity": 0.6117717003567182,
+        "syn_count": 0.6135552913198573,
+        "ack_count": 0.6902497027348394,
+        "rst_count": 0.6212841854934602,
+        "syn_ratio": 0.6908442330558858,
+        "rst_ratio": 0.7223543400713437,
+        "iat_mean": 0.6973840665873959,
+        "iat_std": 0.7407847800237812,
+        "pkt_size_mean": 0.7205707491082045,
+        "pkt_size_std": 0.7199762187871581,
+        "byte_variance": 0.49702734839476814
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.6117717003567182,
+        "syn_behaviour": 0.6521997621878716,
+        "rst_behaviour": 0.6718192627824019,
+        "rate_behaviour": 0.6004756242568371,
+        "timing_iat_behaviour": 0.7190844233055886,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "per_feature_alphas": {
+          "flow_count": 1000.0,
+          "byte_rate": 1000.0,
+          "packet_rate": 1000.0,
+          "mean_flow_duration": 10.0,
+          "dst_port_diversity": 1000.0,
+          "syn_count": 0.01,
+          "ack_count": 10.0,
+          "rst_count": 1000.0,
+          "syn_ratio": 100.0,
+          "rst_ratio": 0.01,
+          "iat_mean": 1000.0,
+          "iat_std": 0.01,
+          "pkt_size_mean": 0.01,
+          "pkt_size_std": 100.0,
+          "byte_variance": 1000.0
+        },
+        "val_norm_mae": 448.7098839363931
+      }
+    },
+    "B6_GBDT": {
+      "delta_mae_raw": 14676861339.377855,
+      "delta_rmse_raw": 292786740777.0471,
+      "delta_mae_normalized": 458.4990528641503,
+      "delta_rmse_normalized": 9129.568379699671,
+      "median_mae_normalized": 0.5253132415553528,
+      "directional_accuracy": 0.6449464922711058,
+      "directional_accuracy_nonzero": 0.6588387723702324,
+      "interval_coverage_90": 0.8433610780816488,
+      "per_feature_normalized_mae": {
+        "flow_count": 0.705826971239956,
+        "byte_rate": 3.7431541041551855,
+        "packet_rate": 1.204607708624199,
+        "mean_flow_duration": 0.4824312039471563,
+        "dst_port_diversity": 1.1301312984679577,
+        "syn_count": 0.44988711737574644,
+        "ack_count": 0.3556670352546254,
+        "rst_count": 0.5485026356088348,
+        "syn_ratio": 0.7113888208402411,
+        "rst_ratio": 0.44731177792003984,
+        "iat_mean": 1.5528565997547394,
+        "iat_std": 0.5049749806930756,
+        "pkt_size_mean": 0.4752400617958335,
+        "pkt_size_std": 0.45105011780929505,
+        "byte_variance": 6864.722762528767
+      },
+      "per_feature_directional_accuracy": {
+        "flow_count": 0.6159334126040428,
+        "byte_rate": 0.5309155766944114,
+        "packet_rate": 0.5719381688466112,
+        "mean_flow_duration": 0.7312722948870393,
+        "dst_port_diversity": 0.6230677764565993,
+        "syn_count": 0.6105826397146255,
+        "ack_count": 0.6819262782401903,
+        "rst_count": 0.6046373365041617,
+        "syn_ratio": 0.6629013079667063,
+        "rst_ratio": 0.7045184304399524,
+        "iat_mean": 0.6664684898929846,
+        "iat_std": 0.7360285374554102,
+        "pkt_size_mean": 0.7086801426872771,
+        "pkt_size_std": 0.718192627824019,
+        "byte_variance": 0.5071343638525565
+      },
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.6230677764565993,
+        "syn_behaviour": 0.6367419738406659,
+        "rst_behaviour": 0.654577883472057,
+        "rate_behaviour": 0.5514268727705113,
+        "timing_iat_behaviour": 0.7012485136741974,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "per_feature_params": {
+          "flow_count": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "byte_rate": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "packet_rate": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "mean_flow_duration": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "dst_port_diversity": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "syn_count": {
+            "max_iter": 100,
+            "learning_rate": 0.1,
+            "max_depth": 5,
+            "min_samples_leaf": 20
+          },
+          "ack_count": {
+            "max_iter": 100,
+            "learning_rate": 0.1,
+            "max_depth": 5,
+            "min_samples_leaf": 20
+          },
+          "rst_count": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "syn_ratio": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "rst_ratio": {
+            "max_iter": 100,
+            "learning_rate": 0.05,
+            "max_depth": 6,
+            "min_samples_leaf": 15
+          },
+          "iat_mean": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "iat_std": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "pkt_size_mean": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          },
+          "pkt_size_std": {
+            "max_iter": 100,
+            "learning_rate": 0.1,
+            "max_depth": 5,
+            "min_samples_leaf": 20
+          },
+          "byte_variance": {
+            "max_iter": 50,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 20
+          }
+        },
+        "val_norm_mae": 279.63613404335734
+      }
+    }
+  },
+  "victory_criterion": {
+    "B5_Ridge": {
+      "B1_ZeroChange": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B1_ZeroChange",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [637.4257 vs 163.7638], DA win: True [0.6591 vs 0.0211], Block wins: 0/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 0/4)."
+      },
+      "B2_Persistence": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B2_Persistence",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 1,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 1,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [637.4257 vs 278.8519], DA win: True [0.6591 vs 0.3289], Block wins: 1/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 1/4)."
+      },
+      "B3_EWMA": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B3_EWMA",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [637.4257 vs 202.3789], DA win: True [0.6591 vs 0.3022], Block wins: 0/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 0/4)."
+      },
+      "B4_AR_best": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B4_AR_best",
+        "norm_mae_improved": false,
+        "norm_da_improved": false,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          false,
+          true,
+          false,
+          false
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "NO IMPROVEMENT",
+        "raw_mae_improved": false,
+        "raw_da_improved": false,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          false,
+          true,
+          false,
+          false
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "FAIL",
+        "explanation": "V2 Normalized: [NO IMPROVEMENT] (Norm MAE win: False [637.4257 vs 188.3678], DA win: False [0.6591 vs 0.6810], Block wins: 0/4). | V1 Raw: [FAIL] (Raw MAE win: False, DA win: False, Block wins: 0/4)."
+      }
+    },
+    "B6_GBDT": {
+      "B1_ZeroChange": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B1_ZeroChange",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [458.4991 vs 163.7638], DA win: True [0.6449 vs 0.0211], Block wins: 0/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 0/4)."
+      },
+      "B2_Persistence": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B2_Persistence",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 1,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 1,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [458.4991 vs 278.8519], DA win: True [0.6449 vs 0.3289], Block wins: 1/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 1/4)."
+      },
+      "B3_EWMA": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B3_EWMA",
+        "norm_mae_improved": false,
+        "norm_da_improved": true,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "MIXED",
+        "raw_mae_improved": false,
+        "raw_da_improved": true,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "MIXED",
+        "explanation": "V2 Normalized: [MIXED] (Norm MAE win: False [458.4991 vs 202.3789], DA win: True [0.6449 vs 0.3022], Block wins: 0/4). | V1 Raw: [MIXED] (Raw MAE win: False, DA win: True, Block wins: 0/4)."
+      },
+      "B4_AR_best": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B4_AR_best",
+        "norm_mae_improved": false,
+        "norm_da_improved": false,
+        "block_norm_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_norm_da_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_folds_passed_norm": 0,
+        "v2_primary_status": "NO IMPROVEMENT",
+        "raw_mae_improved": false,
+        "raw_da_improved": false,
+        "block_raw_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_raw_da_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_folds_passed_raw": 0,
+        "v1_raw_status": "FAIL",
+        "explanation": "V2 Normalized: [NO IMPROVEMENT] (Norm MAE win: False [458.4991 vs 188.3678], DA win: False [0.6449 vs 0.6810], Block wins: 0/4). | V1 Raw: [FAIL] (Raw MAE win: False, DA win: False, Block wins: 0/4)."
+      }
+    }
+  },
+  "decision_gate": "YELLOW",
+  "scientific_conclusion": "Directional transition structure is robust to scale normalization (65-70% DA), but AR-style autoregression remains competitive or clearly best. Predictive structure is established, but complex ML advantage is unproven."
+}

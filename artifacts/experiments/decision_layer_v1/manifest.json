@@ -1,0 +1,30 @@
+{
+  "experiment_name": "decision_layer_v1",
+  "timestamp": "2026-08-29T14:42:51.399650",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "random_seed": 42,
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "priority_results_jsonl": "artifacts\\experiments\\decision_layer_v1\\priority_results.jsonl",
+    "role_routing_results_jsonl": "artifacts\\experiments\\decision_layer_v1\\role_routing_results.jsonl",
+    "notification_examples_jsonl": "artifacts\\experiments\\decision_layer_v1\\notification_examples.jsonl",
+    "response_recommendations_jsonl": "artifacts\\experiments\\decision_layer_v1\\response_recommendations.jsonl",
+    "scenario_summary_csv": "artifacts\\experiments\\decision_layer_v1\\scenario_summary.csv",
+    "results_summary_json": "artifacts\\experiments\\decision_layer_v1\\results_summary.json"
+  }
+}

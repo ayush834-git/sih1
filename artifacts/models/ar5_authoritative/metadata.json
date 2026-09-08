@@ -1,0 +1,39 @@
+{
+  "model_name": "B4_AR_best(p=5)",
+  "model_family": "AR-style",
+  "selected_p": 5,
+  "n_features": 15,
+  "feature_names": [
+    "flow_count",
+    "byte_rate",
+    "packet_rate",
+    "mean_flow_duration",
+    "dst_port_diversity",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "syn_ratio",
+    "rst_ratio",
+    "iat_mean",
+    "iat_std",
+    "pkt_size_mean",
+    "pkt_size_std",
+    "byte_variance"
+  ],
+  "selected_hyperparameters": {
+    "p": 5,
+    "val_norm_mae": 11.79903870192604
+  },
+  "created_at": "2026-08-31T17:19:52.959388",
+  "training_states_count": 8640,
+  "training_transitions_count": 6727,
+  "train_samples": 4036,
+  "val_samples": 1009,
+  "test_samples": 1682,
+  "test_normalized_mae": 188.36779077183508,
+  "test_directional_accuracy": 0.680975029726516,
+  "test_raw_mae": 6015775423.294755,
+  "history_depth": 6,
+  "wed_source": "artifacts/state_sequences/Wednesday-28-02-2018_TrafficForML_CICFlowMeter.states.jsonl",
+  "thu_source": "artifacts/state_sequences/Thursday-01-03-2018_TrafficForML_CICFlowMeter.states.jsonl"
+}

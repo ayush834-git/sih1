@@ -1,0 +1,11 @@
+{
+  "scenario_name": "demo_recon_15s",
+  "total_demo_windows": 16,
+  "ar3_warmup_windows_required": 3,
+  "ar5_warmup_windows_required": 5,
+  "ar3_first_forecast_window": "w03 (030s)",
+  "ar5_first_forecast_window": "w05 (050s)",
+  "demo_recon_start_window": "w06 (060s)",
+  "ar5_active_at_recon_start": true,
+  "finding": "Because the canonical demo includes a 5-window baseline warmup (w00..w04), AR(5) is fully populated and forecasting by w05 before port exploration accelerates at w06. Therefore, AR(5)'s higher context requirement causes zero forecast dropouts during the active demo sequence."
+}

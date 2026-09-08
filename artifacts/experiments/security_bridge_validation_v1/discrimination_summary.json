@@ -1,0 +1,18 @@
+{
+  "validation_experiment": "security_bridge_validation_v1",
+  "created_at": "2026-08-29T14:37:16.470800",
+  "runtime_seconds": 0.0,
+  "fixtures_tested": 6,
+  "stage_collapse_status": "PASS",
+  "distinct_stages": [
+    "Collection / Exfiltration",
+    "Reconnaissance",
+    "Impact / Denial of Service",
+    "Initial Access / Delivery",
+    "Unknown"
+  ],
+  "forecast_reinforcement_validated": true,
+  "contradictory_forecast_handling_validated": true,
+  "abstention_and_unknown_validated": true,
+  "gate": "GREEN"
+}

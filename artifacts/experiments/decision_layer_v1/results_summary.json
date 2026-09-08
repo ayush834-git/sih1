@@ -1,0 +1,97 @@
+{
+  "experiment_id": "decision_layer_v1",
+  "created_at": "2026-08-29T14:42:51.359139",
+  "runtime_seconds": 0.0,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "numpy_version": "2.5.2",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "scenarios_evaluated": 7,
+  "demo_sequence": [
+    {
+      "step": "T0",
+      "description": "Baseline operational telemetry / low concern",
+      "primary_stage": "Unknown",
+      "priority_level": "LOW",
+      "notifications_dispatched": 0,
+      "roles_notified": [],
+      "system_state": "Traffic within normal baseline; no alerts dispatched."
+    },
+    {
+      "step": "T1",
+      "description": "Port diversity rises and AR(5) forecast predicts multi-step expansion",
+      "primary_stage": "Reconnaissance",
+      "stage_confidence": 0.85,
+      "system_state": "Reconnaissance hypothesis upgraded to primary with forecast reinforcement."
+    },
+    {
+      "step": "T2",
+      "description": "Role-relevance routing dispatches differentiated alerts to relevant roles",
+      "priority_level": "MEDIUM",
+      "notifications_dispatched": 2,
+      "roles_notified": [
+        "INCIDENT_RESPONSE: [SOC Alert] Reconnaissance Pattern Detected (MEDIUM Priority)",
+        "NETWORK_SECURITY: [Network Defense] Boundary Telemetry Deviation \u2014 Reconnaissance"
+      ],
+      "roles_omitted": [
+        "ENDPOINT_ANALYST (Excluded due to missing host telemetry)"
+      ],
+      "system_state": "SOC Analyst and Network Defender notified with role-tailored headlines; Endpoint Analyst excluded."
+    },
+    {
+      "step": "T3",
+      "description": "New telemetry observation arrives indicating rapid probe cessation",
+      "primary_stage": "Reconnaissance",
+      "system_state": "Rolling context refreshed; forecast predicts immediate deceleration back to baseline."
+    },
+    {
+      "step": "T4",
+      "description": "Model uncertainty adjusts confidence and priority score downward",
+      "confidence": 0.4,
+      "priority_level": "INFO",
+      "composite_priority": 0.17289999999999997,
+      "system_state": "Priority dampened from MEDIUM to INFO without blind escalation."
+    },
+    {
+      "step": "T5",
+      "description": "Notification updated to reflect de-escalation",
+      "updated_notifications_dispatched": 2,
+      "system_state": "Roles receive updated context noting deceleration and reduced priority."
+    },
+    {
+      "step": "T6",
+      "description": "Human-gated response recommendation presented to operator",
+      "strategy": "MONITOR",
+      "requires_human": true,
+      "is_reversible": true,
+      "recommended_actions": [
+        {
+          "action_type": "INCREASE_MONITORING",
+          "target": "Baseline telemetry stream",
+          "urgency": "WHEN_CONVENIENT"
+        }
+      ],
+      "reasoning": "Traffic consistent with baseline or ambiguous. Recommended action is continued monitoring without intervention.",
+      "system_state": "Strict non-destructive observation recommendation ready for human approval; zero automated changes executed."
+    }
+  ],
+  "safety_invariants": {
+    "1_no_notification_to_not_relevant_roles": true,
+    "2_high_uncertainty_cannot_create_critical": true,
+    "3_unknown_does_not_produce_destructive_action": true,
+    "4_every_recommendation_requires_human_approval": true,
+    "5_no_recommendation_executes_destructive_action": true,
+    "6_notifications_contain_evidence_and_trust": true,
+    "7_role_contexts_differ_meaningfully": true,
+    "8_duplicate_notifications_suppressed": true,
+    "9_material_forecast_changes_generate_updates": true,
+    "10_no_label_or_infiltration_fraction_leakage": true,
+    "11_unavailable_topology_cannot_create_topology_priority": true,
+    "12_deterministic_inputs_produce_deterministic_outputs": true,
+    "13_historical_experiment_artifacts_remain_unchanged": true
+  },
+  "gate": "GREEN",
+  "scientific_conclusion": "The Operational Decision Layer successfully integrates consequence-aware prioritization, deterministic role-relevance routing, differentiated role notifications with spam suppression, and strictly reversible, human-gated response recommendations. All 13 critical safety invariants passed."
+}

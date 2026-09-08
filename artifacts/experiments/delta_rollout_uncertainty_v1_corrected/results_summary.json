@@ -1,0 +1,270 @@
+{
+  "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+  "created_at": "2026-08-29T14:24:34.263798",
+  "runtime_seconds": 9.88,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "numpy_version": "2.5.2",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "reproduction_1step": {
+    "delta_mae_normalized": 187.00731726656664,
+    "median_mae_normalized": 0.40405257636001446,
+    "directional_accuracy": 0.6809069212410501,
+    "directional_accuracy_nonzero": 0.6956274382314694
+  },
+  "horizon_metrics": [
+    {
+      "horizon": 1,
+      "open_loop_true_multistep_norm_mae": 187.00731726656664,
+      "open_loop_true_multistep_median_norm_mae": 0.40405257636001446,
+      "open_loop_true_multistep_raw_mae": 6037313520.419436,
+      "open_loop_true_multistep_raw_rmse": 263507632150.3152,
+      "open_loop_true_multistep_da": 0.6809069212410501,
+      "open_loop_true_multistep_da_nz": 0.6956274382314694,
+      "rolling_onestep_after_refresh_norm_mae": 187.00731726656662,
+      "rolling_onestep_after_refresh_median_norm_mae": 0.40405257636001446,
+      "rolling_onestep_after_refresh_raw_mae": 6037313520.419435,
+      "rolling_onestep_after_refresh_raw_rmse": 263507632150.3152,
+      "rolling_onestep_after_refresh_da": 0.6809069212410501,
+      "rolling_onestep_after_refresh_da_nz": 0.6956274382314694,
+      "pct_rolling_reduction_mae": 1.519818039520386e-14
+    },
+    {
+      "horizon": 2,
+      "open_loop_true_multistep_norm_mae": 187.1209990434821,
+      "open_loop_true_multistep_median_norm_mae": 0.47114694235905163,
+      "open_loop_true_multistep_raw_mae": 6034859729.939975,
+      "open_loop_true_multistep_raw_rmse": 276223674559.72595,
+      "open_loop_true_multistep_da": 0.5095067621320605,
+      "open_loop_true_multistep_da_nz": 0.5205217815344604,
+      "rolling_onestep_after_refresh_norm_mae": 187.0068722031188,
+      "rolling_onestep_after_refresh_median_norm_mae": 0.40388811482008835,
+      "rolling_onestep_after_refresh_raw_mae": 6037309133.886615,
+      "rolling_onestep_after_refresh_raw_rmse": 263507632149.3822,
+      "rolling_onestep_after_refresh_da": 0.6809466984884646,
+      "rolling_onestep_after_refresh_da_nz": 0.6956680754226268,
+      "pct_rolling_reduction_mae": 0.060990931507787456
+    },
+    {
+      "horizon": 3,
+      "open_loop_true_multistep_norm_mae": 186.31331828784727,
+      "open_loop_true_multistep_median_norm_mae": 0.4691279752742413,
+      "open_loop_true_multistep_raw_mae": 6009180676.109199,
+      "open_loop_true_multistep_raw_rmse": 275740192078.138,
+      "open_loop_true_multistep_da": 0.5020684168655529,
+      "open_loop_true_multistep_da_nz": 0.5129226267880365,
+      "rolling_onestep_after_refresh_norm_mae": 187.00643206065007,
+      "rolling_onestep_after_refresh_median_norm_mae": 0.40365135557270504,
+      "rolling_onestep_after_refresh_raw_mae": 6037303872.128317,
+      "rolling_onestep_after_refresh_raw_rmse": 263507632148.04984,
+      "rolling_onestep_after_refresh_da": 0.681145584725537,
+      "rolling_onestep_after_refresh_da_nz": 0.6958712613784135,
+      "pct_rolling_reduction_mae": -0.37201515123678275
+    }
+  ],
+  "coverage_metrics": [
+    {
+      "nominal_coverage": 0.8,
+      "horizon": 1,
+      "marginal_per_feature_observed_coverage": 0.8191726332537789,
+      "coverage_error": 0.019172633253778826
+    },
+    {
+      "nominal_coverage": 0.8,
+      "horizon": 2,
+      "marginal_per_feature_observed_coverage": 0.8336913285600637,
+      "coverage_error": 0.03369132856006363
+    },
+    {
+      "nominal_coverage": 0.8,
+      "horizon": 3,
+      "marginal_per_feature_observed_coverage": 0.8406523468575975,
+      "coverage_error": 0.04065234685759744
+    },
+    {
+      "nominal_coverage": 0.9,
+      "horizon": 1,
+      "marginal_per_feature_observed_coverage": 0.8971360381861575,
+      "coverage_error": -0.0028639618138425194
+    },
+    {
+      "nominal_coverage": 0.9,
+      "horizon": 2,
+      "marginal_per_feature_observed_coverage": 0.9087509944311853,
+      "coverage_error": 0.008750994431185322
+    },
+    {
+      "nominal_coverage": 0.9,
+      "horizon": 3,
+      "marginal_per_feature_observed_coverage": 0.9117740652346857,
+      "coverage_error": 0.011774065234685716
+    },
+    {
+      "nominal_coverage": 0.95,
+      "horizon": 1,
+      "marginal_per_feature_observed_coverage": 0.9384645982498011,
+      "coverage_error": -0.011535401750198848
+    },
+    {
+      "nominal_coverage": 0.95,
+      "horizon": 2,
+      "marginal_per_feature_observed_coverage": 0.9467780429594272,
+      "coverage_error": -0.0032219570405727094
+    },
+    {
+      "nominal_coverage": 0.95,
+      "horizon": 3,
+      "marginal_per_feature_observed_coverage": 0.9489657915672235,
+      "coverage_error": -0.0010342084327764622
+    }
+  ],
+  "trust_metrics": [
+    {
+      "horizon": 1,
+      "composite_trust": 0.2,
+      "trust_level": "LOW",
+      "normalized_interval_width": 26.878459574256887,
+      "historical_error": 187.00731726656664,
+      "scope": "forecast_horizon_uncertainty"
+    },
+    {
+      "horizon": 2,
+      "composite_trust": 0.08000000000000002,
+      "trust_level": "INSUFFICIENT",
+      "normalized_interval_width": 87.61420461207426,
+      "historical_error": 187.1209990434821,
+      "scope": "forecast_horizon_uncertainty"
+    },
+    {
+      "horizon": 3,
+      "composite_trust": 0.05,
+      "trust_level": "INSUFFICIENT",
+      "normalized_interval_width": 96.77240140939706,
+      "historical_error": 186.31331828784727,
+      "scope": "forecast_horizon_uncertainty"
+    }
+  ],
+  "reconsideration_test": {
+    "test_status": "PASS",
+    "initial_forecast_step1_byte_rate": 40155.52309451228,
+    "deviating_observation_step1_byte_rate": 277379.3,
+    "recalculated_forecast_step2_byte_rate": -161263.441091837,
+    "prediction_vector_shift_l2": 375911483.7135856,
+    "reconsideration_triggered": true,
+    "explanation": "Receiving a deviating observation updated context, adjusted subsequent trajectory forecasts, and triggered trajectory reconsideration."
+  },
+  "per_block_metrics": [
+    {
+      "block_id": "block-1-wed",
+      "horizon": 1,
+      "open_loop_norm_mae": 339.7223616636821,
+      "open_loop_da": 0.6793002915451894,
+      "rolling_onestep_after_refresh_norm_mae": 339.72236166368214,
+      "rolling_onestep_after_refresh_da": 0.6793002915451894
+    },
+    {
+      "block_id": "block-1-wed",
+      "horizon": 2,
+      "open_loop_norm_mae": 390.49498086750896,
+      "open_loop_da": 0.5374149659863946,
+      "rolling_onestep_after_refresh_norm_mae": 339.72143716786945,
+      "rolling_onestep_after_refresh_da": 0.6798833819241983
+    },
+    {
+      "block_id": "block-1-wed",
+      "horizon": 3,
+      "open_loop_norm_mae": 390.3988642005448,
+      "open_loop_da": 0.5276967930029155,
+      "rolling_onestep_after_refresh_norm_mae": 339.72236625912063,
+      "rolling_onestep_after_refresh_da": 0.6794946550048591
+    },
+    {
+      "block_id": "block-2-wed",
+      "horizon": 1,
+      "open_loop_norm_mae": 6.385769973965496,
+      "open_loop_da": 0.6903370786516854,
+      "rolling_onestep_after_refresh_norm_mae": 6.385769973965496,
+      "rolling_onestep_after_refresh_da": 0.6903370786516854
+    },
+    {
+      "block_id": "block-2-wed",
+      "horizon": 2,
+      "open_loop_norm_mae": 7.352685250260263,
+      "open_loop_da": 0.5232958801498128,
+      "rolling_onestep_after_refresh_norm_mae": 6.368854954414482,
+      "rolling_onestep_after_refresh_da": 0.6904868913857678
+    },
+    {
+      "block_id": "block-2-wed",
+      "horizon": 3,
+      "open_loop_norm_mae": 7.293972834363431,
+      "open_loop_da": 0.520749063670412,
+      "rolling_onestep_after_refresh_norm_mae": 6.336227593296033,
+      "rolling_onestep_after_refresh_da": 0.6900374531835206
+    },
+    {
+      "block_id": "block-3-thu",
+      "horizon": 1,
+      "open_loop_norm_mae": 10.571169926741753,
+      "open_loop_da": 0.7034084344309648,
+      "rolling_onestep_after_refresh_norm_mae": 10.571169926741753,
+      "rolling_onestep_after_refresh_da": 0.7034084344309648
+    },
+    {
+      "block_id": "block-3-thu",
+      "horizon": 2,
+      "open_loop_norm_mae": 12.670311829760667,
+      "open_loop_da": 0.5248989023685731,
+      "rolling_onestep_after_refresh_norm_mae": 10.574572739302829,
+      "rolling_onestep_after_refresh_da": 0.7037550548815713
+    },
+    {
+      "block_id": "block-3-thu",
+      "horizon": 3,
+      "open_loop_norm_mae": 12.66320649261036,
+      "open_loop_da": 0.5209705372616984,
+      "rolling_onestep_after_refresh_norm_mae": 10.57747665282504,
+      "rolling_onestep_after_refresh_da": 0.7032928942807626
+    },
+    {
+      "block_id": "block-4-thu",
+      "horizon": 1,
+      "open_loop_norm_mae": 129.6421191150176,
+      "open_loop_da": 0.6693877551020408,
+      "rolling_onestep_after_refresh_norm_mae": 129.6421191150176,
+      "rolling_onestep_after_refresh_da": 0.6693877551020408
+    },
+    {
+      "block_id": "block-4-thu",
+      "horizon": 2,
+      "open_loop_norm_mae": 148.6419344500124,
+      "open_loop_da": 0.5084548104956268,
+      "rolling_onestep_after_refresh_norm_mae": 129.6407288827818,
+      "rolling_onestep_after_refresh_da": 0.6691933916423712
+    },
+    {
+      "block_id": "block-4-thu",
+      "horizon": 3,
+      "open_loop_norm_mae": 148.61246294078012,
+      "open_loop_da": 0.5008746355685131,
+      "rolling_onestep_after_refresh_norm_mae": 129.6408583089092,
+      "rolling_onestep_after_refresh_da": 0.6695821185617103
+    }
+  ],
+  "integrity_checks": {
+    "1_training_only_residual_pool": true,
+    "2_no_test_residual_use": true,
+    "3_no_future_ground_truth_in_open_loop": true,
+    "4_no_test_based_interval_calibration": true,
+    "5_no_label_leakage": true,
+    "6_no_infiltration_fraction": true,
+    "7_no_gap_or_session_crossing": true,
+    "8_deterministic_seed": true,
+    "9_exact_source_artifact_hashes": true,
+    "10_reproducible_trajectory_generation": true
+  },
+  "decision_gate": "YELLOW",
+  "scientific_conclusion": "Short-horizon AR(5) dynamics are reproducible. True open-loop recursive forecasting loses directional fidelity beyond 10 seconds. Observation-anchored rolling one-step forecasts retain the one-step predictive signal (~68%) when new telemetry is incorporated. Empirical residual bootstrap provides useful marginal uncertainty intervals. Representative empirical scenario trajectories can be generated from actual bootstrap paths."
+}

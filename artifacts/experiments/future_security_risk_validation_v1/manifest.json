@@ -1,0 +1,26 @@
+{
+  "experiment_id": "future_security_risk_validation_v1",
+  "created_at": "2026-09-05T18:30:04.285797",
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "model_artifact": "artifacts/models/ar5_authoritative",
+  "source_data": {
+    "thursday": "artifacts/state_sequences/Thursday-01-03-2018_TrafficForML_CICFlowMeter.states.jsonl",
+    "wednesday": "artifacts/state_sequences/Wednesday-28-02-2018_TrafficForML_CICFlowMeter.states.jsonl"
+  },
+  "files": {
+    "results_summary_json": "artifacts\\experiments\\future_security_risk_validation_v1\\results_summary.json",
+    "benign_trajectory_csv": "artifacts\\experiments\\future_security_risk_validation_v1\\benign_trajectory.csv",
+    "attack_trajectory_csv": "artifacts\\experiments\\future_security_risk_validation_v1\\attack_trajectory.csv",
+    "benign_vs_attack_comparison_csv": "artifacts\\experiments\\future_security_risk_validation_v1\\benign_vs_attack_comparison.csv",
+    "contradiction_analysis_csv": "artifacts\\experiments\\future_security_risk_validation_v1\\contradiction_analysis.csv",
+    "horizon_analysis_csv": "artifacts\\experiments\\future_security_risk_validation_v1\\horizon_analysis.csv",
+    "figures": {
+      "plot1_benign_risk_trajectory": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot1_benign_risk_trajectory.png",
+      "plot2_attack_onset_trajectory": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot2_attack_onset_trajectory.png",
+      "plot3_benign_vs_attack_distribution": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot3_benign_vs_attack_distribution.png",
+      "plot4_risk_difference_slope": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot4_risk_difference_slope.png",
+      "plot5_horizon_comparison": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot5_horizon_comparison.png",
+      "plot6_contradiction_termination": "artifacts\\experiments\\future_security_risk_validation_v1\\figures\\plot6_contradiction_termination.png"
+    }
+  }
+}

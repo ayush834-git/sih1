@@ -1,0 +1,46 @@
+{
+  "experiment_id": "statistical_hardening_v1",
+  "timestamp": "2026-08-29T19:18:04.094647",
+  "runtime_seconds": 1.45,
+  "gate": "GREEN",
+  "ar5_test_directional_accuracy": {
+    "point_estimate": 0.681,
+    "ci_95_lower": 0.6732,
+    "ci_95_upper": 0.6887,
+    "standard_error": 0.004,
+    "n_transitions": 1682,
+    "resampling": "Moving Block Bootstrap (B=12 / 120s)"
+  },
+  "ar5_vs_ar3_comparison": {
+    "point_difference": 0.0082,
+    "ci_95_lower": 0.0023,
+    "ci_95_upper": 0.0138,
+    "cohens_dz": 0.0695,
+    "mcnemar_p_value": 0.0002739808004460498,
+    "aligned_test_transitions": 1682
+  },
+  "infiltration_blocks_variability": {
+    "n_blocks": 4,
+    "mean_gain": 0.0169,
+    "median_gain": 0.0185,
+    "min_gain": 0.0091,
+    "max_gain": 0.0216,
+    "spread": 0.0124
+  },
+  "response_window_statistics": {
+    "n_scenarios": 3,
+    "mean_gain_s": 10.0,
+    "median_gain_s": 10.0,
+    "min_gain_s": 10.0,
+    "max_gain_s": 10.0,
+    "characterization": "Deterministic replay benchmark"
+  },
+  "false_positive_bounds": {
+    "evaluated_windows": 32,
+    "observed_false_alarms": 0,
+    "empirical_rate": 0.0,
+    "clopper_pearson_95_upper_bound": 0.1089,
+    "rule_of_three_upper_bound": 0.0938
+  },
+  "scientific_conclusion": "Statistical hardening confirms that AR(5) directional accuracy (68.10% [95% CI: 67.32%\u201368.87%]) and AR(5) superiority over AR(3) (+0.82% [95% CI: +0.23%\u2013+1.38%] on test; +1.69% mean gain across infiltration blocks) are robust under dependency-aware moving block bootstrapping. Small-sample results (N=4 blocks, N=3 response scenarios) are strictly characterized descriptively without ungrounded asymptotic claims."
+}

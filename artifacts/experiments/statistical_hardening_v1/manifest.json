@@ -1,0 +1,31 @@
+{
+  "experiment_id": "statistical_hardening_v1",
+  "timestamp": "2026-08-29T19:18:04.095230",
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "artifacts": {
+    "statistical_summary_csv": "artifacts\\experiments\\statistical_hardening_v1\\statistical_summary.csv",
+    "ar5_confidence_interval_csv": "artifacts\\experiments\\statistical_hardening_v1\\ar5_confidence_interval.csv",
+    "ar3_vs_ar5_comparison_csv": "artifacts\\experiments\\statistical_hardening_v1\\ar3_vs_ar5_comparison.csv",
+    "infiltration_block_variability_csv": "artifacts\\experiments\\statistical_hardening_v1\\infiltration_block_variability.csv",
+    "response_window_statistics_csv": "artifacts\\experiments\\statistical_hardening_v1\\response_window_statistics.csv",
+    "false_positive_bounds_csv": "artifacts\\experiments\\statistical_hardening_v1\\false_positive_bounds.csv",
+    "methodology_md": "artifacts\\experiments\\statistical_hardening_v1\\methodology.md",
+    "results_summary_json": "artifacts\\experiments\\statistical_hardening_v1\\results_summary.json"
+  }
+}

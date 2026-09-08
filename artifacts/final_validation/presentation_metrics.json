@@ -1,0 +1,14 @@
+{
+  "dataset_states_evaluated": 8640,
+  "ar5_directional_accuracy_test": 0.6810,
+  "ar5_directional_accuracy_95ci": [0.6732, 0.6887],
+  "ar5_vs_ar3_paired_gain_test_pp": 0.82,
+  "ar5_vs_ar3_paired_gain_95ci": [0.23, 1.38],
+  "mcnemar_p_value": 0.000274,
+  "uncertainty_nominal_90_coverage": 0.8971,
+  "false_alarms_in_32_tested_windows": 0,
+  "simulated_useful_response_window_gain_seconds": 10.0,
+  "decision_safety_invariants_passed_ratio": "13/13",
+  "repository_tests_passed_ratio": "158/158"
+}
+

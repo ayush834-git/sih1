@@ -1,0 +1,14 @@
+{
+  "audit_passed": true,
+  "is_replay_of_csv": false,
+  "is_socket_shim": false,
+  "capture_backend": "Npcap 1.88 + TShark 4.6.8",
+  "evidence": {
+    "kernel_capture_interface": "\\Device\\NPF_Loopback",
+    "sub_microsecond_timestamps": true,
+    "exact_tcp_flags_observed": true,
+    "state_source_marker": true,
+    "execution_mode": "LIVE_PACKET_CAPTURE",
+    "distinct_packet_hashes_count": 726
+  }
+}

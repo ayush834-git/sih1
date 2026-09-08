@@ -1,0 +1,9 @@
+{
+  "experiment_id": "unseen_attack_generalization_v1",
+  "source_dataset": "C:/Users/ayush/Downloads/Wednesday-21-02-2018_TrafficForML_CICFlowMeter.csv",
+  "output_files": [
+    "artifacts\\experiments\\unseen_attack_generalization_v1\\unseen_comparison.csv",
+    "artifacts\\experiments\\unseen_attack_generalization_v1\\generalization_results.json",
+    "artifacts\\experiments\\unseen_attack_generalization_v1\\Wednesday-21-02-2018_DDoS_slice.states.jsonl"
+  ]
+}

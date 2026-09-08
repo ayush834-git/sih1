@@ -1,0 +1,6 @@
+domain,n,point_estimate,interval_95,method,caveat
+AR(5) Test DA,1682,68.10%,"[67.32%, 68.87%]",Moving Block Bootstrap (B=12),Evaluated on 10s windowed transport telemetry.
+AR(5) vs AR(3) DA Gain,1682,+0.82%,"[+0.23%, +1.38%]",Paired Block Bootstrap,Aligned test transitions; availability difference is 0.29%.
+Infiltration Block Gain,4,+1.69%,"[0.91%, 2.16%]",Leave-One-Block-Out Min-Max Spread,Variability characterization across 4 observed episodic blocks.
+Useful Response Window,3,+10.0s,10.0s across all 3 scenarios,Deterministic Progression Replay,Simulated 20s action execution; controlled replay benchmark.
+False Positive Rate,32,0.00%,"[0.00%, 10.89%]",Clopper-Pearson 95% Bound,Observed 0 false positives in 32 tested replay windows.

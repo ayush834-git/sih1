@@ -1,0 +1,25 @@
+[
+  {
+    "progression_id": "prog-recon-001",
+    "t0_timestamp": "2018-03-01T08:20:10",
+    "t0_primary_stage": "Reconnaissance",
+    "t0_primary_confidence": 0.55,
+    "t0_active_signatures": [
+      "RECONNAISSANCE_PORT_EXPLORATION",
+      "RECONNAISSANCE_PORT_EXPLORATION"
+    ],
+    "observation_at_t1": {
+      "dst_port_diversity": 35.0,
+      "flow_count": 120.0,
+      "syn_ratio": 0.45
+    },
+    "t1_primary_stage": "Reconnaissance",
+    "t1_primary_confidence": 0.75,
+    "t1_active_signatures": [
+      "RECONNAISSANCE_PORT_EXPLORATION",
+      "CONNECTION_FLOODING_RESOURCE_PRESSURE"
+    ],
+    "hypothesis_adapted": true,
+    "explanation": "Observed port exploration spike at t1 adapted forecast and upgraded Reconnaissance hypothesis to primary stage."
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "run_id": "live-run-20260905-170226",
+  "interface": "\\Device\\NPF_Loopback",
+  "bpf_filter": "tcp and (port 8768 or port 8769 or port 8770 or port 8765 or port 8766 or port 8767)",
+  "start_time": 1788627747.4688811,
+  "end_time": 1788627753.5883157,
+  "packets_captured": 826,
+  "isolation_passed": true
+}

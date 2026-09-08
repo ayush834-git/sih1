@@ -1,0 +1,159 @@
+{
+  "experiment_id": "bridge_multisignal_experiment_v1",
+  "status": "COMPLETED",
+  "variants_summary": {
+    "OLD_STATIC": {
+      "benign_mean_risk": 0.3172271891336819,
+      "benign_median_risk": 0.25245000000000006,
+      "pre_onset_mean_risk": 0.34960925727739733,
+      "attack_b4_mean_risk": 0.3540773505830905,
+      "b4_vs_pre_cohens_d": 0.034910491579914014,
+      "b4_vs_pre_overlap": 0.9188116538200405,
+      "all_vs_benign_cohens_d": 0.5084477841007277,
+      "all_vs_benign_overlap": 0.7331644958574765
+    },
+    "PORT_DYNAMIC": {
+      "benign_mean_risk": 0.2581103715459298,
+      "benign_median_risk": 0.1836,
+      "pre_onset_mean_risk": 0.29898859160958907,
+      "attack_b4_mean_risk": 0.29754708454810497,
+      "b4_vs_pre_cohens_d": -0.008272055141049665,
+      "b4_vs_pre_overlap": 0.8916889652142661,
+      "all_vs_benign_cohens_d": 0.5820307903261175,
+      "all_vs_benign_overlap": 0.7049761872696776
+    },
+    "MULTI_SIGNAL": {
+      "benign_mean_risk": 0.2656239684466019,
+      "benign_median_risk": 0.1836,
+      "pre_onset_mean_risk": 0.30195558647260273,
+      "attack_b4_mean_risk": 0.30544241982507286,
+      "b4_vs_pre_cohens_d": 0.019311675265536624,
+      "b4_vs_pre_overlap": 0.9116628060226049,
+      "all_vs_benign_cohens_d": 0.5498209879900817,
+      "all_vs_benign_overlap": 0.7209223213520524
+    }
+  },
+  "ablations": {
+    "1_PORT_ONLY": {
+      "active_signals": [
+        "port"
+      ],
+      "benign_all_mean": 0.2558,
+      "benign_all_median": 0.1836,
+      "pre_onset_mean": 0.2972,
+      "pre_onset_median": 0.2525,
+      "attack_b4_mean": 0.2976,
+      "attack_b4_median": 0.2525,
+      "attack_all_mean": 0.3685,
+      "attack_all_median": 0.3443,
+      "b4_vs_pre_cohens_d": 0.0023,
+      "b4_vs_pre_overlap": 0.9083,
+      "b4_vs_pre_mean_diff": 0.0004,
+      "b4_vs_pre_mean_diff_ci": [
+        -0.0402,
+        0.0383
+      ],
+      "all_vs_benign_cohens_d": 0.589,
+      "all_vs_benign_overlap": 0.702
+    },
+    "2_PORT_FLOW": {
+      "active_signals": [
+        "port",
+        "flow"
+      ],
+      "benign_all_mean": 0.2611,
+      "benign_all_median": 0.1836,
+      "pre_onset_mean": 0.2978,
+      "pre_onset_median": 0.2525,
+      "attack_b4_mean": 0.2988,
+      "attack_b4_median": 0.2525,
+      "attack_all_mean": 0.369,
+      "attack_all_median": 0.3443,
+      "b4_vs_pre_cohens_d": 0.0059,
+      "b4_vs_pre_overlap": 0.9112,
+      "b4_vs_pre_mean_diff": 0.001,
+      "b4_vs_pre_mean_diff_ci": [
+        -0.0401,
+        0.0383
+      ],
+      "all_vs_benign_cohens_d": 0.5602,
+      "all_vs_benign_overlap": 0.7158
+    },
+    "3_PORT_TIMING": {
+      "active_signals": [
+        "port",
+        "timing"
+      ],
+      "benign_all_mean": 0.2561,
+      "benign_all_median": 0.1836,
+      "pre_onset_mean": 0.2972,
+      "pre_onset_median": 0.2525,
+      "attack_b4_mean": 0.2976,
+      "attack_b4_median": 0.2525,
+      "attack_all_mean": 0.3685,
+      "attack_all_median": 0.3443,
+      "b4_vs_pre_cohens_d": 0.0023,
+      "b4_vs_pre_overlap": 0.9083,
+      "b4_vs_pre_mean_diff": 0.0004,
+      "b4_vs_pre_mean_diff_ci": [
+        -0.0402,
+        0.0383
+      ],
+      "all_vs_benign_cohens_d": 0.5871,
+      "all_vs_benign_overlap": 0.7026
+    },
+    "4_PORT_BYTE": {
+      "active_signals": [
+        "port",
+        "byte"
+      ],
+      "benign_all_mean": 0.2607,
+      "benign_all_median": 0.1836,
+      "pre_onset_mean": 0.3018,
+      "pre_onset_median": 0.2525,
+      "attack_b4_mean": 0.305,
+      "attack_b4_median": 0.2525,
+      "attack_all_mean": 0.3723,
+      "attack_all_median": 0.3443,
+      "b4_vs_pre_cohens_d": 0.0176,
+      "b4_vs_pre_overlap": 0.9117,
+      "b4_vs_pre_mean_diff": 0.0032,
+      "b4_vs_pre_mean_diff_ci": [
+        -0.0373,
+        0.0421
+      ],
+      "all_vs_benign_cohens_d": 0.5776,
+      "all_vs_benign_overlap": 0.7076
+    },
+    "5_FULL_MULTISIGNAL": {
+      "active_signals": [
+        "port",
+        "flow",
+        "byte",
+        "timing"
+      ],
+      "benign_all_mean": 0.2656,
+      "benign_all_median": 0.1836,
+      "pre_onset_mean": 0.302,
+      "pre_onset_median": 0.2525,
+      "attack_b4_mean": 0.3054,
+      "attack_b4_median": 0.2525,
+      "attack_all_mean": 0.3725,
+      "attack_all_median": 0.3443,
+      "b4_vs_pre_cohens_d": 0.0193,
+      "b4_vs_pre_overlap": 0.9117,
+      "b4_vs_pre_mean_diff": 0.0035,
+      "b4_vs_pre_mean_diff_ci": [
+        -0.0368,
+        0.042
+      ],
+      "all_vs_benign_cohens_d": 0.5498,
+      "all_vs_benign_overlap": 0.7209
+    }
+  },
+  "contradiction_regression": {
+    "OLD_STATIC": 63.2,
+    "PORT_DYNAMIC": 49.82,
+    "MULTI_SIGNAL": 86.51
+  }
+}

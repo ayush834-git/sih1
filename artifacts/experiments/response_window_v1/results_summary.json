@@ -1,0 +1,22 @@
+{
+  "experiment_id": "response_window_v1",
+  "timestamp": "2026-09-08T10:09:18.369885",
+  "runtime_seconds": 0.27,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "scenarios_evaluated": 5,
+  "valid_attack_events_count": 3,
+  "average_raw_lead_time_seconds": 10.0,
+  "average_useful_response_window_gain_seconds": 10.0,
+  "fairness_summary": {
+    "benign_burst_predictive_fp": 0,
+    "benign_burst_baseline_fp": 0,
+    "ambiguous_predictive_fp": 0,
+    "ambiguous_baseline_fp": 0
+  },
+  "gate": "GREEN",
+  "scientific_conclusion": "Under frozen, identical event definitions across 3 controlled attack progressions, predictive trajectory forecasting provided an average raw lead time of 10.0s (10.0s per event) and a validated simulated useful response window gain of 10.0s, allowing reversible defender actions (20s duration) to complete prior to sustained event onset where current-state detectors alerted too late."
+}

@@ -1,0 +1,4 @@
+scenario_id,attack_stage,sustained_event_onset_s,current_state_alert_s,predictive_alert_s,raw_lead_time_s,simulated_useful_window_gain_s
+recon_progression,Reconnaissance,60.0,50.0,40.0,10.0,10.0
+dos_progression,Impact / Denial of Service,60.0,50.0,40.0,10.0,10.0
+exfiltration_progression,Collection / Exfiltration,60.0,50.0,40.0,10.0,10.0

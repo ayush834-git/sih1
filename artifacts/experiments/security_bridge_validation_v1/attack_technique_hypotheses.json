@@ -1,0 +1,62 @@
+[
+  {
+    "technique_id": "T1046",
+    "technique_name": "Network Service Discovery",
+    "tactic_name": "Discovery",
+    "supporting_signatures": [
+      "RECONNAISSANCE_PORT_EXPLORATION"
+    ],
+    "confidence": 0.7,
+    "rationale": "Elevated destination port diversity across flows indicates systematic probing of host services.",
+    "limitations": "Source IP identity and scan tooling headers are unavailable in current flow telemetry.",
+    "is_available": true
+  },
+  {
+    "technique_id": "T1498",
+    "technique_name": "Network Denial of Service",
+    "tactic_name": "Impact",
+    "supporting_signatures": [
+      "CONNECTION_FLOODING_RESOURCE_PRESSURE"
+    ],
+    "confidence": 0.65,
+    "rationale": "High connection flow rate with elevated TCP reset/rejection ratio indicates service flooding.",
+    "limitations": "Cannot distinguish intentional DDoS attack from legitimate high-load flash event without application error logs.",
+    "is_available": true
+  },
+  {
+    "technique_id": "T1048",
+    "technique_name": "Exfiltration Over Alternative Protocol",
+    "tactic_name": "Exfiltration",
+    "supporting_signatures": [
+      "EXFILTRATION_OUTBOUND_SURGE"
+    ],
+    "confidence": 0.6,
+    "rationale": "High sustained byte transfer rate with large mean packet payload size indicates substantial outbound data staging.",
+    "limitations": "L7 payload inspection and destination external IP geolocation are unavailable in CSV flow data.",
+    "is_available": true
+  },
+  {
+    "technique_id": "T1071",
+    "technique_name": "Application Layer Protocol",
+    "tactic_name": "Command and Control",
+    "supporting_signatures": [
+      "TIMING_BEHAVIOURAL_ANOMALY"
+    ],
+    "confidence": 0.45,
+    "rationale": "Rigid flow inter-arrival timing suggests periodic machine-generated communication.",
+    "limitations": "Interval regularity alone cannot prove malicious C2 protocol without payload analysis.",
+    "is_available": true
+  },
+  {
+    "technique_id": "T1021",
+    "technique_name": "Remote Services",
+    "tactic_name": "Lateral Movement",
+    "supporting_signatures": [
+      "LATERAL_FAN_OUT"
+    ],
+    "confidence": 0.0,
+    "rationale": "Lateral movement evaluation requires internal IP tracking and endpoint fan-out.",
+    "limitations": "UNAVAILABLE: Endpoint IP addresses and internal routing topology are absent in current dataset.",
+    "is_available": false
+  }
+]

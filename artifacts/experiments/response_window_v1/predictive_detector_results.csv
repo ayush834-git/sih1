@@ -1,0 +1,41 @@
+scenario_name,window_index,is_alert,event_type,confidence,trigger_reason
+1_recon_progression,0,False,None,0.15,Forecast projects state remaining within normal boundaries
+1_recon_progression,1,False,None,0.15,Forecast projects state remaining within normal boundaries
+1_recon_progression,2,False,None,0.15,Forecast projects state remaining within normal boundaries
+1_recon_progression,3,False,None,0.15,Forecast projects state remaining within normal boundaries
+1_recon_progression,4,True,Reconnaissance,0.8,Trajectory forecast predicts Reconnaissance condition at h=1 (Trust=HIGH)
+1_recon_progression,5,True,Reconnaissance,0.8,Trajectory forecast predicts Reconnaissance condition at h=1 (Trust=HIGH)
+1_recon_progression,6,True,Reconnaissance,0.8,Trajectory forecast predicts Reconnaissance condition at h=1 (Trust=HIGH)
+1_recon_progression,7,True,Reconnaissance,0.8,Trajectory forecast predicts Reconnaissance condition at h=1 (Trust=HIGH)
+2_dos_progression,0,False,None,0.15,Forecast projects state remaining within normal boundaries
+2_dos_progression,1,False,None,0.15,Forecast projects state remaining within normal boundaries
+2_dos_progression,2,False,None,0.15,Forecast projects state remaining within normal boundaries
+2_dos_progression,3,False,None,0.15,Forecast projects state remaining within normal boundaries
+2_dos_progression,4,True,Impact / Denial of Service,0.8,Trajectory forecast predicts Impact / Denial of Service condition at h=1 (Trust=HIGH)
+2_dos_progression,5,True,Impact / Denial of Service,0.8,Trajectory forecast predicts Impact / Denial of Service condition at h=1 (Trust=HIGH)
+2_dos_progression,6,True,Impact / Denial of Service,0.8,Trajectory forecast predicts Impact / Denial of Service condition at h=1 (Trust=HIGH)
+2_dos_progression,7,True,Impact / Denial of Service,0.8,Trajectory forecast predicts Impact / Denial of Service condition at h=1 (Trust=HIGH)
+3_exfiltration_progression,0,False,None,0.15,Forecast projects state remaining within normal boundaries
+3_exfiltration_progression,1,False,None,0.15,Forecast projects state remaining within normal boundaries
+3_exfiltration_progression,2,False,None,0.15,Forecast projects state remaining within normal boundaries
+3_exfiltration_progression,3,False,None,0.15,Forecast projects state remaining within normal boundaries
+3_exfiltration_progression,4,True,Collection / Exfiltration,0.8,Trajectory forecast predicts Collection / Exfiltration condition at h=1 (Trust=HIGH)
+3_exfiltration_progression,5,True,Collection / Exfiltration,0.8,Trajectory forecast predicts Collection / Exfiltration condition at h=1 (Trust=HIGH)
+3_exfiltration_progression,6,True,Collection / Exfiltration,0.8,Trajectory forecast predicts Collection / Exfiltration condition at h=1 (Trust=HIGH)
+3_exfiltration_progression,7,True,Collection / Exfiltration,0.8,Trajectory forecast predicts Collection / Exfiltration condition at h=1 (Trust=HIGH)
+4_benign_burst_traffic,0,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,1,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,2,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,3,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,4,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,5,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,6,False,None,0.15,Forecast projects state remaining within normal boundaries
+4_benign_burst_traffic,7,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,0,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,1,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,2,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,3,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,4,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,5,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,6,False,None,0.15,Forecast projects state remaining within normal boundaries
+5_ambiguous_mixed_traffic,7,False,None,0.15,Forecast projects state remaining within normal boundaries

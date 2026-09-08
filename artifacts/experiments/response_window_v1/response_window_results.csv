@@ -1,0 +1,6 @@
+scenario_name,event_type,action_evaluated,action_duration_seconds,defender_A_base_start_s,defender_A_base_complete_s,defender_A_completed_before_sustained,defender_A_available_window_s,defender_B_pred_start_s,defender_B_pred_complete_s,defender_B_completed_before_sustained,defender_B_available_window_s,simulated_useful_window_gain_seconds,useful_response_validated
+1_recon_progression,Reconnaissance,REVIEW_BOUNDARY_ACLS,20,50,70,False,10,40,60,True,20,10,VALIDATED
+2_dos_progression,Impact / Denial of Service,PREPARE_RATE_LIMIT,20,50,70,False,10,40,60,True,20,10,VALIDATED
+3_exfiltration_progression,Collection / Exfiltration,PREPARE_EGRESS_RESTRICTION,20,50,70,False,10,40,60,True,20,10,VALIDATED
+4_benign_burst_traffic,None,None,20,,,,10,,,,20,,NO_EVENT (Benign/Noise)
+5_ambiguous_mixed_traffic,None,None,20,,,,10,,,,20,,NO_EVENT (Benign/Noise)

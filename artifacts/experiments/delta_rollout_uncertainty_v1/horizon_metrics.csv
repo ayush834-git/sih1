@@ -1,0 +1,4 @@
+Horizon,OpenLoop_Norm_MAE,OpenLoop_Median_Norm_MAE,OpenLoop_Raw_MAE,OpenLoop_Raw_RMSE,OpenLoop_DA,OpenLoop_DA_NZ,Receding_Norm_MAE,Receding_Median_Norm_MAE,Receding_Raw_MAE,Receding_Raw_RMSE,Receding_DA,Receding_DA_NZ,Pct_Receding_Impr_MAE
+1,187.0073,0.4041,6.04e+09,2.64e+11,0.6809,0.6956,187.0073,0.4041,6.04e+09,2.64e+11,0.6809,0.6956,+0.00
+2,187.1210,0.4711,6.03e+09,2.76e+11,0.5095,0.5205,187.0069,0.4039,6.04e+09,2.64e+11,0.6809,0.6957,+0.06
+3,186.3133,0.4691,6.01e+09,2.76e+11,0.5021,0.5129,187.0064,0.4037,6.04e+09,2.64e+11,0.6811,0.6959,-0.37

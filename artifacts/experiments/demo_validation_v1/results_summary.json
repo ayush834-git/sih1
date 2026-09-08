@@ -1,0 +1,122 @@
+{
+  "experiment_name": "demo_validation_v1",
+  "timestamp": "2026-08-29T14:54:12.238894",
+  "runtime_seconds": 0.2,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "scenarios_executed": 5,
+  "scenario_summaries": [
+    {
+      "scenario_name": "demo_recon_15s",
+      "total_steps": 16,
+      "start_time": "2026-08-29T14:54:12.054632",
+      "end_time": "2026-08-29T14:54:12.094042",
+      "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+      "final_stage": "Unknown",
+      "final_priority": "LOW",
+      "final_strategy": "MONITOR",
+      "all_stages_observed": [
+        "Reconnaissance",
+        "Unknown"
+      ],
+      "all_roles_notified": [
+        "INCIDENT_RESPONSE",
+        "NETWORK_SECURITY"
+      ],
+      "human_approval_enforced": true,
+      "zero_automated_execution_verified": true
+    },
+    {
+      "scenario_name": "demo_recon",
+      "total_steps": 10,
+      "start_time": "2026-08-29T14:54:12.111603",
+      "end_time": "2026-08-29T14:54:12.132188",
+      "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+      "final_stage": "Reconnaissance",
+      "final_priority": "LOW",
+      "final_strategy": "MONITOR",
+      "all_stages_observed": [
+        "Reconnaissance",
+        "Unknown"
+      ],
+      "all_roles_notified": [
+        "INCIDENT_RESPONSE",
+        "NETWORK_SECURITY"
+      ],
+      "human_approval_enforced": true,
+      "zero_automated_execution_verified": true
+    },
+    {
+      "scenario_name": "demo_dos",
+      "total_steps": 10,
+      "start_time": "2026-08-29T14:54:12.145135",
+      "end_time": "2026-08-29T14:54:12.165989",
+      "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+      "final_stage": "Impact / Denial of Service",
+      "final_priority": "HIGH",
+      "final_strategy": "ACT",
+      "all_stages_observed": [
+        "Impact / Denial of Service",
+        "Unknown"
+      ],
+      "all_roles_notified": [
+        "INCIDENT_RESPONSE",
+        "NETWORK_SECURITY"
+      ],
+      "human_approval_enforced": true,
+      "zero_automated_execution_verified": true
+    },
+    {
+      "scenario_name": "demo_exfiltration",
+      "total_steps": 10,
+      "start_time": "2026-08-29T14:54:12.180978",
+      "end_time": "2026-08-29T14:54:12.199824",
+      "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+      "final_stage": "Collection / Exfiltration",
+      "final_priority": "MEDIUM",
+      "final_strategy": "PREPARE",
+      "all_stages_observed": [
+        "Collection / Exfiltration",
+        "Unknown"
+      ],
+      "all_roles_notified": [
+        "INCIDENT_RESPONSE",
+        "NETWORK_SECURITY",
+        "CLOUD_SYSTEM_ADMIN"
+      ],
+      "human_approval_enforced": true,
+      "zero_automated_execution_verified": true
+    },
+    {
+      "scenario_name": "demo_ambiguous",
+      "total_steps": 10,
+      "start_time": "2026-08-29T14:54:12.215218",
+      "end_time": "2026-08-29T14:54:12.234872",
+      "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+      "final_stage": "Unknown",
+      "final_priority": "LOW",
+      "final_strategy": "MONITOR",
+      "all_stages_observed": [
+        "Reconnaissance",
+        "Unknown"
+      ],
+      "all_roles_notified": [
+        "INCIDENT_RESPONSE",
+        "NETWORK_SECURITY"
+      ],
+      "human_approval_enforced": true,
+      "zero_automated_execution_verified": true
+    }
+  ],
+  "safety_audit": {
+    "all_recommendations_human_gated": true,
+    "zero_automated_execution_verified": true,
+    "no_external_network_operations": true,
+    "replay_is_deterministic": true
+  },
+  "gate": "GREEN",
+  "scientific_conclusion": "All canonical controlled demo scenarios execute deterministically end-to-end through the real NetworkState -> AR(5) -> Behavioral Security Bridge -> Priority -> Role Routing -> Notification -> Human-Gated Recommendation pipeline. Selective role routing and human-approval constraints strictly hold."
+}

@@ -1,0 +1,4 @@
+Horizon,OpenLoop_True_MultiStep_Norm_MAE,Rolling_OneStep_After_Refresh_Norm_MAE,Norm_MAE_Reduction,OpenLoop_DA,Rolling_OneStep_DA,DA_Difference
+1,187.0073,187.0073,0.0000,0.6809,0.6809,+0.0000
+2,187.1210,187.0069,0.1141,0.5095,0.6809,+0.1714
+3,186.3133,187.0064,-0.6931,0.5021,0.6811,+0.1791

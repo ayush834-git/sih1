@@ -1,0 +1,8 @@
+scenario_name,primary_stage,confidence,trust_level,priority_level,composite_priority,relevant_roles_count,relevant_roles,notification_count,recommended_strategy,requires_human,is_reversible
+1_benign,Unknown,0.85,HIGH,LOW,0.335,0,None,0,MONITOR,True,True
+2_reconnaissance,Reconnaissance,0.75,HIGH,MEDIUM,0.482,2,"SOC_ANALYST, NETWORK_DEFENDER",2,PREPARE,True,True
+3_connection_flooding_dos,Impact / Denial of Service,0.7,HIGH,MEDIUM,0.546,2,"SOC_ANALYST, NETWORK_DEFENDER",2,PREPARE,True,True
+4_exfiltration_surge,Collection / Exfiltration,0.65,MEDIUM,MEDIUM,0.519,3,"SOC_ANALYST, NETWORK_DEFENDER, DATA_PROTECTION",3,PREPARE,True,True
+5_low_trust_recon_forecast,Reconnaissance,0.55,LOW,INFO,0.169,2,"SOC_ANALYST, NETWORK_DEFENDER",2,MONITOR,True,True
+6_high_consequence_low_confidence,Impact / Denial of Service,0.5,LOW,LOW,0.205,2,"SOC_ANALYST, NETWORK_DEFENDER",2,MONITOR,True,True
+7_unknown_ambiguous,Unknown,0.85,MEDIUM,LOW,0.275,0,None,0,MONITOR,True,True

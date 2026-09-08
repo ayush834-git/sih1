@@ -1,0 +1,3 @@
+test_name,condition,primary_stage_match,confidence_match,feature_ranking_match,passed
+Deterministic Idempotence,Same input evaluated twice,True,True,True,True
+Bounded Perturbation Coherence,2% irrelevant feature drift (byte_rate),True,True,True,True

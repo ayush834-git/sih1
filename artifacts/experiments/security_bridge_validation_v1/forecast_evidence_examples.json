@@ -1,0 +1,32 @@
+[
+  {
+    "case_id": "case_a_recon_reinforcement",
+    "description": "Current reconnaissance reinforced by forecasted port expansion",
+    "current_only_confidence": 0.55,
+    "current_plus_forecast_confidence": 0.85,
+    "confidence_change": "0.55 -> 0.85 (Elevated)",
+    "mechanism": "Forecast growth confirms multi-step sustained activity, upgrading confidence."
+  },
+  {
+    "case_id": "case_b_exfil_reinforcement",
+    "description": "Current volumetric surge reinforced by forecasted byte acceleration",
+    "current_only_confidence": 0.45,
+    "current_plus_forecast_confidence": 0.8,
+    "confidence_change": "0.45 -> 0.80 (Elevated)",
+    "mechanism": "Forecast volume expansion validates exfiltration staging trend."
+  },
+  {
+    "case_id": "case_c_contradictory_forecast",
+    "description": "Current elevated port diversity with forecast predicting sharp collapse",
+    "current_only_confidence": 0.75,
+    "current_plus_contradictory_forecast_confidence": 0.4,
+    "confidence_change": "0.75 -> 0.40 (Suppressed)",
+    "blind_escalation_prevented": true,
+    "counter_evidence_added": [
+      "Target endpoints responding normally",
+      "No lateral fan-out telemetry available",
+      "Forecast predicts immediate deceleration / mean-reversion to baseline"
+    ],
+    "mechanism": "Contradictory forecast predicts immediate deceleration, suppressing confidence and preventing blind escalation."
+  }
+]

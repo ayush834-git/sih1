@@ -1,0 +1,7 @@
+Residual_Metric,Pre_Onset_Mean,B4_Mean,Mean_Diff,Cohens_d,Overlap,Spans_Zero
+Fam5_Res_Norm_Euclidean,157.9104,67.4398,-90.4706,-0.1072,0.9726,True
+Fam5_Res_Delta_Alignment,0.3648,0.344,-0.0207,-0.0222,0.989,True
+Fam5_Res_iat_mean,0.0123,0.0008,-0.0114,-0.0029,0.7699,True
+Fam5_Res_flow_count,0.6242,1.0921,0.4678,0.0013,0.8502,True
+Fam5_Res_dst_port_diversity,-0.0498,0.0148,0.0646,0.0004,0.8134,True
+Fam5_Res_byte_rate,581.5889,488.7685,-92.8204,-0.0001,0.9723,True

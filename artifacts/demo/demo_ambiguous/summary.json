@@ -1,0 +1,20 @@
+{
+  "scenario_name": "demo_ambiguous",
+  "total_steps": 10,
+  "start_time": "2026-08-29T14:54:12.215218",
+  "end_time": "2026-08-29T14:54:12.234872",
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "final_stage": "Unknown",
+  "final_priority": "LOW",
+  "final_strategy": "MONITOR",
+  "all_stages_observed": [
+    "Reconnaissance",
+    "Unknown"
+  ],
+  "all_roles_notified": [
+    "INCIDENT_RESPONSE",
+    "NETWORK_SECURITY"
+  ],
+  "human_approval_enforced": true,
+  "zero_automated_execution_verified": true
+}

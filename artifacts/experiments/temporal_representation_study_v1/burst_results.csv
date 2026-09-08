@@ -1,0 +1,7 @@
+Burst_Descriptor,Pre_Onset_Mean,B4_Mean,Mean_Diff,Cohens_d,Overlap,Spans_Zero
+Fam3_Burst_byte_duty_cycle,0.2883,0.2604,-0.0279,-0.3336,0.7815,True
+Fam3_Burst_flow_quiet_duration,2.9795,3.4985,0.5191,0.1391,0.9289,True
+Fam3_Burst_flow_run_length,0.1901,0.2391,0.049,0.09,0.9778,True
+Fam3_Burst_flow_duty_cycle,0.1511,0.1545,0.0034,0.0467,0.8382,True
+Fam3_Burst_byte_run_length,0.4264,0.3907,-0.0357,-0.0459,0.9697,True
+Fam3_Burst_dst_port_run_length,0.137,0.1545,0.0175,0.0381,0.9816,True

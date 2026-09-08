@@ -1,0 +1,4 @@
+Horizon,OpenLoop_True_MultiStep_Norm_MAE,OpenLoop_True_MultiStep_Median_Norm_MAE,OpenLoop_True_MultiStep_Raw_MAE,OpenLoop_True_MultiStep_Raw_RMSE,OpenLoop_True_MultiStep_DA,OpenLoop_True_MultiStep_DA_NZ,Rolling_OneStep_After_Refresh_Norm_MAE,Rolling_OneStep_After_Refresh_Median_Norm_MAE,Rolling_OneStep_After_Refresh_Raw_MAE,Rolling_OneStep_After_Refresh_Raw_RMSE,Rolling_OneStep_After_Refresh_DA,Rolling_OneStep_After_Refresh_DA_NZ,Pct_Rolling_Reduction_MAE
+1,187.0073,0.4041,6.04e+09,2.64e+11,0.6809,0.6956,187.0073,0.4041,6.04e+09,2.64e+11,0.6809,0.6956,+0.00
+2,187.1210,0.4711,6.03e+09,2.76e+11,0.5095,0.5205,187.0069,0.4039,6.04e+09,2.64e+11,0.6809,0.6957,+0.06
+3,186.3133,0.4691,6.01e+09,2.76e+11,0.5021,0.5129,187.0064,0.4037,6.04e+09,2.64e+11,0.6811,0.6959,-0.37

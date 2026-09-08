@@ -1,0 +1,2 @@
+metric_name,sample_count,evaluation_windows,observed_false_alarms,empirical_fpr,clopper_pearson_95_upper_bound,rule_of_three_upper_bound,interpretation
+Tested Benign Scenarios,2,32,0,0.00%,10.89%,9.38%,"Observed 0 false positives across 32 controlled test windows; upper bound reflects sample-size constraint, not guaranteed zero enterprise false positive rate."

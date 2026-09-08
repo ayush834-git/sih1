@@ -1,0 +1,5 @@
+horizon_step,label,horizon_seconds,mean_uncertainty,certainty_retention,nominal_trust,benign_mean_risk,benign_median_risk,benign_std_risk,attack_mean_risk,attack_median_risk,attack_std_risk
+0,NOW,0.0,0.1,0.9,0.85,0.3172,0.2525,0.1242,0.3547,0.3902,0.1263
+1,+10s,10.0,0.2,0.8,0.85,0.2495,0.2244,0.1003,0.2753,0.306,0.0979
+2,+20s,20.0,0.35,0.65,0.75,0.201,0.1609,0.0786,0.2139,0.2194,0.0742
+3,+30s,30.0,0.5,0.5,0.65,0.1347,0.1072,0.0528,0.1471,0.1462,0.0562

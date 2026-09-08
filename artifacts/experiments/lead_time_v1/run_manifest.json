@@ -1,0 +1,37 @@
+{
+  "run_id": "lead_time_v1_20260905_181405",
+  "governing_principle": "Forecast horizon != Actionable lead time",
+  "default_modeled_action_duration_s": 20,
+  "experiment_tier": "EMPIRICAL_LEAD_TIME",
+  "created_at": "2026-09-05T18:14:05.826147+00:00",
+  "backend": {
+    "has_npcap": true,
+    "npcap_version": "1.88",
+    "tshark_path": "C:\\Program Files\\Wireshark\\tshark.exe",
+    "tshark_version": "4.6.8",
+    "loopback_interface": "\\Device\\NPF_Loopback"
+  },
+  "models": {
+    "ar5_authoritative_dir": "artifacts/models/ar5_authoritative",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "files_generated": [
+    "lead_time_results.json",
+    "comparison.csv",
+    "raw_event_timeline.jsonl",
+    "methodology.md"
+  ],
+  "file_hashes": {
+    "lead_time_results.json": "af53abed546cfa8462bb9bfb257147a5bb4509290ea7a38e62fbfa115c836718",
+    "comparison.csv": "dea77263f2201aa7f72cfb26c7c143c99869f3f3331e6af4228470f534b841a3",
+    "raw_event_timeline.jsonl": "ffe61e5dd6b55f2dc9bf0b3a66023ab9bf9494f379a624e5f7c0b5f0951ea310",
+    "methodology.md": "45abf7681aba3d7a683f2449863afaa26af46275c3e156b94318e9c49d9137ba"
+  },
+  "sha256_checksums": {
+    "lead_time_results.json": "af53abed546cfa8462bb9bfb257147a5bb4509290ea7a38e62fbfa115c836718",
+    "comparison.csv": "dea77263f2201aa7f72cfb26c7c143c99869f3f3331e6af4228470f534b841a3",
+    "raw_event_timeline.jsonl": "ffe61e5dd6b55f2dc9bf0b3a66023ab9bf9494f379a624e5f7c0b5f0951ea310",
+    "methodology.md": "45abf7681aba3d7a683f2449863afaa26af46275c3e156b94318e9c49d9137ba"
+  },
+  "is_valid_experiment": true
+}

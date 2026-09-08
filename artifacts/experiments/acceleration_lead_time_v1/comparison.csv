@@ -1,0 +1,9 @@
+slice_id,onset_idx,base_alert,ctrl_alert,treat_alert,ctrl_lead_base_s,treat_lead_base_s,ctrl_lead_actual_s,treat_lead_actual_s,ctrl_actionable_20s,treat_actionable_20s,ctrl_fail_cat,treat_fail_cat
+Infiltration,3,3,0,0,30.0,30.0,30.0,30.0,True,True,NONE,NONE
+Infiltration,3,2,0,0,20.0,20.0,30.0,30.0,True,True,NONE,NONE
+Infiltration,3,0,0,0,0.0,0.0,30.0,30.0,False,False,LATE_VS_BASELINE,LATE_VS_BASELINE
+Infiltration,3,0,0,0,0.0,0.0,30.0,30.0,False,False,LATE_VS_BASELINE,LATE_VS_BASELINE
+Benign,,,,,0.0,0.0,0.0,0.0,False,False,NONE,NONE
+Benign,,,1,1,0.0,0.0,0.0,0.0,False,False,FALSE_EARLY,FALSE_EARLY
+Benign,,,0,0,0.0,0.0,0.0,0.0,False,False,FALSE_EARLY,FALSE_EARLY
+Benign,,,,,0.0,0.0,0.0,0.0,False,False,NONE,NONE

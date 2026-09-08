@@ -1,0 +1,29 @@
+{
+  "experiment_name": "ar_order_availability_v1",
+  "timestamp": "2026-09-08T10:09:11.913701",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "order_comparison_csv": "artifacts\\experiments\\ar_order_availability_v1\\order_comparison.csv",
+    "availability_comparison_csv": "artifacts\\experiments\\ar_order_availability_v1\\availability_comparison.csv",
+    "block_comparison_csv": "artifacts\\experiments\\ar_order_availability_v1\\block_comparison.csv",
+    "demo_comparison_json": "artifacts\\experiments\\ar_order_availability_v1\\demo_comparison.json",
+    "results_summary_json": "artifacts\\experiments\\ar_order_availability_v1\\results_summary.json"
+  }
+}

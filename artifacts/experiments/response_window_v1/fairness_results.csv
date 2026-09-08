@@ -1,0 +1,6 @@
+scenario_name,total_windows,baseline_alerts_count,lr_alerts_count,predictive_alerts_count,has_ground_truth_event,baseline_false_positives,predictive_false_positives
+1_recon_progression,8,3,8,4,True,0,0
+2_dos_progression,8,3,8,4,True,0,0
+3_exfiltration_progression,8,3,8,4,True,0,0
+4_benign_burst_traffic,8,0,8,0,False,0,0
+5_ambiguous_mixed_traffic,8,0,8,0,False,0,0

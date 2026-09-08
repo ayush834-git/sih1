@@ -1,0 +1,51 @@
+{
+  "run_id": "live-run-20260905-170226",
+  "timestamp_utc": "2026-09-05T17:02:34.269225+00:00",
+  "execution_mode": "LIVE_PACKET_CAPTURE",
+  "backend_info": {
+    "tshark_path": "C:\\Program Files\\Wireshark\\tshark.exe",
+    "version": "4.6.8",
+    "npcap_detected": true,
+    "npcap_version": "1.88",
+    "interface_name": "\\Device\\NPF_Loopback",
+    "bpf_filter": "tcp and (port 8768 or port 8769 or port 8770 or port 8765 or port 8766 or port 8767)",
+    "process_pid": 26244
+  },
+  "isolation_validation": {
+    "isolation_passed": true,
+    "total_captured": 826,
+    "in_scope_packets": 826,
+    "out_of_scope_packets": 0,
+    "violations": []
+  },
+  "generator_stats": {
+    "scenario": "recon_scan",
+    "target_ports": [
+      8765,
+      8766,
+      8767,
+      8768,
+      8769,
+      8770
+    ],
+    "duration_s": 6.081,
+    "connections_attempted": 89,
+    "connections_succeeded": 89,
+    "bytes_sent": 5696
+  },
+  "capture_stats": {
+    "duration_s": 6.119,
+    "packets_captured": 826
+  },
+  "total_packets": 726,
+  "total_flows": 69,
+  "total_states": 3,
+  "total_forecast_events": 3,
+  "cryptographic_integrity": {
+    "packets_sha256": "d32eb3b255297fd79e83305bf34ee41190538443dcdfb051ba55385945399efa",
+    "states_sha256": "5a2a1d6603446be9ecf9ad8d3cbe0b6b47217fe2572fc3d23808dc7127d34f15",
+    "events_sha256": "9a0299515e2909c83e7b9fcc7452102a69596a977a825691dca086744315972c"
+  },
+  "is_valid_experiment": true,
+  "reasons_for_invalid": []
+}

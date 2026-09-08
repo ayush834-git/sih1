@@ -1,0 +1,12 @@
+{
+  "run_id": "live-run-20260905-170226",
+  "packets_digest": "d32eb3b255297fd79e83305bf34ee41190538443dcdfb051ba55385945399efa",
+  "states_digest": "5a2a1d6603446be9ecf9ad8d3cbe0b6b47217fe2572fc3d23808dc7127d34f15",
+  "events_digest": "9a0299515e2909c83e7b9fcc7452102a69596a977a825691dca086744315972c",
+  "state_provenance_hashes": [
+    "63e1803c99bee77ca87d0b7c6305d07ab45b612e4373510abbbfb4a4f980fa21",
+    "f9f614a2c7b50402c5a132b6befe221cf285d29f5ee0c24ad3ee775797bdfcff",
+    "915ddb2ae3a32f8a8476d2b89457512652009ef0b6d3ab90ce47999bd68e8feb"
+  ],
+  "isolation_verified": true
+}

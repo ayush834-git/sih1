@@ -1,0 +1,350 @@
+{
+  "manifest_id": "sih26153_final_results_manifest_v1",
+  "project": "SIH 26153 — Predictive Network State Forecasting & Behavioral Security Decision Layer",
+  "generated_at": "2026-08-29T16:25:00Z",
+  "status": "FROZEN",
+  "metrics": {
+    "telemetry_state_counts": [
+      {
+        "metric_name": "wednesday_10s_state_count",
+        "value": 4320,
+        "source_artifact": "artifacts/state_sequences/Wednesday-28-02-2018_TrafficForML_CICFlowMeter.states.jsonl",
+        "experiment_id": "day1_ingest",
+        "evaluation_split": "full_day_24h",
+        "date_version": "2026-08-29",
+        "caveat": "Covers 24 contiguous hours (86,400s) aggregated at 10.0s interval without synthetic time shifts."
+      },
+      {
+        "metric_name": "thursday_10s_state_count",
+        "value": 4320,
+        "source_artifact": "artifacts/state_sequences/Thursday-01-03-2018_TrafficForML_CICFlowMeter.states.jsonl",
+        "experiment_id": "day1_ingest",
+        "evaluation_split": "full_day_24h",
+        "date_version": "2026-08-29",
+        "caveat": "Covers 24 contiguous hours (86,400s) aggregated at 10.0s interval."
+      },
+      {
+        "metric_name": "total_network_states",
+        "value": 8640,
+        "source_artifact": "artifacts/state_sequences/",
+        "experiment_id": "day1_ingest",
+        "evaluation_split": "combined_wed_thu",
+        "date_version": "2026-08-29",
+        "caveat": "Total 86,400s telemetry per day across 2 full days."
+      }
+    ],
+    "data_cleaning_and_quality": [
+      {
+        "metric_name": "wednesday_raw_flow_count",
+        "value": 611960,
+        "source_artifact": "artifacts/experiments/delta_baseline_v1/results_summary.json",
+        "experiment_id": "delta_baseline_v1",
+        "evaluation_split": "raw_ingest_wednesday",
+        "date_version": "2026-08-29",
+        "caveat": "Pre-cleaned raw flows from CSE-CIC-IDS2018 Wednesday capture."
+      },
+      {
+        "metric_name": "thursday_raw_flow_count",
+        "value": 331125,
+        "source_artifact": "artifacts/experiments/delta_baseline_v1/results_summary.json",
+        "experiment_id": "delta_baseline_v1",
+        "evaluation_split": "raw_ingest_thursday",
+        "date_version": "2026-08-29",
+        "caveat": "Pre-cleaned raw flows from CSE-CIC-IDS2018 Thursday capture."
+      },
+      {
+        "metric_name": "feature_availability_count",
+        "value": "15 AVAILABLE / 6 UNAVAILABLE",
+        "source_artifact": "core/contracts.py",
+        "experiment_id": "data_contract_v1",
+        "evaluation_split": "schema_definition",
+        "date_version": "2026-08-29",
+        "caveat": "NetFlow CSV lacks topology/host features (fan_out, east_west, internal_ratio) which are explicitly marked UNAVAILABLE and zeroed in models."
+      }
+    ],
+    "ar_order_tradeoff_ar3_vs_ar5": [
+      {
+        "metric_name": "ar3_test_directional_accuracy",
+        "value": 0.6680,
+        "source_artifact": "artifacts/experiments/ar_order_availability_v1/results_summary.json",
+        "experiment_id": "ar_order_availability_v1",
+        "evaluation_split": "chronological_test_wednesday",
+        "date_version": "2026-08-29",
+        "caveat": "Evaluated on strictly held-out test split using 3-delta history buffer."
+      },
+      {
+        "metric_name": "ar5_test_directional_accuracy",
+        "value": 0.6864,
+        "source_artifact": "artifacts/experiments/ar_order_availability_v1/results_summary.json",
+        "experiment_id": "ar_order_availability_v1",
+        "evaluation_split": "chronological_test_wednesday",
+        "date_version": "2026-08-29",
+        "caveat": "AR(5) achieves +1.84% directional accuracy gain over AR(3)."
+      },
+      {
+        "metric_name": "overall_forecast_availability_rate_ar3",
+        "value": 0.7815,
+        "source_artifact": "artifacts/experiments/ar_order_availability_v1/results_summary.json",
+        "experiment_id": "ar_order_availability_v1",
+        "evaluation_split": "full_8640_states",
+        "date_version": "2026-08-29",
+        "caveat": "6,752 valid forecasts produced across 8,640 states."
+      },
+      {
+        "metric_name": "overall_forecast_availability_rate_ar5",
+        "value": 0.7786,
+        "source_artifact": "artifacts/experiments/ar_order_availability_v1/results_summary.json",
+        "experiment_id": "ar_order_availability_v1",
+        "evaluation_split": "full_8640_states",
+        "date_version": "2026-08-29",
+        "caveat": "6,727 valid forecasts produced; net loss from AR(3) to AR(5) is only 25 states (0.29%)."
+      },
+      {
+        "metric_name": "attack_block_forecasts_lost_ar5_vs_ar3",
+        "value": 0,
+        "source_artifact": "artifacts/experiments/ar_order_availability_v1/results_summary.json",
+        "experiment_id": "ar_order_availability_v1",
+        "evaluation_split": "four_observed_infiltration_blocks",
+        "date_version": "2026-08-29",
+        "caveat": "Across all 4 observed infiltration blocks, AR(5) lost zero valid forecasts relative to AR(3) (343/343, 445/445, 577/577, 343/343)."
+      }
+    ],
+    "baseline_ladder_comparison": [
+      {
+        "metric_name": "b1_zero_change_directional_accuracy",
+        "value": 0.0211,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "ZeroChange predicts Delta_S = 0; only matches when true delta is exactly 0."
+      },
+      {
+        "metric_name": "b2_persistence_directional_accuracy",
+        "value": 0.3289,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "Persistence predicts Delta_S(t+1) = Delta_S(t)."
+      },
+      {
+        "metric_name": "b3_ewma_directional_accuracy",
+        "value": 0.3022,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "EWMA smoothing on historical deltas (alpha=0.1)."
+      },
+      {
+        "metric_name": "b4_ar5_directional_accuracy",
+        "value": 0.6810,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "Linear AR(5) on historical deltas per feature."
+      },
+      {
+        "metric_name": "b5_ridge_directional_accuracy",
+        "value": 0.6591,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "L2-regularized linear regression on scaled history."
+      },
+      {
+        "metric_name": "b6_gbdt_directional_accuracy",
+        "value": 0.6449,
+        "source_artifact": "artifacts/experiments/delta_baseline_v2/results_summary.json",
+        "experiment_id": "delta_baseline_v2",
+        "evaluation_split": "chronological_test",
+        "date_version": "2026-08-29",
+        "caveat": "Histogram Gradient Boosted Decision Trees per feature."
+      }
+    ],
+    "open_loop_vs_rolling_onestep": [
+      {
+        "metric_name": "open_loop_h1_directional_accuracy",
+        "value": 0.6809,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_horizon_1",
+        "date_version": "2026-08-29",
+        "caveat": "True 10-second forward prediction."
+      },
+      {
+        "metric_name": "open_loop_h2_directional_accuracy",
+        "value": 0.5095,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_horizon_2",
+        "date_version": "2026-08-29",
+        "caveat": "True 20-second recursive prediction; degrades close to chance (50%)."
+      },
+      {
+        "metric_name": "open_loop_h3_directional_accuracy",
+        "value": 0.5021,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_horizon_3",
+        "date_version": "2026-08-29",
+        "caveat": "True 30-second recursive prediction; demonstrates multi-step open-loop limitation."
+      },
+      {
+        "metric_name": "rolling_onestep_h1_directional_accuracy",
+        "value": 0.6809,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_rolling_refresh",
+        "date_version": "2026-08-29",
+        "caveat": "One-step forecast with true observation refresh at each step."
+      },
+      {
+        "metric_name": "rolling_onestep_h2_directional_accuracy",
+        "value": 0.6809,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_rolling_refresh",
+        "date_version": "2026-08-29",
+        "caveat": "Maintains ~68% accuracy when new observations refresh the AR(5) history buffer."
+      },
+      {
+        "metric_name": "rolling_onestep_h3_directional_accuracy",
+        "value": 0.6811,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "test_split_rolling_refresh",
+        "date_version": "2026-08-29",
+        "caveat": "Confirms operational utility of receding-horizon observation updates."
+      }
+    ],
+    "uncertainty_and_bootstrap_coverage": [
+      {
+        "metric_name": "observed_coverage_80pct_nominal_h1",
+        "value": 0.8192,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "training_residual_bootstrap_test_eval",
+        "date_version": "2026-08-29",
+        "caveat": "Training-only residual pool bootstrap; evaluated on unseen test split."
+      },
+      {
+        "metric_name": "observed_coverage_90pct_nominal_h1",
+        "value": 0.8971,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "training_residual_bootstrap_test_eval",
+        "date_version": "2026-08-29",
+        "caveat": "Empirical coverage error is only -0.29%."
+      },
+      {
+        "metric_name": "observed_coverage_95pct_nominal_h1",
+        "value": 0.9385,
+        "source_artifact": "artifacts/experiments/delta_rollout_uncertainty_v1_corrected/results_summary.json",
+        "experiment_id": "delta_rollout_uncertainty_v1_corrected",
+        "evaluation_split": "training_residual_bootstrap_test_eval",
+        "date_version": "2026-08-29",
+        "caveat": "Empirical coverage error is -1.15%."
+      }
+    ],
+    "security_bridge_and_decision_layer": [
+      {
+        "metric_name": "security_bridge_discrimination_status",
+        "value": "VALIDATED",
+        "source_artifact": "artifacts/experiments/security_bridge_validation_v1/results_summary.json",
+        "experiment_id": "security_bridge_validation_v1",
+        "evaluation_split": "synthetic_fixtures",
+        "date_version": "2026-08-29",
+        "caveat": "Controlled behavioral discrimination validated across Recon, DoS, Exfiltration, Ambiguous, and Benign."
+      },
+      {
+        "metric_name": "anti_stage_collapse_pass_rate",
+        "value": "100%",
+        "source_artifact": "artifacts/experiments/security_bridge_validation_v1/results_summary.json",
+        "experiment_id": "security_bridge_validation_v1",
+        "evaluation_split": "synthetic_fixtures",
+        "date_version": "2026-08-29",
+        "caveat": "Distinct telemetry signatures produce distinct hypotheses without stage collapse."
+      },
+      {
+        "metric_name": "decision_layer_safety_invariants_passed",
+        "value": "13 / 13 (100%)",
+        "source_artifact": "artifacts/experiments/decision_layer_v1/results_summary.json",
+        "experiment_id": "decision_layer_v1",
+        "evaluation_split": "7_decision_scenarios",
+        "date_version": "2026-08-29",
+        "caveat": "Passed all safety rules: human-gating required, no destructive execution, role filtering, spam suppression."
+      }
+    ],
+    "response_window_experiment": [
+      {
+        "metric_name": "average_raw_lead_time_seconds",
+        "value": 10.0,
+        "source_artifact": "artifacts/experiments/response_window_v1/results_summary.json",
+        "experiment_id": "response_window_v1",
+        "evaluation_split": "3_attack_progressions",
+        "date_version": "2026-08-29",
+        "caveat": "10.0s lead time per event under frozen, identical sustained event definitions."
+      },
+      {
+        "metric_name": "average_useful_response_window_gain_seconds",
+        "value": 10.0,
+        "source_artifact": "artifacts/experiments/response_window_v1/results_summary.json",
+        "experiment_id": "response_window_v1",
+        "evaluation_split": "3_attack_progressions",
+        "date_version": "2026-08-29",
+        "caveat": "Allows 20s reversible preparation actions to complete before sustained event onset."
+      },
+      {
+        "metric_name": "false_positive_count_benign_and_ambiguous",
+        "value": 0,
+        "source_artifact": "artifacts/experiments/response_window_v1/results_summary.json",
+        "experiment_id": "response_window_v1",
+        "evaluation_split": "benign_and_ambiguous_scenarios",
+        "date_version": "2026-08-29",
+        "caveat": "Both Predictive and Conventional baseline generated 0 false alarms on noise."
+      }
+    ],
+    "explainability_and_perturbation": [
+      {
+        "metric_name": "recon_port_diversity_perturbation_shift",
+        "value": "+0.30 (0.55 -> 0.85)",
+        "source_artifact": "artifacts/experiments/explainability_v1/perturbation_results.csv",
+        "experiment_id": "explainability_v1",
+        "evaluation_split": "controlled_perturbation",
+        "date_version": "2026-08-29",
+        "caveat": "Confidence increases monotonically under port diversity expansion."
+      },
+      {
+        "metric_name": "dos_flow_rst_perturbation_shift",
+        "value": "+0.85 (0.00 -> 0.85)",
+        "source_artifact": "artifacts/experiments/explainability_v1/perturbation_results.csv",
+        "experiment_id": "explainability_v1",
+        "evaluation_split": "controlled_perturbation",
+        "date_version": "2026-08-29",
+        "caveat": "Confidence transitions from 0 to 0.85 under connection flooding and RST surge."
+      },
+      {
+        "metric_name": "exfil_byte_pkt_perturbation_shift",
+        "value": "+0.80 (0.00 -> 0.80)",
+        "source_artifact": "artifacts/experiments/explainability_v1/perturbation_results.csv",
+        "experiment_id": "explainability_v1",
+        "evaluation_split": "controlled_perturbation",
+        "date_version": "2026-08-29",
+        "caveat": "Confidence transitions from 0 to 0.80 under large packet outbound data surge."
+      },
+      {
+        "metric_name": "deterministic_idempotence_and_noise_coherence",
+        "value": "PASS (100% match)",
+        "source_artifact": "artifacts/experiments/explainability_v1/explanation_consistency.csv",
+        "experiment_id": "explainability_v1",
+        "evaluation_split": "consistency_evaluation",
+        "date_version": "2026-08-29",
+        "caveat": "Identical states produce bitwise identical explanations; 2% irrelevant feature noise does not flip explanation."
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "experiment_name": "response_window_v1",
+  "timestamp": "2026-09-08T10:09:18.370462",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "event_definitions_json": "artifacts\\experiments\\response_window_v1\\event_definitions.json",
+    "baseline_detector_results_csv": "artifacts\\experiments\\response_window_v1\\baseline_detector_results.csv",
+    "logistic_regression_results_csv": "artifacts\\experiments\\response_window_v1\\logistic_regression_results.csv",
+    "predictive_detector_results_csv": "artifacts\\experiments\\response_window_v1\\predictive_detector_results.csv",
+    "lead_time_results_csv": "artifacts\\experiments\\response_window_v1\\lead_time_results.csv",
+    "response_window_results_csv": "artifacts\\experiments\\response_window_v1\\response_window_results.csv",
+    "fairness_results_csv": "artifacts\\experiments\\response_window_v1\\fairness_results.csv",
+    "scenario_timelines_jsonl": "artifacts\\experiments\\response_window_v1\\scenario_timelines.jsonl",
+    "results_summary_json": "artifacts\\experiments\\response_window_v1\\results_summary.json"
+  }
+}

@@ -1,0 +1,2 @@
+comparison,sample_count_aligned_transitions,ar5_point_da,ar3_point_da,paired_difference_point,difference_ci_95_lower,difference_ci_95_upper,difference_bootstrap_se,cohens_dz_effect_size,mcnemar_b_discordant,mcnemar_c_discordant,mcnemar_odds_ratio,mcnemar_chi2_statistic,mcnemar_p_value,methodology
+AR(5) vs AR(3) Directional Accuracy,1682,0.681,0.6728,0.0082,0.0023,0.0138,0.003,0.0695,1690,1484,1.1388,13.2404,2.74e-04,Paired Moving Block Bootstrap & Exact McNemar Test on Aligned Observations

@@ -1,0 +1,508 @@
+{
+  "experiment_id": "delta_baseline_v1",
+  "created_at": "2026-08-29T13:37:52.593717",
+  "runtime_seconds": 39.47,
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+    "numpy_version": "2.5.2",
+    "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5"
+  },
+  "datasets": {
+    "wednesday": {
+      "path": "artifacts/state_sequences/Wednesday-28-02-2018_TrafficForML_CICFlowMeter.states.jsonl",
+      "sha256": "8d9d6377bfb619b46ce780f6b99628afe950197226ed39f55281ef090b4f8572",
+      "state_count": 4320,
+      "valid_transitions": 3387
+    },
+    "thursday": {
+      "path": "artifacts/state_sequences/Thursday-01-03-2018_TrafficForML_CICFlowMeter.states.jsonl",
+      "sha256": "ccff194830c3e43f75b638901a64152df99fde2de535868c9f04a40da0b08d12",
+      "state_count": 4320,
+      "valid_transitions": 3379
+    },
+    "combined": {
+      "valid_transitions": 6766,
+      "dropped_counts": {
+        "empty_state_in_window": 1868,
+        "session_boundary_crossed": 3,
+        "time_gap_encountered": 0,
+        "unavailable_feature": 0
+      }
+    }
+  },
+  "splits": {
+    "train_samples": 4060,
+    "val_samples": 1015,
+    "test_samples": 1691,
+    "train_start": "2018-02-28T01:00:30",
+    "train_end": "2018-03-01T02:52:30",
+    "val_start": "2018-03-01T02:52:40",
+    "val_end": "2018-03-01T08:18:00",
+    "test_start": "2018-03-01T08:18:10",
+    "test_end": "2018-03-01T12:59:50"
+  },
+  "sanity_checks": {
+    "1_no_label_in_features": true,
+    "2_no_infiltration_fraction_in_features": true,
+    "3_no_future_timestamp_in_features": true,
+    "4_no_gap_or_session_crossing": true,
+    "5_scaler_fit_on_train_only": true,
+    "6_val_params_not_from_test": true,
+    "7_boundary_history_isolated": true,
+    "8_transition_counts_reported": true,
+    "9_feature_count_reported": true,
+    "10_dropped_transitions_explained": true
+  },
+  "global_metrics": {
+    "B1_ZeroChange": {
+      "delta_mae": 5195701131.707362,
+      "delta_rmse": 271298781889.88754,
+      "directional_accuracy": 0.021210329193770944,
+      "directional_accuracy_nonzero": 0.0,
+      "interval_coverage_90": "N/A",
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.05381431105854524,
+        "syn_behaviour": 0.07953873447664105,
+        "rst_behaviour": 0.02956830277942046,
+        "rate_behaviour": 0.00029568302779420464,
+        "timing_iat_behaviour": 0.0,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {}
+    },
+    "B2_Persistence": {
+      "delta_mae": 8845072429.460205,
+      "delta_rmse": 434474619562.6831,
+      "directional_accuracy": 0.32939089296274393,
+      "directional_accuracy_nonzero": 0.33270229991541467,
+      "interval_coverage_90": "N/A",
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.3122412773506801,
+        "syn_behaviour": 0.3151981076286221,
+        "rst_behaviour": 0.307806031933767,
+        "rate_behaviour": 0.34979302188054406,
+        "timing_iat_behaviour": 0.32939089296274393,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {}
+    },
+    "B3_EWMA": {
+      "delta_mae": 7474870132.166209,
+      "delta_rmse": 360934823510.8896,
+      "directional_accuracy": 0.33282081608515673,
+      "directional_accuracy_nonzero": 0.3383413219478793,
+      "interval_coverage_90": "N/A",
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.32406859846244823,
+        "syn_behaviour": 0.3018923713778829,
+        "rst_behaviour": 0.3397397989355411,
+        "rate_behaviour": 0.3456534594914252,
+        "timing_iat_behaviour": 0.34535777646363097,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "alpha": 0.1,
+        "val_mae": 550721342.8933288
+      }
+    },
+    "B4_AR_style": {
+      "delta_mae": 5667066421.258465,
+      "delta_rmse": 266287351371.88843,
+      "directional_accuracy": 0.6564163217031342,
+      "directional_accuracy_nonzero": 0.6706408345752608,
+      "interval_coverage_90": "N/A",
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.6250739207569486,
+        "syn_behaviour": 0.6277350680070964,
+        "rst_behaviour": 0.6543465405085748,
+        "rate_behaviour": 0.6454760496747487,
+        "timing_iat_behaviour": 0.6883500887049083,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "p": 2,
+        "val_mae": 360865018.6780436
+      }
+    },
+    "B5_Ridge": {
+      "delta_mae": 12589320542.996994,
+      "delta_rmse": 232071610190.1696,
+      "directional_accuracy": 0.6467967671988961,
+      "directional_accuracy_nonzero": 0.660812824747251,
+      "interval_coverage_90": 0.911886457717327,
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.6369012418687168,
+        "syn_behaviour": 0.6209343583678297,
+        "rst_behaviour": 0.6581904198698995,
+        "rate_behaviour": 0.607037256061502,
+        "timing_iat_behaviour": 0.7019515079834417,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "alpha": 1000.0,
+        "val_mae": 9623970987.438362
+      }
+    },
+    "B6_GBDT": {
+      "delta_mae": 14069314203.958916,
+      "delta_rmse": 311706907963.7747,
+      "directional_accuracy": 0.6238517642420658,
+      "directional_accuracy_nonzero": 0.6373706045837193,
+      "interval_coverage_90": 0.8869308101714961,
+      "behavioural_directional_accuracy": {
+        "port_diversity": 0.5653459491425192,
+        "syn_behaviour": 0.6061502069781195,
+        "rst_behaviour": 0.6371969248965109,
+        "rate_behaviour": 0.5369603784742756,
+        "timing_iat_behaviour": 0.6939680662329982,
+        "destination_diversity": "UNAVAILABLE"
+      },
+      "selected_hyperparameters": {
+        "max_iter": 50,
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "val_mae": 10375294131.140007
+      }
+    }
+  },
+  "per_block_metrics": {
+    "block-1-wed": {
+      "B1_ZeroChange": {
+        "delta_mae": 10699983978.528563,
+        "delta_rmse": 513921850414.42267,
+        "directional_accuracy": 0.007580174927113703,
+        "directional_accuracy_nonzero": 0.0
+      },
+      "B2_Persistence": {
+        "delta_mae": 21398296024.838764,
+        "delta_rmse": 890138246217.7299,
+        "directional_accuracy": 0.3589893100097182,
+        "directional_accuracy_nonzero": 0.36173129651390523
+      },
+      "B3_EWMA": {
+        "delta_mae": 16330142819.403759,
+        "delta_rmse": 685347445511.9465,
+        "directional_accuracy": 0.3471331389698737,
+        "directional_accuracy_nonzero": 0.34978456717587153
+      },
+      "B4_AR_style": {
+        "delta_mae": 10699220880.25453,
+        "delta_rmse": 419829432371.9785,
+        "directional_accuracy": 0.6472303206997084,
+        "directional_accuracy_nonzero": 0.6521739130434783
+      },
+      "B5_Ridge": {
+        "delta_mae": 13734952542.072868,
+        "delta_rmse": 366946860422.49664,
+        "directional_accuracy": 0.6655004859086492,
+        "directional_accuracy_nonzero": 0.6705836271053662
+      },
+      "B6_GBDT": {
+        "delta_mae": 21427970451.783924,
+        "delta_rmse": 449875601566.1109,
+        "directional_accuracy": 0.6672497570456755,
+        "directional_accuracy_nonzero": 0.672346259302781
+      }
+    },
+    "block-2-wed": {
+      "B1_ZeroChange": {
+        "delta_mae": 162963627.76968232,
+        "delta_rmse": 6959772658.001314,
+        "directional_accuracy": 0.006292134831460674,
+        "directional_accuracy_nonzero": 0.0
+      },
+      "B2_Persistence": {
+        "delta_mae": 322426136.8408511,
+        "delta_rmse": 12079149781.752842,
+        "directional_accuracy": 0.349812734082397,
+        "directional_accuracy_nonzero": 0.3518769787426504
+      },
+      "B3_EWMA": {
+        "delta_mae": 246593701.74107048,
+        "delta_rmse": 9297182276.078417,
+        "directional_accuracy": 0.338876404494382,
+        "directional_accuracy_nonzero": 0.3410221619176843
+      },
+      "B4_AR_style": {
+        "delta_mae": 159511822.17868328,
+        "delta_rmse": 5633561747.2703495,
+        "directional_accuracy": 0.6632209737827716,
+        "directional_accuracy_nonzero": 0.6674204733906226
+      },
+      "B5_Ridge": {
+        "delta_mae": 7315248626.739443,
+        "delta_rmse": 41946092154.94621,
+        "directional_accuracy": 0.6814981273408239,
+        "directional_accuracy_nonzero": 0.6858133574551485
+      },
+      "B6_GBDT": {
+        "delta_mae": 5017625484.1310005,
+        "delta_rmse": 98089905992.75096,
+        "directional_accuracy": 0.6788014981273408,
+        "directional_accuracy_nonzero": 0.683099653248907
+      }
+    },
+    "block-3-thu": {
+      "B1_ZeroChange": {
+        "delta_mae": 325642635.06734806,
+        "delta_rmse": 7844620191.911133,
+        "directional_accuracy": 0.01074523396880416,
+        "directional_accuracy_nonzero": 0.0
+      },
+      "B2_Persistence": {
+        "delta_mae": 646202004.8500433,
+        "delta_rmse": 13574722895.38042,
+        "directional_accuracy": 0.3321779318313114,
+        "directional_accuracy_nonzero": 0.3353188507358094
+      },
+      "B3_EWMA": {
+        "delta_mae": 490804469.63373375,
+        "delta_rmse": 10449870794.462042,
+        "directional_accuracy": 0.3337954939341421,
+        "directional_accuracy_nonzero": 0.3374211632796076
+      },
+      "B4_AR_style": {
+        "delta_mae": 322716773.2612807,
+        "delta_rmse": 6438144588.890696,
+        "directional_accuracy": 0.6682842287694974,
+        "directional_accuracy_nonzero": 0.6755430974071479
+      },
+      "B5_Ridge": {
+        "delta_mae": 7892045785.129159,
+        "delta_rmse": 40444247818.94134,
+        "directional_accuracy": 0.6806470248411323,
+        "directional_accuracy_nonzero": 0.6880401775286148
+      },
+      "B6_GBDT": {
+        "delta_mae": 5666922114.162199,
+        "delta_rmse": 133626344515.41287,
+        "directional_accuracy": 0.6755632582322357,
+        "directional_accuracy_nonzero": 0.6829011913104415
+      }
+    },
+    "block-4-thu": {
+      "B1_ZeroChange": {
+        "delta_mae": 3954836374.4797664,
+        "delta_rmse": 174266475761.11887,
+        "directional_accuracy": 0.015160349854227406,
+        "directional_accuracy_nonzero": 0.0
+      },
+      "B2_Persistence": {
+        "delta_mae": 7908796010.408788,
+        "delta_rmse": 301895276518.8063,
+        "directional_accuracy": 0.3327502429543246,
+        "directional_accuracy_nonzero": 0.3372804420761792
+      },
+      "B3_EWMA": {
+        "delta_mae": 6031558191.260276,
+        "delta_rmse": 232334977558.55017,
+        "directional_accuracy": 0.3424684159378037,
+        "directional_accuracy_nonzero": 0.34774028024472076
+      },
+      "B4_AR_style": {
+        "delta_mae": 3948764644.770247,
+        "delta_rmse": 142345804704.88074,
+        "directional_accuracy": 0.6532555879494655,
+        "directional_accuracy_nonzero": 0.6633116242352477
+      },
+      "B5_Ridge": {
+        "delta_mae": 10151690121.332272,
+        "delta_rmse": 131198581018.87895,
+        "directional_accuracy": 0.6487852283770651,
+        "directional_accuracy_nonzero": 0.6587724491809749
+      },
+      "B6_GBDT": {
+        "delta_mae": 8820283504.905386,
+        "delta_rmse": 189580975282.09088,
+        "directional_accuracy": 0.6384839650145773,
+        "directional_accuracy_nonzero": 0.6483126110124334
+      }
+    }
+  },
+  "victory_criterion": {
+    "B5_Ridge": {
+      "B1_ZeroChange": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B1_ZeroChange",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B5_Ridge vs B1_ZeroChange achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 0/4)."
+      },
+      "B2_Persistence": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B2_Persistence",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 1,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B5_Ridge vs B2_Persistence achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 1/4)."
+      },
+      "B3_EWMA": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B3_EWMA",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 1,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B5_Ridge vs B3_EWMA achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 1/4)."
+      },
+      "B4_AR_style": {
+        "candidate_name": "B5_Ridge",
+        "baseline_name": "B4_AR_style",
+        "global_mae_improved": false,
+        "global_da_improved": false,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "FAIL",
+        "explanation": "B5_Ridge failed to beat B4_AR_style (Global MAE win: False, Global DA win: False, Block fold wins: 0/4)."
+      }
+    },
+    "B6_GBDT": {
+      "B1_ZeroChange": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B1_ZeroChange",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B6_GBDT vs B1_ZeroChange achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 0/4)."
+      },
+      "B2_Persistence": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B2_Persistence",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B6_GBDT vs B2_Persistence achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 0/4)."
+      },
+      "B3_EWMA": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B3_EWMA",
+        "global_mae_improved": false,
+        "global_da_improved": true,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "MIXED",
+        "explanation": "B6_GBDT vs B3_EWMA achieved mixed results (Global MAE win: False, Global DA win: True, Block fold wins: 0/4)."
+      },
+      "B4_AR_style": {
+        "candidate_name": "B6_GBDT",
+        "baseline_name": "B4_AR_style",
+        "global_mae_improved": false,
+        "global_da_improved": false,
+        "block_fold_mae_improvements": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "block_fold_da_improvements": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "block_folds_passed": 0,
+        "total_valid_block_folds": 4,
+        "status": "FAIL",
+        "explanation": "B6_GBDT failed to beat B4_AR_style (Global MAE win: False, Global DA win: False, Block fold wins: 0/4)."
+      }
+    }
+  },
+  "gate_recommendation": "RED",
+  "scientific_conclusion": "Learned models fail to beat temporal baselines. Network-state delta formulation must be reassessed before building complex forecasting."
+}

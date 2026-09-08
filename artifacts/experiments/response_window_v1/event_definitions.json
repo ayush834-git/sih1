@@ -1,0 +1,26 @@
+{
+  "Reconnaissance": {
+    "event_name": "Sustained Reconnaissance Exploration",
+    "target_stage": "Reconnaissance",
+    "condition_description": "dst_port_diversity >= 20 for >= 2 consecutive 10s windows",
+    "min_sustained_windows": 2,
+    "relevant_action": "REVIEW_BOUNDARY_ACLS",
+    "action_duration_s": 20
+  },
+  "Impact / Denial of Service": {
+    "event_name": "Sustained Connection Flooding / DoS",
+    "target_stage": "Impact / Denial of Service",
+    "condition_description": "flow_count >= 200 and rst_ratio >= 0.25 for >= 2 consecutive 10s windows",
+    "min_sustained_windows": 2,
+    "relevant_action": "PREPARE_RATE_LIMIT",
+    "action_duration_s": 20
+  },
+  "Collection / Exfiltration": {
+    "event_name": "Sustained Volumetric Outbound Exfiltration",
+    "target_stage": "Collection / Exfiltration",
+    "condition_description": "byte_rate >= 100,000 B/s for >= 2 consecutive 10s windows",
+    "min_sustained_windows": 2,
+    "relevant_action": "PREPARE_EGRESS_RESTRICTION",
+    "action_duration_s": 20
+  }
+}

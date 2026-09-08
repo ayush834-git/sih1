@@ -1,0 +1,31 @@
+{
+  "experiment_name": "explainability_v1",
+  "timestamp": "2026-08-29T16:21:35.795870",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "artifact_paths": {
+    "ar5_feature_contributions": "artifacts\\experiments\\explainability_v1\\ar5_feature_contributions.jsonl",
+    "security_explanations": "artifacts\\experiments\\explainability_v1\\security_explanations.jsonl",
+    "perturbation_results_csv": "artifacts\\experiments\\explainability_v1\\perturbation_results.csv",
+    "explanation_consistency_csv": "artifacts\\experiments\\explainability_v1\\explanation_consistency.csv",
+    "infiltration_block_examples": "artifacts\\experiments\\explainability_v1\\infiltration_block_examples.jsonl",
+    "demo_recon_explanations_json": "artifacts\\experiments\\explainability_v1\\demo_recon_explanations.json",
+    "results_summary_json": "artifacts\\experiments\\explainability_v1\\results_summary.json"
+  }
+}

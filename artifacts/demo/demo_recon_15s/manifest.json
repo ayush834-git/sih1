@@ -1,0 +1,25 @@
+{
+  "scenario_name": "demo_recon_15s",
+  "timestamp": "2026-08-29T19:09:29.210423",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "artifact_paths": {
+    "events_jsonl": "artifacts\\demo\\demo_recon_15s\\events.jsonl",
+    "summary_json": "artifacts\\demo\\demo_recon_15s\\summary.json"
+  }
+}

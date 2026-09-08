@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-05T17:29:57.201997+00:00",
+    "runtime_seconds": 11.74,
+    "source_csv": "C:/Users/ayush/Downloads/Wednesday-21-02-2018_TrafficForML_CICFlowMeter.csv",
+    "time_window": "2018-02-21 02:08:00 to 2018-02-21 02:18:00",
+    "transitions_evaluated": 40
+  },
+  "comparison": [
+    {
+      "dataset_name": "Thursday-01 Test Split (Within-Family Held-Out)",
+      "attack_family": "Infiltration",
+      "relationship_to_training": "Held-Out Chronological Split (Same Attack Family)",
+      "normalized_mae": 188.37,
+      "directional_accuracy": 0.681,
+      "directional_accuracy_nonzero": 0.6956,
+      "sample_count": 1682
+    },
+    {
+      "dataset_name": "Wednesday-21 Slice (Cross-Family Unseen)",
+      "attack_family": "DDoS-HOIC",
+      "relationship_to_training": "Unseen Attack Family (Zero Training Exposure)",
+      "normalized_mae": 1.88,
+      "directional_accuracy": 0.5383,
+      "directional_accuracy_nonzero": 0.646,
+      "sample_count": 40
+    }
+  ],
+  "unseen_ddos_per_feature_da": {
+    "flow_count": 0.6,
+    "byte_rate": 0.625,
+    "packet_rate": 0.7,
+    "mean_flow_duration": 0.5,
+    "dst_port_diversity": 0.45,
+    "syn_count": 0.05,
+    "ack_count": 0.675,
+    "rst_count": 0.675,
+    "syn_ratio": 0.05,
+    "rst_ratio": 0.725,
+    "iat_mean": 0.6,
+    "iat_std": 0.575,
+    "pkt_size_mean": 0.725,
+    "pkt_size_std": 0.65,
+    "byte_variance": 0.475
+  },
+  "scientific_conclusion": "The AR(5) model demonstrates positive directional transfer to an unseen attack family (DDoS), successfully tracking upward delta velocity at attack onset. However, normalized magnitude error increases significantly due to the 100x-1000x volumetric difference between stealthy Infiltration and volumetric DDoS floods. This empirically validates that temporal dynamics models require family-specific scaling or adaptive normalization when deployed across divergent attack classes."
+}

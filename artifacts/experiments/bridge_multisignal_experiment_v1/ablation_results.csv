@@ -1,0 +1,6 @@
+Ablation_Name,Signals,Benign_Mean,Pre_Onset_Mean,Attack_B4_Mean,Attack_All_Mean,B4_vs_Pre_Cohens_d,B4_vs_Pre_Overlap,All_vs_Benign_Cohens_d,All_vs_Benign_Overlap
+1_PORT_ONLY,port,0.2558,0.2972,0.2976,0.3685,0.0023,0.9083,0.589,0.702
+2_PORT_FLOW,port+flow,0.2611,0.2978,0.2988,0.369,0.0059,0.9112,0.5602,0.7158
+3_PORT_TIMING,port+timing,0.2561,0.2972,0.2976,0.3685,0.0023,0.9083,0.5871,0.7026
+4_PORT_BYTE,port+byte,0.2607,0.3018,0.305,0.3723,0.0176,0.9117,0.5776,0.7076
+5_FULL_MULTISIGNAL,port+flow+byte+timing,0.2656,0.302,0.3054,0.3725,0.0193,0.9117,0.5498,0.7209

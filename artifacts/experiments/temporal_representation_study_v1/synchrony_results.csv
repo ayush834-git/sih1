@@ -1,0 +1,5 @@
+Synchrony_Metric,Pre_Onset_Mean,B4_Mean,Mean_Diff,Cohens_d,Overlap,Spans_Zero
+Fam4_Sync_flow_rst,0.3144,-0.1607,-0.4751,-0.296,0.8767,False
+Fam4_Sync_Mahalanobis_Vector,2.4864,4.0279,1.5415,0.1486,0.9698,False
+Fam4_Sync_flow_iat,1.1871,1.1106,-0.0764,-0.0286,0.8276,True
+Fam4_Sync_flow_byte,2.3757,2.5102,0.1345,0.0189,0.864,True
