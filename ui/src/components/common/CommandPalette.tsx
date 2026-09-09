@@ -34,11 +34,11 @@ export const CommandPalette: React.FC = () => {
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 bg-black/80 backdrop-blur-xs">
-      <div className="w-full max-w-2xl bg-[#080808] border border-[#262626] shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 bg-black/85 backdrop-blur-md">
+      <div className="w-full max-w-2xl bg-[#080808] border border-[#27272A]/80 shadow-[0_16px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden rounded-3xl">
         {/* Search Input */}
-        <div className="flex items-center gap-3 p-4 border-b border-[#262626] bg-[#111111]">
-          <span className="material-symbols-outlined text-[#c6c6c6] text-[20px]">search</span>
+        <div className="flex items-center gap-3 p-4 border-b border-[#27272A]/50 bg-[#111111]">
+          <span className="material-symbols-outlined text-[#F0C808] text-[20px]">search</span>
           <input
             autoFocus
             type="text"
@@ -49,14 +49,14 @@ export const CommandPalette: React.FC = () => {
           />
           <button
             onClick={() => setCommandPaletteOpen(false)}
-            className="px-2 py-0.5 border border-[#353535] text-[10px] font-metadata text-[#8e9192] hover:text-white cursor-pointer"
+            className="px-3 py-1 border border-[#353535] text-[10px] font-metadata text-[#8e9192] hover:text-white hover:border-[#F0C808] rounded-full transition-colors cursor-pointer"
           >
             ESC
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto p-2 flex flex-col gap-1 font-metadata text-metadata">
+        <div className="max-h-96 overflow-y-auto p-3 flex flex-col gap-1.5 font-metadata text-metadata">
           {/* Quick Actions */}
           <div className="px-3 py-1 text-[10px] text-[#8e9192] uppercase font-label-caps border-b border-[#181818]">
             NAVIGATE & ACTIONS
@@ -66,7 +66,7 @@ export const CommandPalette: React.FC = () => {
               navigate('/command-center');
               setCommandPaletteOpen(false);
             }}
-            className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+            className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
           >
             <span className="font-label-caps text-label-caps">GO TO OVERVIEW DASHBOARD</span>
             <span className="text-[#8e9192]">/command-center</span>
@@ -76,7 +76,7 @@ export const CommandPalette: React.FC = () => {
               navigate('/command-center/investigations');
               setCommandPaletteOpen(false);
             }}
-            className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+            className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
           >
             <span className="font-label-caps text-label-caps">GO TO CASE INVESTIGATION WORKSPACE</span>
             <span className="text-[#8e9192]">CASE-019</span>
@@ -86,7 +86,7 @@ export const CommandPalette: React.FC = () => {
               navigate('/command-center/intelligence');
               setCommandPaletteOpen(false);
             }}
-            className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+            className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
           >
             <span className="font-label-caps text-label-caps">GO TO ENTITY EXPLORER</span>
             <span className="text-[#8e9192]">GATEWAY_NODE_4</span>
@@ -96,7 +96,7 @@ export const CommandPalette: React.FC = () => {
               navigate('/command-center/evidence');
               setCommandPaletteOpen(false);
             }}
-            className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+            className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
           >
             <span className="font-label-caps text-label-caps">GO TO EVIDENCE INTELLIGENCE</span>
             <span className="text-[#8e9192]">EV-00419</span>
@@ -106,7 +106,7 @@ export const CommandPalette: React.FC = () => {
               navigate('/command-center/system');
               setCommandPaletteOpen(false);
             }}
-            className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+            className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
           >
             <span className="font-label-caps text-label-caps">GO TO SYSTEM HEALTH & AUDIT</span>
             <span className="text-[#8e9192]">AUDIT LOGS</span>
@@ -125,7 +125,7 @@ export const CommandPalette: React.FC = () => {
                     navigate('/command-center/investigations');
                     setCommandPaletteOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+                  className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
                 >
                   <div className="flex items-center gap-2">
                     <span className="font-label-caps text-[#F0C808]">{c.id}</span>
@@ -150,7 +150,7 @@ export const CommandPalette: React.FC = () => {
                     navigate('/command-center/alerts');
                     setCommandPaletteOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+                  className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
                 >
                   <div className="flex items-center gap-2">
                     <span className="font-label-caps text-[#F0C808]">{a.id}</span>
@@ -175,11 +175,11 @@ export const CommandPalette: React.FC = () => {
                     navigate('/command-center/intelligence');
                     setCommandPaletteOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2 text-left hover:bg-[#181818] text-white cursor-pointer"
+                  className="flex items-center justify-between px-3.5 py-2 text-left hover:bg-[#181818] text-white cursor-pointer rounded-xl transition-colors"
                 >
                   <div className="flex items-center gap-2">
                     <span className="font-metadata text-white">{e.name}</span>
-                    <span className="text-[9px] bg-[#181818] px-1 border border-[#262626] text-[#c6c6c6]">{e.type}</span>
+                    <span className="text-[9px] bg-[#181818] px-2 py-0.5 border border-[#262626] text-[#c6c6c6] rounded-full">{e.type}</span>
                   </div>
                   <span className="text-[#8e9192]">{e.observationsCount} OBS</span>
                 </button>

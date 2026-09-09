@@ -309,7 +309,7 @@ export function MouseEffectCard({
   return (
     <Card
       className={cn(
-        "relative w-full overflow-hidden rounded-none border border-[#2a2a2a] bg-[#000000] p-0 shadow-none",
+        "relative w-full overflow-hidden rounded-3xl border border-[#2a2a2a] bg-[#000000] p-0 shadow-none",
         className
       )}
     >

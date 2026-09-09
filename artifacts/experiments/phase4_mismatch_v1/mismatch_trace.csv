@@ -1,0 +1,6 @@
+mode,expected_status,actual_status,reconsideration_request_created,approval_required,auto_exec_calls,auto_rollback_calls
+Mode 0 (Conforming Control),VERIFIED_SUCCESS,VERIFIED_SUCCESS,False,False,0,0
+Mode 1 (Vector Mutation),VERIFIED_MISMATCH,VERIFIED_MISMATCH,True,True,0,0
+Mode 2 (Volumetric Overpower),VERIFIED_MISMATCH,VERIFIED_MISMATCH,True,True,0,0
+Mode 3 (Benign Surge),VERIFIED_MISMATCH,VERIFIED_MISMATCH,True,True,0,0
+Mode 4 (Sensor Blackout),INSUFFICIENT_EVIDENCE,INSUFFICIENT_EVIDENCE,False,False,0,0

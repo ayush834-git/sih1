@@ -235,7 +235,7 @@ export default function SmoothTab({
         className={cn(
           "relative flex items-center justify-between gap-1 p-1",
           "w-full sm:w-[480px] bg-[#000000]",
-          "rounded-md border border-white/10",
+          "rounded-full border border-white/10",
           "transition-all duration-200",
           showCardContent ? "mb-8" : "",
           className
@@ -251,7 +251,7 @@ export default function SmoothTab({
             opacity: 1,
           }}
           className={cn(
-            "absolute z-[1] rounded",
+            "absolute z-[1] rounded-full",
             selectedItem?.color || activeColor
           )}
           initial={false}
@@ -271,7 +271,7 @@ export default function SmoothTab({
                 aria-controls={`panel-${item.id}`}
                 aria-selected={isSelected}
                 className={cn(
-                  "relative flex items-center justify-center gap-0.5 rounded px-2 py-1.5",
+                  "relative flex items-center justify-center gap-0.5 rounded-full px-2 py-1.5",
                   "font-mono font-medium text-xs tracking-wider uppercase transition-all duration-200",
                   "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FFD60A]",
                   "truncate cursor-pointer",

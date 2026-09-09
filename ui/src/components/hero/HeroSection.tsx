@@ -10,7 +10,8 @@
 
 import { Link } from 'react-router-dom'
 import { ShaderBackground } from '@/components/ui/rds-silk'
-import SlideTextButton from '@/components/kokonutui/slide-text-button'
+import { TraceText, OrbitText } from '@/components/common/EncasedHover'
+import { MetallicShimmerText } from '@/components/common/MetallicShimmerText'
 
 export function HeroSection() {
   return (
@@ -42,70 +43,65 @@ export function HeroSection() {
         style={{ padding: 'clamp(1.25rem, 3vh, 2rem) clamp(1.5rem, 7vw, 5rem)' }}
         aria-label="Primary navigation"
       >
-        {/* Brand mark — left */}
-        <div className="flex flex-col" style={{ gap: '3px' }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(10px, 0.85vw, 13px)',
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase' as const,
-              color: 'rgba(255,255,255,0.92)',
-              fontWeight: 500,
-            }}
-          >
-            PREDICTIVE DEFENSE
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(9px, 0.7vw, 11px)',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase' as const,
-              color: 'var(--muted)',
-            }}
-          >
-            SIH 26153
-          </span>
-        </div>
-
-        {/* Nav links — right */}
-        <div className="flex items-center" style={{ gap: 'clamp(1.2rem, 2.5vw, 2.5rem)' }}>
-          {['SYSTEM', 'EVIDENCE'].map((label) => (
-            <a
-              key={label}
-              href="#"
-              className="hidden sm:block"
+        {/* Brand mark — left (Curvy Pill) */}
+        <div className="flex items-center gap-3 bg-black/45 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+          <div className="w-2.5 h-2.5 rounded-full bg-[#F0C808] shadow-[0_0_8px_rgba(240,200,8,0.7)] animate-pulse" />
+          <div className="flex flex-col" style={{ gap: '1px' }}>
+            <MetallicShimmerText
+              as="span"
+              variant="gold"
+              mode="sweep"
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(10px, 0.8vw, 12px)',
-                letterSpacing: '0.2em',
+                fontSize: 'clamp(10px, 0.85vw, 12px)',
+                letterSpacing: '0.22em',
                 textTransform: 'uppercase' as const,
-                color: 'rgba(255,255,255,0.50)',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
+                fontWeight: 600,
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.50)' }}
             >
-              {label}
-            </a>
-          ))}
+              PREDICTIVE DEFENSE
+            </MetallicShimmerText>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(8px, 0.7vw, 10px)',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase' as const,
+                color: 'var(--muted)',
+              }}
+            >
+              SIH 26153
+            </span>
+          </div>
+        </div>
+
+        {/* Nav links — right (Curvy Pill Container) */}
+        <div className="flex items-center gap-2 bg-black/45 border border-white/10 backdrop-blur-md px-3 py-1 rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+          <TraceText
+            to="/pipeline/observe"
+            variant="pill"
+            className="hidden sm:inline-flex text-white/70 hover:text-[#F0C808] text-[10px] tracking-[0.2em] px-3 py-1"
+          >
+            OBSERVE
+          </TraceText>
+          <TraceText
+            to="/pipeline/trace"
+            variant="pill"
+            className="hidden sm:inline-flex text-white/70 hover:text-[#F0C808] text-[10px] tracking-[0.2em] px-3 py-1"
+          >
+            AUDIT TRACE
+          </TraceText>
           <Link
-            to="/command-center"
+            to="/pipeline/observe"
+            data-hover="true"
+            className="px-4 py-1.5 rounded-full bg-[#F0C808] text-black font-bold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#FFE14C] hover:shadow-[0_0_15px_rgba(240,200,8,0.45)]"
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(10px, 0.8vw, 12px)',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase' as const,
-              color: 'var(--signal)',
+              letterSpacing: '0.15em',
               textDecoration: 'none',
-              transition: 'color 0.2s ease',
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--signal)' }}
           >
-            ENTER →
+            CONTROL CENTER →
           </Link>
         </div>
       </nav>
@@ -137,7 +133,8 @@ export function HeroSection() {
 
         {/* Display heading */}
         <h1
-          className="animate-fade-in-up"
+          tabIndex={0}
+          className="group animate-fade-in-up select-none outline-none focus-visible:ring-2 focus-visible:ring-[#F0C808]/60 focus-visible:ring-offset-4 focus-visible:ring-offset-black rounded-xl"
           style={{
             fontSize: 'clamp(2.8rem, 6.5vw, 6.5rem)',
             fontWeight: 800,
@@ -148,9 +145,21 @@ export function HeroSection() {
             margin: 0,
           }}
         >
-          <span className="block">PREDICTIVE</span>
-          <span className="block" style={{ color: 'var(--signal)' }}>CYBER</span>
-          <span className="block">DEFENSE</span>
+          <span className="block">
+            <MetallicShimmerText as="span" variant="monochrome" mode="sweep">
+              PREDICTIVE
+            </MetallicShimmerText>
+          </span>
+          <span className="block">
+            <MetallicShimmerText as="span" variant="gold" mode="ambient">
+              CYBER
+            </MetallicShimmerText>
+          </span>
+          <span className="block">
+            <MetallicShimmerText as="span" variant="monochrome" mode="sweep">
+              DEFENSE
+            </MetallicShimmerText>
+          </span>
         </h1>
 
         {/* Thesis line */}
@@ -188,15 +197,16 @@ export function HeroSection() {
 
         {/* CTA */}
         <div
-          className="animate-fade-in-up delay-500"
+          className="animate-fade-in-up delay-500 inline-block"
           style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)' }}
         >
-          <SlideTextButton
-            text="ENTER COMMAND CENTER"
-            hoverText="ENTER COMMAND CENTER"
-            href="/command-center"
-            variant="default"
-          />
+          <OrbitText
+            to="/pipeline/observe"
+            className="text-xs sm:text-sm font-bold shadow-[0_0_24px_rgba(240,200,8,0.2)]"
+          >
+            <span>ENTER CONTROL CENTRE</span>
+            <span className="text-[#F0C808]">→</span>
+          </OrbitText>
         </div>
 
         {/* Technical metadata */}
@@ -205,7 +215,7 @@ export function HeroSection() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 'clamp(0.8rem, 1.5vw, 1.5rem)',
+            gap: 'clamp(0.6rem, 1.2vw, 1rem)',
             flexWrap: 'wrap' as const,
             marginTop: 'clamp(1.5rem, 3vh, 2.5rem)',
           }}
@@ -213,13 +223,7 @@ export function HeroSection() {
           {['SIH 26153', 'PREDICTIVE SECURITY', 'HUMAN-GATED'].map((tag, i) => (
             <span
               key={i}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(9px, 0.7vw, 11px)',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase' as const,
-                color: 'var(--muted)',
-              }}
+              className="px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md text-white/70 font-mono tracking-widest text-[10px] uppercase shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:border-[#F0C808]/40 hover:text-white transition-all"
             >
               {tag}
             </span>

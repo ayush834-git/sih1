@@ -1,0 +1,21 @@
+{
+  "scenario_name": "scenario_dos_flooding",
+  "total_steps": 18,
+  "start_time": "2026-09-09T22:09:07.466225",
+  "end_time": "2026-09-09T22:09:07.686935",
+  "state_schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "final_stage": "Unknown",
+  "final_priority": "LOW",
+  "final_strategy": "MONITOR",
+  "all_stages_observed": [
+    "Impact / Denial of Service",
+    "Reconnaissance",
+    "Unknown"
+  ],
+  "all_roles_notified": [
+    "NETWORK_SECURITY",
+    "INCIDENT_RESPONSE"
+  ],
+  "human_approval_enforced": true,
+  "zero_automated_execution_verified": true
+}

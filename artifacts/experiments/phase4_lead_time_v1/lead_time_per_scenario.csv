@@ -1,0 +1,13 @@
+scenario_name,category,is_attack,onset_window,b0_alert_window,b1_alert_window,b2_alert_window,b0_raw_lead_s,b1_raw_lead_s,b2_raw_lead_s,b0_actionable_tau0s,b1_actionable_tau0s,b2_actionable_tau0s,b2_margin_tau0s,b0_actionable_tau5s,b1_actionable_tau5s,b2_actionable_tau5s,b2_margin_tau5s,b0_actionable_tau10s,b1_actionable_tau10s,b2_actionable_tau10s,b2_margin_tau10s,b0_actionable_tau20s,b1_actionable_tau20s,b2_actionable_tau20s,b2_margin_tau20s
+recon_slow_port_scan,Reconnaissance,True,6,6,0,5,0.0,60.0,10.0,0.0,60.0,10.0,10.0,0.0,55.0,5.0,5.0,0.0,50.0,0.0,0.0,0.0,40.0,0.0,-10.0
+recon_stepping_stone,Reconnaissance,True,5,5,0,5,0.0,50.0,0.0,0.0,50.0,0.0,0.0,0.0,45.0,0.0,-5.0,0.0,40.0,0.0,-10.0,0.0,30.0,0.0,-20.0
+recon_rapid_syn_probe,Reconnaissance,True,4,4,0,3,0.0,40.0,10.0,0.0,40.0,10.0,10.0,0.0,35.0,5.0,5.0,0.0,30.0,0.0,0.0,0.0,20.0,0.0,-10.0
+dos_gradual_syn_ramp,Impact / Denial of Service,True,5,5,0,5,0.0,50.0,0.0,0.0,50.0,0.0,0.0,0.0,45.0,0.0,-5.0,0.0,40.0,0.0,-10.0,0.0,30.0,0.0,-20.0
+dos_connection_exhaustion,Impact / Denial of Service,True,4,4,0,3,0.0,40.0,10.0,0.0,40.0,10.0,10.0,0.0,35.0,5.0,5.0,0.0,30.0,0.0,0.0,0.0,20.0,0.0,-10.0
+dos_volumetric_udp_flood,Impact / Denial of Service,True,4,4,0,4,0.0,40.0,0.0,0.0,40.0,0.0,0.0,0.0,35.0,0.0,-5.0,0.0,30.0,0.0,-10.0,0.0,20.0,0.0,-20.0
+exfil_dns_tunneling,Collection / Exfiltration,True,7,6,0,5,10.0,70.0,20.0,10.0,70.0,20.0,20.0,5.0,65.0,15.0,15.0,0.0,60.0,10.0,10.0,0.0,50.0,0.0,0.0
+exfil_volumetric_tcp,Collection / Exfiltration,True,5,5,0,5,0.0,50.0,0.0,0.0,50.0,0.0,0.0,0.0,45.0,0.0,-5.0,0.0,40.0,0.0,-10.0,0.0,30.0,0.0,-20.0
+exfil_burst_web,Collection / Exfiltration,True,4,4,0,4,0.0,40.0,0.0,0.0,40.0,0.0,0.0,0.0,35.0,0.0,-5.0,0.0,30.0,0.0,-10.0,0.0,20.0,0.0,-20.0
+benign_backup_surge,Benign,False,,,0,4,,,,,,,,,,,,,,,,,,,
+benign_flash_crowd,Benign,False,,,0,5,,,,,,,,,,,,,,,,,,,
+benign_ambiguous_noise,Benign,False,,,0,,,,,,,,,,,,,,,,,,,,

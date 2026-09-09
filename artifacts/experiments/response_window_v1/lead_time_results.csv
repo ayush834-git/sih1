@@ -1,6 +1,6 @@
 scenario_name,event_type,t_event_start_window,t_event_sustained_window,first_baseline_alert_window,first_lr_alert_window,first_predictive_alert_window,raw_lead_time_seconds,validation_status
-1_recon_progression,Reconnaissance,5,6,5,0,4,10,VALIDATED
-2_dos_progression,Impact / Denial of Service,5,6,5,0,4,10,VALIDATED
+1_recon_progression,Reconnaissance,5,6,5,5,4,10,VALIDATED
+2_dos_progression,Impact / Denial of Service,5,6,5,4,4,10,VALIDATED
 3_exfiltration_progression,Collection / Exfiltration,5,6,5,0,4,10,VALIDATED
 4_benign_burst_traffic,None,,,,0,,,NO_EVENT (Benign/Noise)
-5_ambiguous_mixed_traffic,None,,,,0,,,NO_EVENT (Benign/Noise)
+5_ambiguous_mixed_traffic,None,,,,,,,NO_EVENT (Benign/Noise)

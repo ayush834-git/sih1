@@ -32,8 +32,8 @@ export default function SlideTextButton({
   const slideText = hoverText ?? text;
   const variantStyles =
     variant === "ghost"
-      ? "border border-white/10 text-white hover:bg-white/5"
-      : "bg-white text-black hover:bg-white/90";
+      ? "border border-[#27272A] text-white hover:bg-white/5 rounded-full"
+      : "bg-[#F0C808] text-black hover:bg-[#FFE14C] shadow-[0_0_18px_rgba(240,200,8,0.35)] hover:shadow-[0_0_24px_rgba(240,200,8,0.55)] rounded-full";
 
   return (
     <motion.div
@@ -43,7 +43,7 @@ export default function SlideTextButton({
     >
       <Link
         className={cn(
-          "group relative inline-flex h-11 items-center justify-center overflow-hidden rounded-lg px-8 font-mono font-bold text-sm tracking-wider uppercase transition-all duration-300 md:min-w-64",
+          "group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full px-8 font-mono font-bold text-sm tracking-wider uppercase transition-all duration-300 md:min-w-64",
           variantStyles,
           className
         )}

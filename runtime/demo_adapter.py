@@ -51,7 +51,7 @@ class DemoAdapter:
     def __init__(
         self,
         engine: LiveDemoEngine | None = None,
-        base_step_delay: float = 0.5,
+        base_step_delay: float = 4.0,
         store: RuntimeStateStore | None = None,
     ) -> None:
         if engine is not None:
@@ -179,7 +179,7 @@ class DemoAdapter:
 
     async def start(
         self,
-        scenario: str = "demo_recon_15s",
+        scenario: str = "demo_golden_attack",
         speed: float = 1.0,
     ) -> dict[str, Any]:
         """

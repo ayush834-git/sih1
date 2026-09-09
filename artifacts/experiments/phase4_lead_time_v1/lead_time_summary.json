@@ -1,0 +1,173 @@
+{
+  "experiment_id": "phase4_lead_time_v1",
+  "git_commit_sha": "7ec690bbc997e47ea501f5b33b04ea2490e9d584",
+  "git_is_dirty": true,
+  "experiment_seed": 42,
+  "timestamp_utc": "2026-09-09T16:38:41.786137+00:00",
+  "telemetry_source": "SYNTHETIC_CONTROLLED_SCENARIO",
+  "simulation_fidelity": "PARAMETERIZED_STATE_TRANSFORMATION_NOT_HARDWARE_INLINE",
+  "epistemic_status": "OBSERVATIONAL_TRAJECTORY_VERIFICATION_NON_PEARLIAN",
+  "experiment_name": "Experiment B: Actionable Lead Time & Human Review Latency Sweep",
+  "schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "human_latency_sweep_seconds": [
+    0.0,
+    5.0,
+    10.0,
+    20.0
+  ],
+  "total_scenarios_evaluated": 12,
+  "attack_scenarios_evaluated": 9,
+  "benign_scenarios_evaluated": 3,
+  "raw_lead_times_summary": {
+    "b0_mean_raw_lead_s": 1.1111111111111112,
+    "b1_mean_raw_lead_s": 48.888888888888886,
+    "b2_mean_raw_lead_s": 5.555555555555555,
+    "b2_raw_lead_ci_95": [
+      1.1111111111111112,
+      10.0
+    ]
+  },
+  "benign_false_alert_rates": {
+    "B0_Conventional": 0.0,
+    "B1_LogisticRegression": 1.0,
+    "B2_PredictiveTrajectory": 0.6666666666666666
+  },
+  "predefined_evaluation_criterion": {
+    "target_lead_time_tau0_s": 10.0,
+    "actual_lead_time_tau0_s": 5.56,
+    "is_monotonic_across_latencies": true,
+    "criterion_met": false,
+    "scientific_verdict": "WEAKENED"
+  },
+  "verdict": "WEAKENED",
+  "latency_sweep_evaluations": {
+    "tau_0s": {
+      "tau_exec_seconds": 0.0,
+      "b0_mean_actionable_lead_s": 1.1111111111111112,
+      "b1_mean_actionable_lead_s": 48.888888888888886,
+      "b2_mean_actionable_lead_s": 5.555555555555555,
+      "b2_mean_ci_95": [
+        1.1111111111111112,
+        10.0
+      ],
+      "b2_median_actionable_lead_s": 0.0,
+      "b2_median_ci_95": [
+        0.0,
+        10.0
+      ],
+      "wilcoxon_b2_vs_b0": {
+        "statistic": 10.0,
+        "p_value": 0.0625,
+        "mean_diff": 4.444444444444445,
+        "median_diff": 0.0
+      },
+      "wilcoxon_b2_vs_b1": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": -43.333333333333336,
+        "median_diff": -50.0
+      },
+      "cliffs_delta_b2_vs_b0": 0.3457,
+      "cliffs_delta_b2_vs_b1": -1.0,
+      "fdr_significant_vs_b0": false,
+      "fdr_significant_vs_b1": false
+    },
+    "tau_5s": {
+      "tau_exec_seconds": 5.0,
+      "b0_mean_actionable_lead_s": 0.5555555555555556,
+      "b1_mean_actionable_lead_s": 43.888888888888886,
+      "b2_mean_actionable_lead_s": 3.3333333333333335,
+      "b2_mean_ci_95": [
+        0.5555555555555556,
+        6.666666666666667
+      ],
+      "b2_median_actionable_lead_s": 0.0,
+      "b2_median_ci_95": [
+        0.0,
+        5.0
+      ],
+      "wilcoxon_b2_vs_b0": {
+        "statistic": 10.0,
+        "p_value": 0.0625,
+        "mean_diff": 2.7777777777777777,
+        "median_diff": 0.0
+      },
+      "wilcoxon_b2_vs_b1": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": -40.55555555555556,
+        "median_diff": -45.0
+      },
+      "cliffs_delta_b2_vs_b0": 0.3457,
+      "cliffs_delta_b2_vs_b1": -1.0,
+      "fdr_significant_vs_b0": false,
+      "fdr_significant_vs_b1": false
+    },
+    "tau_10s": {
+      "tau_exec_seconds": 10.0,
+      "b0_mean_actionable_lead_s": 0.0,
+      "b1_mean_actionable_lead_s": 38.888888888888886,
+      "b2_mean_actionable_lead_s": 1.1111111111111112,
+      "b2_mean_ci_95": [
+        0.0,
+        3.3333333333333335
+      ],
+      "b2_median_actionable_lead_s": 0.0,
+      "b2_median_ci_95": [
+        0.0,
+        0.0
+      ],
+      "wilcoxon_b2_vs_b0": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": 1.1111111111111112,
+        "median_diff": 0.0
+      },
+      "wilcoxon_b2_vs_b1": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": -37.77777777777778,
+        "median_diff": -40.0
+      },
+      "cliffs_delta_b2_vs_b0": 0.1111,
+      "cliffs_delta_b2_vs_b1": -1.0,
+      "fdr_significant_vs_b0": false,
+      "fdr_significant_vs_b1": false
+    },
+    "tau_20s": {
+      "tau_exec_seconds": 20.0,
+      "b0_mean_actionable_lead_s": 0.0,
+      "b1_mean_actionable_lead_s": 28.88888888888889,
+      "b2_mean_actionable_lead_s": 0.0,
+      "b2_mean_ci_95": [
+        0.0,
+        0.0
+      ],
+      "b2_median_actionable_lead_s": 0.0,
+      "b2_median_ci_95": [
+        0.0,
+        0.0
+      ],
+      "wilcoxon_b2_vs_b0": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": 0.0,
+        "median_diff": 0.0
+      },
+      "wilcoxon_b2_vs_b1": {
+        "statistic": 0.0,
+        "p_value": 1.0,
+        "mean_diff": -28.88888888888889,
+        "median_diff": -30.0
+      },
+      "cliffs_delta_b2_vs_b0": 0.0,
+      "cliffs_delta_b2_vs_b1": -1.0,
+      "fdr_significant_vs_b0": false,
+      "fdr_significant_vs_b1": false
+    }
+  },
+  "conclusions": {
+    "actionable_lead_advantage": "B2 (Predictive Trajectory) provided an empirical actionable lead time of 5.6s at tau=0s, strictly conforming to the non-increasing monotonicity condition across tau in {0, 5, 10, 20}s. Scientific criterion verdict: WEAKENED.",
+    "epistemic_qualification": "Actionable lead time is evaluated against standardized progression scenarios. Reported metrics represent algorithmic extrapolation lead times under discrete 10-second observation windows, not hardware physical guarantees."
+  }
+}

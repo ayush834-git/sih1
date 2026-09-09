@@ -1,0 +1,45 @@
+{
+  "experiment_id": "phase4_pareto_v1",
+  "git_commit_sha": "7ec690bbc997e47ea501f5b33b04ea2490e9d584",
+  "git_is_dirty": true,
+  "experiment_seed": 42,
+  "timestamp_utc": "2026-09-09T16:38:43.286420+00:00",
+  "telemetry_source": "SYNTHETIC_CONTROLLED_SCENARIO",
+  "simulation_fidelity": "PARAMETERIZED_STATE_TRANSFORMATION_NOT_HARDWARE_INLINE",
+  "epistemic_status": "OBSERVATIONAL_TRAJECTORY_VERIFICATION_NON_PEARLIAN",
+  "schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "total_scenarios_evaluated": 12,
+  "baseline_hierarchy": [
+    "B0: Null Defender",
+    "B1: Reactive Sledgehammer",
+    "B2: Static Playbook",
+    "B3: Forecast Alert Only",
+    "B4: Forecast + Fixed Action",
+    "B5: Full Predictive System (Phase 3B)"
+  ],
+  "mean_B1_reactive_disruption": 0.0125,
+  "mean_B5_predictive_disruption": 0.0,
+  "mean_disruption_difference_absolute": 0.0125,
+  "disruption_reduction_absolute_ci_95": [
+    0.0083,
+    0.0167
+  ],
+  "overall_disruption_reduction_pct": 100.0,
+  "disruption_reduction_relative_pct_ci_95": [
+    100.0,
+    100.0
+  ],
+  "predefined_evaluation_criterion": {
+    "target_disruption_reduction_pct": 30.0,
+    "target_envelope_satisfaction_rate": 0.8,
+    "reduction_target_satisfied": true,
+    "envelope_target_satisfied": true,
+    "scientific_verdict": "SUPPORT"
+  },
+  "wilcoxon_signed_rank_p_value": 0.001953,
+  "cliffs_delta_effect_size": 0.75,
+  "safety_envelope_satisfaction_rate": 0.8333,
+  "risk_envelope_satisfied_count": 10,
+  "verdict": "SUPPORT",
+  "conclusions": "Under evaluated standardized scenarios, B5 (Phase 3B Minimum-Sufficient Selection) achieved an empirical disruption reduction of 100.0% (absolute difference: 0.0125, 95% CI: [0.0083, 0.0167]) relative to B1 (reactive sledgehammer) with true safety envelope satisfaction rate of 83.3% (10/12 scenarios). Scientific criterion verdict: SUPPORT."
+}

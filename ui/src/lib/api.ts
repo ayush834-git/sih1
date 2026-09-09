@@ -14,6 +14,7 @@ import type {
   ResponseExecutionRequest,
   ResponseExecutionResponse,
   ResponseRollbackRequest,
+  ScenarioInfo,
 } from '../types/runtime';
 
 export const API_BASE_URL =
@@ -59,9 +60,20 @@ export const apiClient = {
   },
 
   /**
+   * Get list of data-backed attack scenarios.
+   */
+  async getScenarios(): Promise<ScenarioInfo[]> {
+    const res = await fetch(`${API_BASE_URL}/api/v1/demo/scenarios`, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    });
+    return handleResponse<ScenarioInfo[]>(res);
+  },
+
+  /**
    * Start a simulation scenario.
    */
-  async startDemo(scenario = 'demo_recon_15s', speed = 1.0): Promise<DemoStatus> {
+  async startDemo(scenario = 'scenario_dos_flooding', speed = 1.0): Promise<DemoStatus> {
     const res = await fetch(`${API_BASE_URL}/api/v1/demo/start`, {
       method: 'POST',
       headers: {

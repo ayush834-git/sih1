@@ -106,14 +106,15 @@ def test_capture_startup_and_shutdown():
     assert stats.end_time >= stats.start_time
 
     # Verify process terminated
-    try:
-        os.kill(pid, 0)
-        # If no error, wait slightly and check again
-        time.sleep(0.5)
-        with pytest.raises(OSError):
+    terminated = False
+    for _ in range(10):
+        try:
             os.kill(pid, 0)
-    except OSError:
-        pass  # Process is confirmed terminated
+            time.sleep(0.2)
+        except OSError:
+            terminated = True
+            break
+    assert terminated, f"Process {pid} was not terminated"
 
 
 def test_controlled_generator_traffic():
@@ -267,8 +268,9 @@ def test_traffic_correspondence_and_live_state_contract():
     gen = ControlledTrafficGenerator(ports=[8765])
 
     capture.start()
+    time.sleep(0.5)
     gen.start("baseline", speed=5.0)
-    time.sleep(1.5)
+    time.sleep(2.0)
     g_stats = gen.stop()
     c_stats = capture.stop()
 

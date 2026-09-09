@@ -81,7 +81,7 @@ class LiveCaptureStatusResponse(BaseModel):
 
 
 class DemoStartRequest(BaseModel):
-    scenario: str = Field(default="demo_recon_15s", description="Name of scenario to replay")
+    scenario: str = Field(default="scenario_dos_flooding", description="Name of scenario to replay")
     speed: float = Field(default=1.0, ge=0.0, le=100.0, description="Playback speed factor (0 = manual)")
 
 
@@ -137,6 +137,7 @@ class CurrentStateResponse(BaseModel):
     blast_radius: Optional[dict[str, Any]] = None
     response_execution: Optional[dict[str, Any]] = None
     outcome_verification: Optional[dict[str, Any]] = None
+    decision_result: Optional[dict[str, Any]] = None
 
 
 class HumanApprovalPayload(BaseModel):
@@ -228,6 +229,7 @@ class DecisionResponse(BaseModel):
     omitted_roles: list[str] = Field(default_factory=list)
     dispatched_notifications: list[dict[str, str]] = Field(default_factory=list)
     explanation: Optional[str] = None
+    decision_result: Optional[dict[str, Any]] = None
 
 
 class EventHistoryResponse(BaseModel):
@@ -318,6 +320,7 @@ def build_current_state_response(
         blast_radius=event.blast_radius,
         response_execution=event.response_execution,
         outcome_verification=event.outcome_verification,
+        decision_result=event.decision_result,
     )
 
 
@@ -371,6 +374,12 @@ def create_app(adapter: Optional[DemoAdapter] = None) -> FastAPI:
         """Get current scenario and playback lifecycle status."""
         status_info = runtime_adapter.get_status()
         return DemoStatusResponse(**status_info)
+
+    @app.get("/api/v1/demo/scenarios", tags=["Demo Control"])
+    async def get_demo_scenarios() -> list[dict[str, Any]]:
+        """Return all registered demo scenarios and their metadata."""
+        from scenarios.demo.scenarios import get_all_scenarios
+        return [s.to_dict() for s in get_all_scenarios()]
 
     # ────────────────────────────────────────────────────────
     # Routes: Demo Lifecycle Control
@@ -568,6 +577,7 @@ def create_app(adapter: Optional[DemoAdapter] = None) -> FastAPI:
             omitted_roles=event.omitted_roles,
             dispatched_notifications=event.dispatched_notifications,
             explanation=event.explanation,
+            decision_result=event.decision_result,
         )
 
     @app.get("/api/v1/events", response_model=EventHistoryResponse, tags=["Events"])

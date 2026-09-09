@@ -239,6 +239,18 @@ export interface DemoEvent {
   blast_radius?: Record<string, unknown>;
   response_execution?: Record<string, unknown>;
   outcome_verification?: Record<string, unknown>;
+  decision_result?: Record<string, unknown>;
+}
+
+export interface ScenarioInfo {
+  scenario_id: string;
+  display_name: string;
+  source_dataset: string;
+  source_label: string;
+  replay_window: string;
+  description: string;
+  expected_behavior: string;
+  expected_duration_seconds: number;
 }
 
 export type ExecutionMode = 'DEMO' | 'LIVE_PACKET_CAPTURE';

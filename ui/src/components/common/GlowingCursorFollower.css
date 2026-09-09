@@ -1,0 +1,147 @@
+.ccs-02,
+.ccs-02 *,
+.ccs-02 *::before,
+.ccs-02 *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ccs-02 {
+  --bg: #000001;
+  --text: #FFFFFF;
+  --accent: #F0C808;
+  --muted: #71717A;
+  color-scheme: dark;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 28px;
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.ccs-02__stage {
+  position: relative;
+  width: min(560px, 100%);
+  min-height: 340px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 24px;
+  background: radial-gradient(130% 100% at 20% 0%, #161618, var(--bg));
+  border: 1px solid #27272A;
+}
+
+.ccs-02__content {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px;
+  text-align: left;
+}
+
+.ccs-02__eyebrow {
+  font: 600 11px/1 ui-monospace, Menlo, monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ccs-02__content h2 {
+  font: 700 clamp(22px, 4vw, 30px)/1.12 system-ui, sans-serif;
+  letter-spacing: -.02em;
+}
+
+.ccs-02__content p {
+  font: 400 14.5px/1.6 system-ui, sans-serif;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.ccs-02__content code {
+  font: 600 12.5px/1 ui-monospace, Menlo, monospace;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.ccs-02__link {
+  align-self: flex-start;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-top: 6px;
+  border-radius: 999px;
+  font: 600 13.5px/1 system-ui, sans-serif;
+  text-decoration: none;
+  color: #000001;
+  background: var(--accent);
+  transition: background-color 0.2s;
+}
+
+.ccs-02__link:hover {
+  background: #FFE14C;
+}
+
+.ccs-02__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.ccs-02__dot,
+.ccs-02__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease, scale .2s ease;
+}
+
+.ccs-02__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: 3;
+}
+
+.ccs-02__ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 26px rgba(240, 200, 8, 0.45);
+  z-index: 2;
+}
+
+.ccs-02__stage.is-live .ccs-02__dot,
+.ccs-02__stage.is-live .ccs-02__ring {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ccs-02__stage {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ccs-02__stage {
+    cursor: auto;
+  }
+
+  .ccs-02__dot,
+  .ccs-02__ring {
+    display: none;
+  }
+}

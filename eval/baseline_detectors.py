@@ -86,6 +86,11 @@ class ConventionalCurrentStateDetector:
 class LogisticRegressionBaselineDetector:
     """
     Supervised Logistic Regression baseline trained on chronological training data.
+    Strict Zero-Leakage Protocol (SIH 26153 Phase 4):
+    - Scaler and model parameters fit STRICTLY on chronological training split.
+    - Threshold theta* tuned STRICTLY on chronological validation split.
+    - Evaluation scenarios and held-out test splits are never seen during fitting/tuning.
+    - Evaluates current observation window only (no future-state features).
     """
     def __init__(self, feature_names: Sequence[str] = CSV_AVAILABLE_FEATURES, threshold: float = 0.50) -> None:
         self.feature_names = list(feature_names)
@@ -93,12 +98,53 @@ class LogisticRegressionBaselineDetector:
         self.scaler = StandardScaler()
         self.model = LogisticRegression(class_weight="balanced", random_state=42, max_iter=1000)
         self.is_fitted = False
+        self.validation_metrics: dict[str, float] = {}
 
     def fit(self, X_train: np.ndarray, y_train: np.ndarray) -> LogisticRegressionBaselineDetector:
         X_scaled = self.scaler.fit_transform(X_train)
         self.model.fit(X_scaled, y_train)
         self.is_fitted = True
         return self
+
+    def tune_threshold_on_validation(
+        self,
+        X_val: np.ndarray,
+        y_val: np.ndarray,
+        candidate_thresholds: Sequence[float] | None = None,
+    ) -> float:
+        """
+        Select optimal decision threshold on validation data without test-set leakage.
+        Maximizes F1 score across candidate thresholds.
+        """
+        if not self.is_fitted:
+            raise RuntimeError("Model must be fit before tuning validation threshold.")
+        
+        candidates = candidate_thresholds if candidate_thresholds is not None else np.linspace(0.1, 0.9, 81)
+        X_val_scaled = self.scaler.transform(X_val)
+        probs = self.model.predict_proba(X_val_scaled)[:, 1]
+
+        best_f1 = -1.0
+        best_thresh = self.threshold
+        best_prec = 0.0
+        best_rec = 0.0
+
+        for thresh in candidates:
+            preds = (probs >= thresh).astype(int)
+            f1 = float(f1_score(y_val, preds, zero_division=0))
+            if f1 > best_f1:
+                best_f1 = f1
+                best_thresh = float(thresh)
+                best_prec = float(precision_score(y_val, preds, zero_division=0))
+                best_rec = float(recall_score(y_val, preds, zero_division=0))
+
+        self.threshold = best_thresh
+        self.validation_metrics = {
+            "tuned_threshold": best_thresh,
+            "val_f1": best_f1,
+            "val_precision": best_prec,
+            "val_recall": best_rec,
+        }
+        return best_thresh
 
     def evaluate_state(self, state: NetworkState) -> DetectionResult:
         if not self.is_fitted:
@@ -116,7 +162,7 @@ class LogisticRegressionBaselineDetector:
             is_alert=is_alert,
             event_type="SecurityEvent" if is_alert else "None",
             confidence=p,
-            trigger_reason=f"Logistic Regression P(Event)={p:.3f} (Threshold={self.threshold})",
+            trigger_reason=f"Logistic Regression P(Event)={p:.3f} (Threshold={self.threshold:.3f})",
             feature_values=state.feature_values(),
         )
 

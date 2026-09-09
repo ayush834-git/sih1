@@ -1,0 +1,84 @@
+{
+  "experiment_id": "phase4_mismatch_v1",
+  "git_commit_sha": "7ec690bbc997e47ea501f5b33b04ea2490e9d584",
+  "git_is_dirty": true,
+  "experiment_seed": 42,
+  "timestamp_utc": "2026-09-09T16:38:42.473671+00:00",
+  "telemetry_source": "SYNTHETIC_CONTROLLED_SCENARIO",
+  "simulation_fidelity": "PARAMETERIZED_STATE_TRANSFORMATION_NOT_HARDWARE_INLINE",
+  "epistemic_status": "OBSERVATIONAL_TRAJECTORY_VERIFICATION_NON_PEARLIAN",
+  "schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "total_modes_tested": 5,
+  "injected_divergence_modes_tested": 3,
+  "conforming_control_modes_tested": 1,
+  "sensor_blackout_modes_tested": 1,
+  "predefined_evaluation_criterion": {
+    "target_mismatch_detection_rate": 0.95,
+    "target_false_mismatch_rate": 0.05,
+    "actual_mismatch_detection_rate": 1.0,
+    "actual_false_mismatch_rate": 0.0,
+    "detection_target_satisfied": true,
+    "false_mismatch_target_satisfied": true,
+    "scientific_verdict": "SUPPORT"
+  },
+  "verdict": "SUPPORT",
+  "safety_invariants": {
+    "autonomous_second_executions": 0,
+    "autonomous_rollbacks": 0,
+    "reconsideration_requires_approval": true,
+    "fails_closed_on_missing_telemetry": true,
+    "epistemic_language_conformance": true
+  },
+  "mode_results": [
+    {
+      "mode_id": "mode_0_conforming_execution",
+      "description": "Conforming execution control: observed trajectory stays within tolerance cone; verifies success",
+      "verification_status": "VERIFIED_SUCCESS",
+      "is_mismatch": false,
+      "is_conforming": true,
+      "reconsideration_triggered": false,
+      "new_request_requires_approval": null,
+      "explanation": "Observed post-action network behavior is consistent with the expected intervention outcome and configured safety envelope."
+    },
+    {
+      "mode_id": "mode_1_vector_mutation",
+      "description": "Attacker mutates vector: scan drops but outbound byte_rate surges outside tolerance cone",
+      "verification_status": "VERIFIED_MISMATCH",
+      "is_mismatch": true,
+      "reconsideration_triggered": true,
+      "new_request_requires_approval": true,
+      "explanation": "Observed network behavior diverged from model expectation: Persistent feature delta divergence detected across 3 consecutive observation windows. Model assumptions require investigation; reconsideration recommended."
+    },
+    {
+      "mode_id": "mode_2_volumetric_overpower",
+      "description": "Volumetric flood overpowers rate limit: peak future risk breaches safety ceiling",
+      "verification_status": "VERIFIED_MISMATCH",
+      "is_mismatch": true,
+      "reconsideration_triggered": true,
+      "new_request_requires_approval": true,
+      "explanation": "Observed network behavior diverged from model expectation: Persistent feature delta divergence detected across 3 consecutive observation windows. Model assumptions require investigation; reconsideration recommended."
+    },
+    {
+      "mode_id": "mode_3_benign_surge",
+      "description": "Legitimate backup surge overlaps mitigation: feature divergence detected non-causally",
+      "verification_status": "VERIFIED_MISMATCH",
+      "is_mismatch": true,
+      "reconsideration_triggered": true,
+      "new_request_requires_approval": true,
+      "explanation": "Observed network behavior diverged from model expectation: Persistent feature delta divergence detected across 3 consecutive observation windows. Model assumptions require investigation; reconsideration recommended."
+    },
+    {
+      "mode_id": "mode_4_sensor_blackout",
+      "description": "Sensor blackout / empty telemetry: fails closed to INSUFFICIENT_EVIDENCE",
+      "verification_status": "INSUFFICIENT_EVIDENCE",
+      "is_insufficient_evidence": true,
+      "reconsideration_triggered": false,
+      "explanation": "No post-execution observation windows available; fails closed."
+    }
+  ],
+  "conclusions": {
+    "conforming_control": "Mode 0 establishes an empirical conforming baseline where post-mitigation telemetry aligns with the predicted trajectory within tolerance cone, yielding VERIFIED_SUCCESS and confirming 0% false mismatch rate on conforming cases.",
+    "divergence_handling": "The closed-loop coordinator successfully identifies model mismatch across vector mutations, volumetric overpowering, and co-occurring shifts without making ungrounded causal claims (100% detection rate on controlled injected cases). In all mismatch conditions, reconsideration safely produces an unapproved ApprovalRequest requiring human authorization.",
+    "fail_closed_guarantee": "Under sensor blackout or missing telemetry, the system fails closed to INSUFFICIENT_EVIDENCE, preventing false positive verification or spurious reconsideration."
+  }
+}

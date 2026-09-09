@@ -23,17 +23,19 @@
   --error: #ffb4ab;
   --error-container: #93000a;
 
-  /* Typography Stacks */
+  /* Typography Stacks & Brand Tokens */
   --font-hanken: 'Hanken Grotesk', -apple-system, sans-serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Hanken Grotesk', -apple-system, sans-serif;
+  --signal: #F0C808;
 }
 
 /* ─────────────────────────────────────────────
-   GLOBAL RESET & HARD OVERRIDES
-   Strict minimalist industrial bento requirements
+   GLOBAL RESET & CURVY / ORGANIC GEOMETRY
+   Smooth, rounded, oval, and pill aesthetic
    ───────────────────────────────────────────── */
 * {
-  border-radius: 0 !important;
   box-sizing: border-box;
 }
 
@@ -149,29 +151,36 @@ html, body {
    ───────────────────────────────────────────── */
 .bento-border {
   border: 1px solid #262626;
+  border-radius: 24px;
 }
 .bento-bg {
   background-color: #080808;
+  border-radius: 24px;
 }
 .module-border {
   border: 1px solid #262626;
+  border-radius: 20px;
 }
 .interact-border {
   border: 1px solid #353535;
+  border-radius: 9999px;
 }
 .bento-grid {
   display: grid;
-  gap: 1px;
-  background-color: #262626;
-  border: 1px solid #262626;
+  gap: 16px;
+  background-color: transparent;
 }
 .bento-module {
   background-color: #080808;
   padding: 32px;
   position: relative;
+  border-radius: 24px;
+  border: 1px solid #262626;
+  overflow: hidden;
 }
 .module-level-2 {
   background-color: #111111;
+  border-radius: 20px;
 }
 
 /* Ambient Grid pattern */
@@ -310,3 +319,1211 @@ html, body {
 .bg-critical-accent { background-color: #F0C808; }
 .text-critical-accent { color: #F0C808; }
 .border-critical-accent { border-color: #F0C808; }
+
+/* Hero Section Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+
+/* ─────────────────────────────────────────────
+   GLOBAL SMOOTH GLOWING CURSOR FOLLOWER
+   Trailing ring with lerp physics & restrained cyber gold glow
+   ───────────────────────────────────────────── */
+.global-cursor-portal {
+  pointer-events: none;
+  user-select: none;
+}
+
+.global-cursor-dot,
+.global-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              box-shadow 0.25s ease;
+  z-index: 99999;
+}
+
+/* Base Dot (Default) */
+.global-cursor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* Base Ring (Default) */
+.global-cursor-ring {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(240, 200, 8, 0.35);
+  box-shadow: 0 0 16px rgba(240, 200, 8, 0.18);
+}
+
+/* When active and inside viewport */
+.global-cursor-dot.is-live,
+.global-cursor-ring.is-live {
+  opacity: 1;
+}
+
+/* INTERACTIVE STATE: slight expansion & accentuated cyber gold */
+.global-cursor-ring.is-interactive {
+  width: 52px;
+  height: 52px;
+  border-color: #F0C808;
+  box-shadow: 0 0 24px rgba(240, 200, 8, 0.45);
+  background: rgba(240, 200, 8, 0.04);
+}
+
+.global-cursor-dot.is-interactive {
+  background: #F0C808;
+  box-shadow: 0 0 10px rgba(240, 200, 8, 0.9);
+}
+
+/* CRITICAL STATE: deliberate, tighter focus, authoritative cyber gold */
+.global-cursor-ring.is-critical {
+  width: 44px;
+  height: 44px;
+  border-width: 2px;
+  border-color: #F0C808;
+  box-shadow: 0 0 30px rgba(240, 200, 8, 0.65);
+  background: rgba(240, 200, 8, 0.08);
+}
+
+.global-cursor-dot.is-critical {
+  width: 8px;
+  height: 8px;
+  background: #F0C808;
+  box-shadow: 0 0 12px rgba(240, 200, 8, 1);
+}
+
+/* HIDDEN STATE */
+.global-cursor-dot.is-hidden,
+.global-cursor-ring.is-hidden {
+  opacity: 0 !important;
+}
+
+/* Hide native cursor globally when custom cursor is active on fine-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  html.has-global-cursor,
+  html.has-global-cursor body,
+  html.has-global-cursor a,
+  html.has-global-cursor button,
+  html.has-global-cursor input,
+  html.has-global-cursor select,
+  html.has-global-cursor textarea,
+  html.has-global-cursor [role="button"],
+  html.has-global-cursor label {
+    cursor: none !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .global-cursor-portal,
+  .global-cursor-dot,
+  .global-cursor-ring {
+    display: none !important;
+  }
+
+  html.has-global-cursor,
+  html.has-global-cursor * {
+    cursor: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   PURE-CSS CHECKBOX-HACK PIPELINE DRAWER
+   Smooth slide-out menu with animated burger
+   ───────────────────────────────────────────── */
+#pipeline-nav-toggle {
+  display: none;
+}
+
+.pipeline-burger {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  background: #080808;
+  border: 1px solid #27272A;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.pipeline-burger:hover {
+  background: rgba(240, 200, 8, 0.15);
+  border-color: #F0C808;
+  transform: scale(1.05);
+}
+
+.pipeline-burger span {
+  width: 16px;
+  height: 2px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.38s, width 0.38s;
+  transform-origin: center;
+  display: block;
+}
+
+#pipeline-nav-toggle:checked ~ * .pipeline-burger span:nth-child(1),
+#pipeline-nav-toggle:checked ~ header .pipeline-burger span:nth-child(1),
+#pipeline-nav-toggle:checked + .pipeline-burger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+#pipeline-nav-toggle:checked ~ * .pipeline-burger span:nth-child(2),
+#pipeline-nav-toggle:checked ~ header .pipeline-burger span:nth-child(2),
+#pipeline-nav-toggle:checked + .pipeline-burger span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+#pipeline-nav-toggle:checked ~ * .pipeline-burger span:nth-child(3),
+#pipeline-nav-toggle:checked ~ header .pipeline-burger span:nth-child(3),
+#pipeline-nav-toggle:checked + .pipeline-burger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Backdrop overlay */
+.pipeline-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─────────────────────────────────────────────
+   CODEFRONTS SM-17: DARK MODE GLASS SIDEBAR DOCK
+   True Expandable Dock Architecture
+   Collapsed: 68px | Expanded: 290px
+   Spring Easing: cubic-bezier(0.34, 1.25, 0.5, 1)
+   ───────────────────────────────────────────── */
+
+/* Backdrop overlay - only for mobile/explicit toggle */
+.pipeline-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.8, 0.35, 1);
+}
+
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (min-width: 768px) {
+  /* On desktop, keep overlay non-blocking on pure hover */
+  .pipeline-drawer-overlay {
+    display: none;
+  }
+}
+
+/* ── SM-17 Dock Container ── */
+.pipeline-drawer-nav {
+  --dock-w-min: 68px;
+  --dock-w-max: 290px;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  height: calc(100vh - 28px);
+  width: var(--dock-w-min);
+  background: rgba(11, 11, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 20px 48px -16px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  overflow: hidden;
+  isolation: isolate;
+  transition: width 0.45s cubic-bezier(0.34, 1.25, 0.5, 1), box-shadow 0.35s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.35, 1);
+}
+
+.pipeline-drawer-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F0C808, #FFE14C, transparent);
+  z-index: 2;
+}
+
+/* ── Desktop Hover & Focus-Within Expansion ── */
+@media (min-width: 768px) {
+  .pipeline-drawer-nav:hover,
+  .pipeline-drawer-nav:focus-within,
+  #pipeline-nav-toggle:checked ~ .pipeline-drawer-nav {
+    width: var(--dock-w-max);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 28px 64px -12px rgba(0, 0, 0, 0.95);
+  }
+}
+
+/* ── Tablet Dimensions ── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pipeline-drawer-nav {
+    --dock-w-min: 64px;
+    --dock-w-max: 272px;
+  }
+}
+
+/* ── Mobile Drawer Adaptation ── */
+@media (max-width: 767px) {
+  .pipeline-drawer-nav {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    border-radius: 0 24px 24px 0;
+    width: min(88vw, 300px);
+    transform: translateX(-100%);
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #pipeline-nav-toggle:checked ~ .pipeline-drawer-nav {
+    transform: translateX(0);
+    width: min(88vw, 300px);
+  }
+}
+
+/* ── SM-17 Sliding Specular Active Highlight ── */
+.sm17-highlight {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 0;
+  border-radius: 12px;
+  background: rgba(240, 200, 8, 0.12);
+  border: 1px solid rgba(240, 200, 8, 0.35);
+  box-shadow: 0 4px 16px -4px rgba(240, 200, 8, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  height: 44px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.35, 1), height 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SM-17 Label Transitions (max-width + opacity spring) ── */
+.sm17-label-wrapper {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: max-width 0.45s cubic-bezier(0.34, 1.25, 0.5, 1), opacity 0.25s ease 0.04s;
+}
+
+.pipeline-drawer-nav:hover .sm17-label-wrapper,
+.pipeline-drawer-nav:focus-within .sm17-label-wrapper,
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-nav .sm17-label-wrapper {
+  max-width: 220px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sm17-header-title {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.45s cubic-bezier(0.34, 1.25, 0.5, 1), opacity 0.25s ease 0.04s;
+}
+
+.pipeline-drawer-nav:hover .sm17-header-title,
+.pipeline-drawer-nav:focus-within .sm17-header-title,
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-nav .sm17-header-title {
+  max-width: 180px;
+  opacity: 1;
+}
+
+.sm17-header-close {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.pipeline-drawer-nav:hover .sm17-header-close,
+.pipeline-drawer-nav:focus-within .sm17-header-close,
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-nav .sm17-header-close {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.sm17-section-label {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+.pipeline-drawer-nav:hover .sm17-section-label,
+.pipeline-drawer-nav:focus-within .sm17-section-label,
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-nav .sm17-section-label {
+  max-height: 24px;
+  opacity: 1;
+}
+
+.sm17-operator-details {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.45s cubic-bezier(0.34, 1.25, 0.5, 1), opacity 0.25s ease 0.04s;
+}
+
+.pipeline-drawer-nav:hover .sm17-operator-details,
+.pipeline-drawer-nav:focus-within .sm17-operator-details,
+#pipeline-nav-toggle:checked ~ .pipeline-drawer-nav .sm17-operator-details {
+  max-width: 200px;
+  opacity: 1;
+}
+
+/* ── Reduced Motion Override ── */
+@media (prefers-reduced-motion: reduce) {
+  .pipeline-drawer-nav,
+  .sm17-highlight,
+  .sm17-label-wrapper,
+  .sm17-header-title,
+  .sm17-header-close,
+  .sm17-section-label,
+  .sm17-operator-details,
+  .pipeline-burger span,
+  .pipeline-drawer-overlay {
+    transition: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CODEFRONTS CTH-18: ANIMATED BORDER / ENCASED TEXT HOVER
+   TRACE (Progressive Corner Draw) & ORBIT (Conic Comet)
+   Industrial Monochromatic & Signal Gold Aesthetic (#000001 / #F0C808)
+   ───────────────────────────────────────────── */
+@property --cth18-a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ── TRACE EFFECT ── */
+.cth-trace {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #FFFFFF;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  user-select: none;
+  box-sizing: border-box;
+  transition: background-color 0.25s ease;
+}
+
+.cth-trace::before,
+.cth-trace::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+/* Top-Left corner: draws top edge rightward, then right edge downward */
+.cth-trace::before {
+  top: 0;
+  left: 0;
+  border-top: 1.5px solid #F0C808;
+  border-right: 1.5px solid #F0C808;
+  transition: height 0.2s ease-out, width 0.2s ease-out 0.2s;
+}
+
+/* Bottom-Right corner: draws bottom edge leftward, then left edge upward */
+.cth-trace::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1.5px solid #F0C808;
+  border-left: 1.5px solid #F0C808;
+  transition: height 0.2s ease-out, width 0.2s ease-out 0.2s;
+}
+
+/* On hover & focus-visible: draw width then height */
+.cth-trace:hover::before,
+.cth-trace:hover::after,
+.cth-trace:focus-visible::before,
+.cth-trace:focus-visible::after,
+.cth-trace.is-active::before,
+.cth-trace.is-active::after {
+  width: 100%;
+  height: 100%;
+  transition: width 0.2s ease-out, height 0.2s ease-out 0.2s;
+}
+
+.cth-trace .cth-trace__content,
+.cth-trace > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease 0.25s;
+  color: inherit;
+  z-index: 1;
+}
+
+.cth-trace:hover .cth-trace__content,
+.cth-trace:hover > span,
+.cth-trace:focus-visible .cth-trace__content,
+.cth-trace:focus-visible > span,
+.cth-trace.is-active .cth-trace__content,
+.cth-trace.is-active > span {
+  color: #F0C808;
+}
+
+.cth-trace:focus-visible {
+  outline: 1.5px solid #F0C808;
+  outline-offset: 4px;
+}
+
+/* Trace Variants */
+.cth-trace--surface {
+  background: #080808;
+}
+.cth-trace--pill {
+  border-radius: 9999px;
+}
+.cth-trace--pill::before,
+.cth-trace--pill::after {
+  border-radius: 9999px;
+}
+
+/* ── ORBIT EFFECT ── */
+.cth-orbit {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 1.5px;
+  border-radius: 9999px;
+  text-decoration: none;
+  background: conic-gradient(from var(--cth18-a), transparent 0 78%, #F0C808 92%, transparent 100%);
+  --cth18-a: 40deg;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.cth-orbit .cth-orbit__inner,
+.cth-orbit > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  background: #080808;
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.cth-orbit:hover,
+.cth-orbit:focus-visible {
+  animation: cth18-spin 1.6s linear infinite;
+}
+
+.cth-orbit:hover .cth-orbit__inner,
+.cth-orbit:hover > span,
+.cth-orbit:focus-visible .cth-orbit__inner,
+.cth-orbit:focus-visible > span {
+  color: #F0C808;
+  background: #000001;
+  box-shadow: inset 0 0 14px rgba(240, 200, 8, 0.12);
+}
+
+.cth-orbit:focus-visible {
+  outline: 1.5px solid #F0C808;
+  outline-offset: 4px;
+}
+
+@keyframes cth18-spin {
+  to {
+    --cth18-a: 400deg;
+  }
+}
+
+/* Reduced Motion Graceful Degradation */
+@media (prefers-reduced-motion: reduce) {
+  .cth-trace::before,
+  .cth-trace::after {
+    transition: none !important;
+  }
+  .cth-trace:hover::before,
+  .cth-trace:hover::after,
+  .cth-trace:focus-visible::before,
+  .cth-trace:focus-visible::after {
+    transition: none !important;
+    width: 100%;
+    height: 100%;
+  }
+  .cth-orbit {
+    animation: none !important;
+    background: #F0C808 !important;
+  }
+  .cth-orbit:hover,
+  .cth-orbit:focus-visible {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CODEFRONTS CTH-08: METALLIC SHIMMER TEXT EFFECT
+   Multi-stop metallic gradient + background-clip: text + 250% position sweep
+   Industrial Cyber Defense Palette (#000001 / #FFFFFF / #F0C808)
+   ───────────────────────────────────────────── */
+.cth-shimmer {
+  display: inline-block;
+  background-size: 250% 100%;
+  background-position: 97% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+/* Gold Variant (#F0C808 Warm Technical Foil) */
+.cth-shimmer--gold {
+  background-image: linear-gradient(
+    105deg,
+    #8F7504 0%,
+    #D8B206 34%,
+    #FFFFFF 49%,
+    #F0C808 64%,
+    #8F7504 100%
+  );
+}
+
+/* Monochrome / Chrome Variant (Light Glint across White/Silver Typography) */
+.cth-shimmer--monochrome {
+  background-image: linear-gradient(
+    105deg,
+    #71717A 0%,
+    #D4D4D8 34%,
+    #FFFFFF 49%,
+    #F0C808 55%,
+    #A1A1AA 100%
+  );
+}
+
+/* Silver Variant */
+.cth-shimmer--silver {
+  background-image: linear-gradient(
+    105deg,
+    #52525B 0%,
+    #A1A1AA 34%,
+    #FFFFFF 49%,
+    #D4D4D8 64%,
+    #52525B 100%
+  );
+}
+
+/* Hover / Focus Sweep Animation (1.1s cubic-bezier as specified by CodeFronts) */
+.cth-shimmer--sweep {
+  transition: background-position 1.1s cubic-bezier(0.25, 0.66, 0.15, 1);
+}
+
+.cth-shimmer--sweep:hover,
+.cth-shimmer--sweep:focus-visible,
+*:hover > .cth-shimmer--sweep,
+*:focus-visible > .cth-shimmer--sweep,
+.group:hover .cth-shimmer--sweep,
+.group:focus-visible .cth-shimmer--sweep {
+  background-position: 3% 0;
+}
+
+/* Ambient Slow Glint (Subtle 6s loop for primary brand mark) */
+.cth-shimmer--ambient {
+  animation: cth08-glint 6s ease-in-out infinite;
+}
+
+@keyframes cth08-glint {
+  0%, 100% {
+    background-position: 97% 0;
+  }
+  50% {
+    background-position: 3% 0;
+  }
+}
+
+.cth-shimmer:focus-visible {
+  outline: 1.5px solid #F0C808;
+  outline-offset: 4px;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .cth-shimmer--sweep {
+    transition: none !important;
+  }
+  .cth-shimmer--ambient {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   CODEFRONTS SN-05 — FLOATING GLASS PILL STICKY NAVBAR
+   Authoritative Source: CodeFronts SN-05
+   Adapted for SIH Predictive Cyber Defense Control Centre
+   ============================================================ */
+.sn-glass-pill {
+  position: sticky;
+  top: 14px;
+  z-index: 40;
+  width: min(calc(100% - 32px), 1400px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(8px, 1.6vw, 20px);
+  min-height: 52px;
+  padding: 6px 14px 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 8, 12, 0.76);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.85),
+              inset 0 1px 0 rgba(255, 255, 255, 0.22),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .sn-glass-pill {
+    background: #0A0A0E;
+  }
+}
+
+.pipeline-progression-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3F3F46;
+  font-size: 11px;
+  user-select: none;
+  padding: 0 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sn-glass-pill {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   CODEFRONTS SHIMMER SKELETON SUITE (SSC-07, SSC-09, SSC-10)
+   Authoritative Shimmer Mechanism: 1.8s ease-in-out translateX
+   Monochrome System: Dark Smoky Grey + Soft White Moving Highlight
+   ============================================================ */
+
+.ssc-shimmer-base {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ssc-shimmer-base::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.02) 75%,
+    transparent 100%
+  );
+  animation: ssc-shimmer-sweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.ssc-shimmer-accent {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(240, 200, 8, 0.04);
+  border: 1px solid rgba(240, 200, 8, 0.12);
+}
+
+.ssc-shimmer-accent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(240, 200, 8, 0.02) 25%,
+    rgba(240, 200, 8, 0.10) 50%,
+    rgba(240, 200, 8, 0.02) 75%,
+    transparent 100%
+  );
+  animation: ssc-shimmer-sweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes ssc-shimmer-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Staggered animation delays for lists */
+.ssc-delay-1::after { animation-delay: 0.12s; }
+.ssc-delay-2::after { animation-delay: 0.24s; }
+.ssc-delay-3::after { animation-delay: 0.36s; }
+.ssc-delay-4::after { animation-delay: 0.48s; }
+.ssc-delay-5::after { animation-delay: 0.60s; }
+
+/* SSC-07 Search Result / Trace List Item Container */
+.ssc-trace-card {
+  background: #08080A;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* SSC-09 Content / Analysis Card */
+.ssc-analysis-card {
+  background: #08080A;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* SSC-10 Form Input Placeholder Card */
+.ssc-form-card {
+  background: #08080A;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssc-shimmer-base::after,
+  .ssc-shimmer-accent::after {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   CODEFRONTS AC-18 — ANIMATED CONIC GRADIENT BORDER CARD
+   Authoritative Mechanism: @property --ac18-angle + conic-gradient
+   Masked-Ring Ring Technique + Subtle Travelling Comet Trail Highlight
+   Monochrome / Signal Gold Security Defense Palette (#FFFFFF / #F0C808 / #3F3F46)
+   ============================================================ */
+
+@property --ac18-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes ac18-spin-normal {
+  to {
+    --ac18-angle: 360deg;
+  }
+}
+
+@keyframes ac18-spin-fast {
+  to {
+    --ac18-angle: 360deg;
+  }
+}
+
+.ac18-conic-panel {
+  position: relative;
+  border-radius: 1.5rem;
+  background: transparent;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Primary Masked-Ring Pseudo-Element */
+.ac18-conic-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: transparent;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.35s ease;
+  box-sizing: border-box;
+}
+
+/* Subtle Edge Bloom Pseudo-Element */
+.ac18-conic-panel::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: transparent;
+  filter: blur(10px);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2.5px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* ── State: ACTIVE (AR(5) Temporal Forecast Intelligence) ── */
+.ac18-conic-panel[data-border-state="active"]::before {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 270deg,
+    rgba(161, 161, 170, 0.15) 295deg,
+    rgba(240, 200, 8, 0.45) 330deg,
+    #F0C808 348deg,
+    #FFFFFF 356deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-normal 6s linear infinite;
+  opacity: 1;
+}
+
+.ac18-conic-panel[data-border-state="active"]::after {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 280deg,
+    rgba(240, 200, 8, 0.18) 330deg,
+    rgba(240, 200, 8, 0.35) 350deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-normal 6s linear infinite;
+  opacity: 0.12;
+}
+
+/* ── State: DECISION (Minimum Sufficient Intervention Recommendation) ── */
+.ac18-conic-panel[data-border-state="decision"]::before {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 260deg,
+    rgba(63, 63, 70, 0.3) 280deg,
+    rgba(240, 200, 8, 0.55) 325deg,
+    #F0C808 346deg,
+    #FFFFFF 356deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-fast 4.5s linear infinite;
+  opacity: 1;
+}
+
+.ac18-conic-panel[data-border-state="decision"]::after {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 270deg,
+    rgba(240, 200, 8, 0.25) 320deg,
+    rgba(240, 200, 8, 0.5) 348deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-fast 4.5s linear infinite;
+  opacity: 0.18;
+}
+
+/* ── State: APPROVAL (Operator Action Required / Pending Human Gate) ── */
+.ac18-conic-panel[data-border-state="approval"]::before {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 250deg,
+    rgba(240, 200, 8, 0.25) 275deg,
+    rgba(240, 200, 8, 0.75) 320deg,
+    #F0C808 344deg,
+    #FFFFFF 355deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-fast 3.8s linear infinite;
+  opacity: 1;
+}
+
+.ac18-conic-panel[data-border-state="approval"]::after {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 260deg,
+    rgba(240, 200, 8, 0.35) 310deg,
+    rgba(240, 200, 8, 0.7) 345deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-fast 3.8s linear infinite;
+  opacity: 0.26;
+}
+
+/* ── State: LIVE (Connected Telemetry Activity Indicator) ── */
+.ac18-conic-panel[data-border-state="live"]::before {
+  background: conic-gradient(
+    from var(--ac18-angle),
+    transparent 0deg 290deg,
+    rgba(161, 161, 170, 0.15) 315deg,
+    rgba(240, 200, 8, 0.35) 345deg,
+    #FFFFFF 358deg,
+    transparent 360deg
+  );
+  animation: ac18-spin-normal 6.5s linear infinite;
+  opacity: 1;
+}
+
+.ac18-conic-panel[data-border-state="live"]::after {
+  opacity: 0;
+  display: none;
+}
+
+/* ── State: IDLE / STATIC (Clean Static Panel) ── */
+.ac18-conic-panel[data-border-state="idle"]::before,
+.ac18-conic-panel:not([data-border-state])::before {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.ac18-conic-panel[data-border-state="idle"]::after,
+.ac18-conic-panel:not([data-border-state])::after {
+  animation: none !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* ── Browser Fallback ── */
+@supports not ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .ac18-conic-panel[data-border-state="approval"],
+  .ac18-conic-panel[data-border-state="decision"] {
+    border: 1.5px solid rgba(240, 200, 8, 0.5) !important;
+  }
+  .ac18-conic-panel[data-border-state="active"] {
+    border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  }
+}
+
+/* ── Reduced Motion Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .ac18-conic-panel::before {
+    animation: none !important;
+    --ac18-angle: 45deg !important;
+    opacity: 0.8 !important;
+  }
+  .ac18-conic-panel::after {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
+/* ── Responsive Mobile/Tablet Tuning ── */
+@media (max-width: 768px) {
+  .ac18-conic-panel::after {
+    opacity: 0.08 !important;
+    filter: blur(6px) !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CODEFRONTS GLASS COMPONENT SUITE TOKENS
+   Monochromatic Industrial Cybersecurity Aesthetic
+   ───────────────────────────────────────────── */
+
+/* ── GLZ-23: Dark Glass Material ── */
+.glz-dark-glass {
+  background: rgba(10, 10, 14, 0.72);
+  backdrop-filter: blur(18px) saturate(1.35);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.glz-dark-glass-subtle {
+  background: rgba(10, 10, 14, 0.55);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.glz-dark-glass-bordered {
+  background: rgba(10, 10, 14, 0.78);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glz-dark-glass {
+    background: #0A0A0E !important;
+  }
+  .glz-dark-glass-subtle {
+    background: #0E0E12 !important;
+  }
+  .glz-dark-glass-bordered {
+    background: #0C0C10 !important;
+  }
+}
+
+/* ── GLZ-11: Chart Path Drawing & Live Marker Pulse ── */
+@keyframes glz-path-draw {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.glz-animate-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 0;
+  animation: glz-path-draw 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes glz-live-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.glz-live-ping {
+  transform-origin: center;
+  animation: glz-live-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ── GLZ-19: Notched Ticket / Artifact Geometry ── */
+.glz-ticket-divider {
+  position: relative;
+  border-top: 1px dashed rgba(255, 255, 255, 0.14);
+  margin: 1.25rem -1.5rem;
+}
+
+.glz-ticket-divider::before,
+.glz-ticket-divider::after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #000001;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.glz-ticket-divider::before {
+  left: -9px;
+}
+
+.glz-ticket-divider::after {
+  right: -9px;
+}
+
+/* ── Reduced Motion Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .glz-animate-draw {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .glz-live-ping {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+
+

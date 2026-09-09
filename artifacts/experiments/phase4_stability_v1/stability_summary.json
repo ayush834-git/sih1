@@ -1,0 +1,49 @@
+{
+  "experiment_id": "phase4_stability_v1",
+  "git_commit_sha": "7ec690bbc997e47ea501f5b33b04ea2490e9d584",
+  "git_is_dirty": true,
+  "experiment_seed": 42,
+  "timestamp_utc": "2026-09-09T16:38:42.908905+00:00",
+  "telemetry_source": "SYNTHETIC_CONTROLLED_SCENARIO",
+  "simulation_fidelity": "PARAMETERIZED_STATE_TRANSFORMATION_NOT_HARDWARE_INLINE",
+  "epistemic_status": "OBSERVATIONAL_TRAJECTORY_VERIFICATION_NON_PEARLIAN",
+  "experiment_name": "Experiment D: Closed-Loop Multi-Window Stability & Anti-Flapping",
+  "schema_hash": "ad07f92c94d4a3d0f8976845ad3d3adba7979fd85cfc841b6390e808432b54c5",
+  "total_windows_evaluated": 60,
+  "action_flapping_metrics": {
+    "all_action_transition_rate": 0.0169,
+    "nontrivial_flapping_rate": 0.0,
+    "flapping_index": 0.0,
+    "flapping_threshold_target": 0.05,
+    "flapping_within_safety_envelope": true,
+    "total_posture_transitions": 1,
+    "total_posture_evaluations": 60
+  },
+  "predefined_evaluation_criterion": {
+    "target_nontrivial_flapping_rate": 0.05,
+    "actual_nontrivial_flapping_rate": 0.0,
+    "criterion_met": true,
+    "scientific_verdict": "SUPPORT"
+  },
+  "verdict": "SUPPORT",
+  "trust_dynamics": {
+    "error_penalty_applied": true,
+    "penalty_formula": "min(0.30, mean_deviation * 0.10)",
+    "trust_recovery_status": "NOT CURRENTLY IMPLEMENTED / NOT APPLICABLE",
+    "recovery_rationale": "Phase 3D does not currently implement positive trust recovery; ungrounded synthetic formulas are avoided."
+  },
+  "closed_loop_safety_invariants": {
+    "autonomous_second_executions": 0,
+    "autonomous_rollbacks": 0,
+    "all_reconsideration_requests_require_approval": true,
+    "duplicate_executions_blocked": 0
+  },
+  "reconsideration_audit": {
+    "total_reconsiderations_triggered": 0,
+    "all_requests_contained": true
+  },
+  "conclusions": {
+    "stability_demonstration": "Continuous closed-loop operation over 60 sequential windows achieved a nontrivial flapping rate of 0.0000 (all transition rate: 0.0169), confirming absence of runaway oscillation under progressive attack shifts. Scientific criterion verdict: SUPPORT.",
+    "human_governance_integrity": "Throughout multi-phase incident progression, vector divergence, and re-stabilization, the closed loop strictly maintained 0 autonomous executions and 0 autonomous rollbacks. Every post-action adjustment was gated by explicit operator approval."
+  }
+}

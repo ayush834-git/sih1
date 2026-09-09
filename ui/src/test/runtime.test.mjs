@@ -516,28 +516,38 @@ describe('8. Phase 1 - Canonical Truth and UI Reconciliation Tests', () => {
     const fs = await import('node:fs');
     const path = await import('node:path');
     const mockDataContent = fs.readFileSync(path.resolve('src/data/mockData.ts'), 'utf-8');
-    const investigationContent = fs.readFileSync(path.resolve('src/pages/InvestigationWorkspacePage.tsx'), 'utf-8');
-    const overviewContent = fs.readFileSync(path.resolve('src/pages/OverviewPage.tsx'), 'utf-8');
-    const alertsContent = fs.readFileSync(path.resolve('src/pages/AlertsQueuePage.tsx'), 'utf-8');
-    const evidenceContent = fs.readFileSync(path.resolve('src/pages/EvidenceIntelligencePage.tsx'), 'utf-8');
+    const pages = [
+      'NetworkStatePage.tsx',
+      'TrajectoryForecastPage.tsx',
+      'InterventionMatrixPage.tsx',
+      'HumanApprovalPage.tsx',
+      'VerificationPage.tsx',
+      'AuditTracePage.tsx',
+    ];
 
     assert.ok(!mockDataContent.includes('2023-'), 'mockData.ts contains no 2023 timestamps');
-    assert.ok(!investigationContent.includes('2023-'), 'InvestigationWorkspacePage contains no 2023 timestamps');
-    assert.ok(!overviewContent.includes('2023-'), 'OverviewPage contains no 2023 timestamps');
-    assert.ok(!alertsContent.includes('2023-'), 'AlertsQueuePage contains no 2023 timestamps');
-    assert.ok(!evidenceContent.includes('2023-'), 'EvidenceIntelligencePage contains no 2023 timestamps');
+    for (const page of pages) {
+      const pageContent = fs.readFileSync(path.resolve(`src/pages/${page}`), 'utf-8');
+      assert.ok(!pageContent.includes('2023-'), `${page} contains no 2023 timestamps`);
+    }
   });
 
-  test('AlertsQueue and EvidenceIntelligence eliminate synthetic CASE-${step + 100} numbering', async () => {
+  test('Pipeline pages eliminate synthetic CASE-${step + 100} numbering', async () => {
     const fs = await import('node:fs');
     const path = await import('node:path');
-    const alertsContent = fs.readFileSync(path.resolve('src/pages/AlertsQueuePage.tsx'), 'utf-8');
-    const evidenceContent = fs.readFileSync(path.resolve('src/pages/EvidenceIntelligencePage.tsx'), 'utf-8');
+    const pages = [
+      'NetworkStatePage.tsx',
+      'TrajectoryForecastPage.tsx',
+      'InterventionMatrixPage.tsx',
+      'HumanApprovalPage.tsx',
+      'VerificationPage.tsx',
+      'AuditTracePage.tsx',
+    ];
 
-    assert.ok(!alertsContent.includes('step_index + 100'), 'AlertsQueuePage has no synthetic step_index + 100');
-    assert.ok(!evidenceContent.includes('step_index + 100'), 'EvidenceIntelligencePage has no synthetic step_index + 100');
-    assert.ok(alertsContent.includes("caseId: 'CASE-019'"), 'AlertsQueuePage binds to CASE-019');
-    assert.ok(evidenceContent.includes("displayCaseId = liveEvent ? 'CASE-019' :"), 'EvidenceIntelligence binds to CASE-019');
+    for (const page of pages) {
+      const pageContent = fs.readFileSync(path.resolve(`src/pages/${page}`), 'utf-8');
+      assert.ok(!pageContent.includes('step_index + 100'), `${page} has no synthetic step_index + 100`);
+    }
   });
 
   test('Authoritative 5-stage response execution contract requires human approval', () => {

@@ -1,0 +1,25 @@
+{
+  "scenario_name": "scenario_safety_boundary",
+  "timestamp": "2026-09-09T22:09:20.352281",
+  "random_seed": 42,
+  "config": {
+    "window_size_seconds": 10,
+    "history_depth": 3,
+    "trajectory_count": 3,
+    "forecast_horizon": 1,
+    "scaler": "RobustScaler",
+    "model_hierarchy": [
+      "Persistence",
+      "EWMA",
+      "AR-style",
+      "Ridge",
+      "GBDT"
+    ],
+    "long_gap_seconds": 300,
+    "max_timestamp_failure_fraction": 0.01
+  },
+  "artifact_paths": {
+    "events_jsonl": "artifacts\\demo\\scenario_safety_boundary\\events.jsonl",
+    "summary_json": "artifacts\\demo\\scenario_safety_boundary\\summary.json"
+  }
+}

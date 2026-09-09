@@ -43,6 +43,9 @@ from core.topology.models import TopologyAvailability
 from core.blastradius.engine import BlastRadiusEngine
 from core.blastradius.models import BlastRadiusStatus
 from core.authority import AuthorityPolicyEngine, AuthorityPolicyInput
+from simulation.selector import MinimumSufficientSelector
+from simulation.models import InterventionType, InterventionParameters
+from simulation.decision_models import DecisionResult, RecommendationStatus, RiskConstraintParameters
 
 
 @dataclass(frozen=True)
@@ -89,6 +92,8 @@ class DemoEvent:
     response_execution: dict[str, Any] | None = None
     # Outcome verification (Task 21)
     outcome_verification: dict[str, Any] | None = None
+    # Decision Result from MinimumSufficientSelector (Phase 3B)
+    decision_result: dict[str, Any] | None = None
     # Internal: full-resolution h1 predicted deltas for reconsideration lookback
     # Not serialized to UI (internal pipeline state)
     _full_predicted_deltas_h1: dict[str, float] = field(default_factory=dict)
@@ -129,6 +134,7 @@ class DemoEvent:
             "authority_policy": self.authority_policy,
             "response_execution": self.response_execution,
             "outcome_verification": self.outcome_verification,
+            "decision_result": self.decision_result,
         }
 
 
@@ -181,6 +187,7 @@ class LiveDemoEngine:
             scales=self.scales,
         )
         self.authority_policy_engine = AuthorityPolicyEngine()
+        self.selector = MinimumSufficientSelector()
 
     def stream_scenario(
         self,
@@ -510,6 +517,50 @@ class LiveDemoEngine:
             auth_decision = self.authority_policy_engine.evaluate(auth_input)
             auth_policy_data = auth_decision.to_dict()
 
+            # Evaluate Phase 3B Minimum Sufficient Selector
+            sim_params = {
+                InterventionType.DO_NOTHING: InterventionParameters(),
+                InterventionType.RATE_LIMIT_IP: InterventionParameters(rate_limit_factor=0.20),
+                InterventionType.TEMPORARY_BLOCK_IP: InterventionParameters(source_attribution_valid=True, block_volume_reduction=0.90),
+                InterventionType.ISOLATE_SERVICE_ENDPOINT: InterventionParameters(isolated_port=443),
+            }
+            targets = {
+                InterventionType.ISOLATE_SERVICE_ENDPOINT: "svc-ingress-gw",
+            }
+            decision_result = None
+            decision_result_dict = None
+            try:
+                decision_result = self.selector.select(
+                    current_state=state,
+                    baseline_deltas=pred_deltas[0],
+                    simulation_params_map=sim_params,
+                    target_entity_map=targets,
+                    topology=self.topology,
+                    risk_constraints=RiskConstraintParameters(target_risk=0.40, peak_risk_ceiling=0.60),
+                )
+                decision_result_dict = decision_result.to_dict()
+            except Exception:
+                decision_result = None
+                decision_result_dict = None
+
+            # Minimum Sufficient Intervention strictly from locked V1 action space:
+            # DO_NOTHING, RATE_LIMIT_IP, TEMPORARY_BLOCK_IP, ISOLATE_SERVICE_ENDPOINT
+            if decision_result is not None and decision_result.recommendation_status == RecommendationStatus.RECOMMENDED and decision_result.recommended_action is not None:
+                rec_action_name = decision_result.recommended_action.value
+                target_node = "svc-ingress-gw" if rec_action_name == "ISOLATE_SERVICE_ENDPOINT" else "198.51.100.x"
+                urgency_val = "IMMEDIATE" if curr_risk_val >= 0.40 else ("PROMPT" if curr_risk_val >= 0.20 else "WHEN_CONVENIENT")
+                action_records = [
+                    {"action_type": rec_action_name, "target": target_node, "urgency": urgency_val}
+                ]
+            elif decision_result is not None and decision_result.recommendation_status == RecommendationStatus.NO_SUFFICIENT_ACTION:
+                action_records = [
+                    {"action_type": "NO_SUFFICIENT_ACTION", "target": "HUMAN_ESCALATION_REQUIRED", "urgency": "IMMEDIATE"}
+                ]
+            else:
+                action_records = [
+                    {"action_type": "DO_NOTHING", "target": "Baseline telemetry stream", "urgency": "WHEN_CONVENIENT"}
+                ]
+
             event = DemoEvent(
                 event_id=f"evt-{idx:04d}-{new_id('e')[:8]}",
                 step_index=idx,
@@ -555,6 +606,7 @@ class LiveDemoEngine:
                 authority_policy=auth_policy_data,
                 response_execution=None,
                 outcome_verification=None,
+                decision_result=decision_result_dict,
                 _full_predicted_deltas_h1=h1_deltas_dict,
             )
 

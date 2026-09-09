@@ -14,10 +14,10 @@ CRITICAL INVARIANTS:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta
 from enum import Enum
 from hashlib import sha256
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from core.contracts import FeatureAvailability, NetworkState, new_id
 from core.response_execution.models import ResponseAction
@@ -306,3 +306,345 @@ class OutcomeVerifier:
             ),
             provenance_hash=prov_hash,
         )
+
+    def verify_trajectory(
+        self,
+        action: ResponseAction,
+        expectation: TrajectoryOutcomeExpectation,
+        observed_states: Sequence[NetworkState] | NetworkState,
+        risk_engine: Any = None,
+        bridge: Any = None,
+        config: TrajectoryVerificationConfig | None = None,
+    ) -> TrajectoryVerificationResult:
+        """
+        Evaluate observed post-action telemetry against a Phase 3A simulated intervention trajectory.
+        Enforces execution-relative window alignment, action TTL boundaries, uncertainty tolerance cones,
+        and persistence requirements.
+        """
+        cfg = config or TrajectoryVerificationConfig()
+        verification_id = new_id("verif-traj")
+
+        # 1. Normalize observed states into sequence
+        raw_states = [observed_states] if isinstance(observed_states, NetworkState) else list(observed_states)
+
+        # 2. Deterministic execution-relative window alignment:
+        # Filter candidate states to those strictly following the execution window
+        candidate_states: list[NetworkState] = []
+        for s in raw_states:
+            if not isinstance(s, NetworkState):
+                continue
+            if expectation.execution_window_id and s.window_id == expectation.execution_window_id:
+                continue
+            if expectation.execution_timestamp_end is not None and s.timestamp_start < expectation.execution_timestamp_end:
+                continue
+            candidate_states.append(s)
+
+        candidate_states.sort(key=lambda x: x.timestamp_start)
+
+        # 3. Check for missing or empty telemetry -> INSUFFICIENT_EVIDENCE
+        if not candidate_states:
+            return TrajectoryVerificationResult(
+                verification_id=verification_id,
+                action_id=action.action_id,
+                status=VerificationStatus.INSUFFICIENT_EVIDENCE,
+                step_evaluations={},
+                max_observed_risk=None,
+                risk_ceiling=expectation.risk_ceiling,
+                risk_ceiling_breached=False,
+                persistence_count=0,
+                reconsideration_recommended=False,
+                explanation="No post-execution observation windows available; fails closed.",
+                evidence_window_ids=(),
+            )
+
+        if candidate_states[0].is_empty:
+            return TrajectoryVerificationResult(
+                verification_id=verification_id,
+                action_id=action.action_id,
+                status=VerificationStatus.INSUFFICIENT_EVIDENCE,
+                step_evaluations={},
+                max_observed_risk=None,
+                risk_ceiling=expectation.risk_ceiling,
+                risk_ceiling_breached=False,
+                persistence_count=0,
+                reconsideration_recommended=False,
+                explanation=(
+                    f"Observation window '{candidate_states[0].window_id}' is empty or degraded. "
+                    "Missing evidence never implies success."
+                ),
+                evidence_window_ids=(candidate_states[0].window_id,),
+            )
+
+        # 4. Action TTL Boundary Partitioning:
+        # Only fully covered observation windows within the active action TTL interval count as active-intervention evidence.
+        t_expire = expectation.execution_timestamp_end + timedelta(seconds=expectation.action_ttl_seconds)
+        active_states: list[NetworkState] = []
+        for s in candidate_states:
+            if s.timestamp_end <= (t_expire + timedelta(seconds=1.0)):
+                active_states.append(s)
+
+        if not active_states:
+            return TrajectoryVerificationResult(
+                verification_id=verification_id,
+                action_id=action.action_id,
+                status=VerificationStatus.INSUFFICIENT_EVIDENCE,
+                step_evaluations={},
+                max_observed_risk=None,
+                risk_ceiling=expectation.risk_ceiling,
+                risk_ceiling_breached=False,
+                persistence_count=0,
+                reconsideration_recommended=False,
+                explanation="All candidate observation windows lie beyond active action TTL; post-expiration recovery.",
+                evidence_window_ids=tuple(s.window_id for s in candidate_states),
+            )
+
+        # 5. Horizon evaluation across lookahead steps
+        eval_states = active_states[:cfg.max_observation_steps]
+        step_evals: dict[int, dict[str, Any]] = {}
+        observed_risks: list[float] = []
+        consecutive_mismatches = 0
+        max_consecutive_mismatches = 0
+        ceiling_breached = False
+
+        # Identify primary feature to evaluate
+        primary_feature = "byte_rate"
+        for f in expectation.target_features:
+            avail = eval_states[0].feature_availability.get(f, FeatureAvailability.AVAILABLE)
+            if avail == FeatureAvailability.AVAILABLE and getattr(eval_states[0], f, None) is not None:
+                primary_feature = f
+                break
+
+        baseline_val = float(getattr(expectation.baseline_state, primary_feature, 0.0) or 0.0)
+
+        for i, st in enumerate(eval_states):
+            h = i + 1
+            # Uncertainty-expanded tolerance formula: Tolerance(h) = Base * (1 + kappa * (h - 1))
+            step_tolerance = cfg.base_tolerance * (1.0 + cfg.horizon_expansion_factor * (h - 1))
+            obs_val = float(getattr(st, primary_feature, 0.0) or 0.0)
+            obs_delta = obs_val - baseline_val
+
+            # Layer 1: Security Risk Ceiling Constraint
+            step_risk: float | None = None
+            step_risk_breached = False
+            if risk_engine is not None and bridge is not None:
+                try:
+                    sigs = bridge.extract_signatures(st)
+                    hyps = bridge.infer_stage_hypotheses(sigs, st)
+                    primary_hyp = hyps[0] if hyps else None
+                    if primary_hyp is not None:
+                        risk_score_obj = risk_engine.compute_risk_score(st, primary_hyp, horizon_step=0)
+                        step_risk = float(risk_score_obj.score)
+                        observed_risks.append(step_risk)
+                        if step_risk > expectation.risk_ceiling:
+                            step_risk_breached = True
+                            ceiling_breached = True
+                except Exception:
+                    step_risk = None
+
+            # Layer 2: Feature Delta Direction & Tolerance
+            feature_diverged = False
+            if baseline_val > 0:
+                if (obs_val - baseline_val) / max(1.0, baseline_val) > step_tolerance:
+                    feature_diverged = True
+            elif obs_val > 1000.0:
+                feature_diverged = True
+
+            step_mismatch = step_risk_breached or feature_diverged
+            if step_mismatch:
+                consecutive_mismatches += 1
+                max_consecutive_mismatches = max(max_consecutive_mismatches, consecutive_mismatches)
+            else:
+                consecutive_mismatches = 0
+
+            step_evals[h] = {
+                "window_id": st.window_id,
+                "horizon_step": h,
+                "step_tolerance": round(step_tolerance, 4),
+                "primary_feature": primary_feature,
+                "baseline_value": round(baseline_val, 2),
+                "observed_value": round(obs_val, 2),
+                "observed_delta": round(obs_delta, 2),
+                "observed_risk": round(step_risk, 4) if step_risk is not None else None,
+                "risk_ceiling_breached": step_risk_breached,
+                "feature_diverged": feature_diverged,
+                "step_mismatch": step_mismatch,
+            }
+
+        max_risk = max(observed_risks) if observed_risks else None
+
+        # 6. Persistence & Final Classification
+        is_mismatch = ceiling_breached or (max_consecutive_mismatches >= cfg.persistence_required_steps)
+
+        if is_mismatch:
+            status = VerificationStatus.VERIFIED_MISMATCH
+            reconsideration_recommended = True
+            if ceiling_breached:
+                explanation = (
+                    f"Observed network behavior diverged from model expectation: Security risk ceiling "
+                    f"({expectation.risk_ceiling:.2f}) was breached (peak observed risk: {max_risk:.4f}). "
+                    "Model assumptions require investigation; reconsideration recommended."
+                )
+            else:
+                explanation = (
+                    f"Observed network behavior diverged from model expectation: Persistent feature delta "
+                    f"divergence detected across {max_consecutive_mismatches} consecutive observation windows. "
+                    "Model assumptions require investigation; reconsideration recommended."
+                )
+        else:
+            status = VerificationStatus.VERIFIED_SUCCESS
+            reconsideration_recommended = False
+            explanation = (
+                "Observed post-action network behavior is consistent with the expected intervention outcome "
+                "and configured safety envelope."
+            )
+
+        return TrajectoryVerificationResult(
+            verification_id=verification_id,
+            action_id=action.action_id,
+            status=status,
+            step_evaluations=step_evals,
+            max_observed_risk=max_risk,
+            risk_ceiling=expectation.risk_ceiling,
+            risk_ceiling_breached=ceiling_breached,
+            persistence_count=max_consecutive_mismatches,
+            reconsideration_recommended=reconsideration_recommended,
+            explanation=explanation,
+            evidence_window_ids=tuple(st.window_id for st in eval_states),
+        )
+
+    def build_trajectory_reconsideration_handoff(
+        self,
+        result: TrajectoryVerificationResult,
+    ) -> OutcomeMismatchHandoff | None:
+        """
+        Build an auditable handoff record when trajectory verification detects a mismatch.
+        """
+        if result.status != VerificationStatus.VERIFIED_MISMATCH:
+            return None
+
+        window_id = result.evidence_window_ids[-1] if result.evidence_window_ids else "unknown-window"
+        first_step = result.step_evaluations.get(1, {})
+        feat_name = str(first_step.get("primary_feature", "trajectory_risk"))
+        base_val = float(first_step.get("baseline_value", 0.0))
+        obs_val = float(first_step.get("observed_value", 0.0))
+
+        hash_payload = (
+            f"{result.action_id}:{feat_name}:{base_val:.4f}:{obs_val:.4f}:{window_id}:{result.persistence_count}"
+        )
+        prov_hash = sha256(hash_payload.encode("utf-8")).hexdigest()
+
+        return OutcomeMismatchHandoff(
+            action_id=result.action_id,
+            evidence_window_id=window_id,
+            metric_name=feat_name,
+            baseline_value=base_val,
+            observed_value=obs_val,
+            expected_effect=f"Risk <= {result.risk_ceiling:.2f} and conforming feature trajectory",
+            observed_effect=f"Peak observed risk: {result.max_observed_risk} (persistence: {result.persistence_count})",
+            conflict_summary=result.explanation,
+            provenance_hash=prov_hash,
+        )
+
+
+@dataclass(frozen=True)
+class TrajectoryVerificationConfig:
+    """
+    Configurable parameters governing trajectory-based outcome verification.
+    All parameters are INITIAL DESIGN PARAMETERS — REQUIRE CALIBRATION.
+    """
+    base_tolerance: float = 0.10  # INITIAL DESIGN PARAMETER — REQUIRES CALIBRATION
+    horizon_expansion_factor: float = 0.25  # kappa in: Tolerance(h) = Base * (1 + kappa * (h - 1)) — REQUIRES CALIBRATION
+    min_observation_steps: int = 1
+    max_observation_steps: int = 3
+    persistence_required_steps: int = 2  # INITIAL DESIGN PARAMETER — REQUIRES CALIBRATION
+
+    def __post_init__(self) -> None:
+        if self.base_tolerance <= 0:
+            raise ValueError(f"base_tolerance must be positive, got {self.base_tolerance}")
+        if self.horizon_expansion_factor < 0:
+            raise ValueError(f"horizon_expansion_factor must be non-negative, got {self.horizon_expansion_factor}")
+        if self.persistence_required_steps < 1:
+            raise ValueError(f"persistence_required_steps must be >= 1, got {self.persistence_required_steps}")
+
+
+@dataclass(frozen=True)
+class TrajectoryOutcomeExpectation:
+    """
+    Defines operational success and safety bounds for an executed response action
+    derived from the Phase 3A intervention-conditioned simulation trajectory.
+    """
+    action_id: str
+    recommended_action: str
+    target_entity: str
+    baseline_state: NetworkState
+    predicted_trajectory: Any
+    predicted_risk_trajectory: Any
+    risk_ceiling: float  # Inherited directly from Phase 3B DecisionResult.peak_risk_ceiling
+    action_ttl_seconds: float = 30.0
+    execution_window_id: str = ""
+    execution_timestamp_end: datetime = field(default_factory=datetime.now)
+    target_features: tuple[str, ...] = ("byte_rate", "packet_rate", "flow_count", "syn_ratio")
+    provenance_hash: str = field(default="")
+
+    def __post_init__(self) -> None:
+        if not self.action_id:
+            raise ValueError("action_id is required")
+        if not self.provenance_hash:
+            canonical = (
+                f"{self.action_id}:{self.recommended_action}:{self.target_entity}:"
+                f"{self.risk_ceiling:.4f}:{self.action_ttl_seconds:.1f}:{self.execution_window_id}"
+            )
+            object.__setattr__(self, "provenance_hash", sha256(canonical.encode("utf-8")).hexdigest())
+
+
+@dataclass(frozen=True)
+class TrajectoryVerificationResult:
+    """
+    Immutable audit record of a multi-horizon trajectory verification assessment.
+    """
+    verification_id: str
+    action_id: str
+    status: VerificationStatus
+    step_evaluations: Mapping[int, Mapping[str, Any]]
+    max_observed_risk: float | None
+    risk_ceiling: float
+    risk_ceiling_breached: bool
+    persistence_count: int
+    reconsideration_recommended: bool
+    explanation: str
+    evidence_window_ids: tuple[str, ...] = field(default_factory=tuple)
+    provenance_hash: str = field(default="")
+    created_at: datetime = field(default_factory=datetime.now)
+
+    def __post_init__(self) -> None:
+        if not self.verification_id:
+            raise ValueError("verification_id is required")
+        if not self.action_id:
+            raise ValueError("action_id is required")
+        if not self.provenance_hash:
+            canonical = (
+                f"{self.verification_id}:{self.action_id}:{self.status.value}:"
+                f"{self.risk_ceiling:.4f}:{self.risk_ceiling_breached}:{self.persistence_count}"
+            )
+            object.__setattr__(self, "provenance_hash", sha256(canonical.encode("utf-8")).hexdigest())
+
+    @property
+    def is_model_mismatch(self) -> bool:
+        return self.status == VerificationStatus.VERIFIED_MISMATCH
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "verification_id": self.verification_id,
+            "action_id": self.action_id,
+            "status": self.status.value,
+            "step_evaluations": {int(k): dict(v) for k, v in self.step_evaluations.items()},
+            "max_observed_risk": round(self.max_observed_risk, 4) if self.max_observed_risk is not None else None,
+            "risk_ceiling": round(self.risk_ceiling, 4),
+            "risk_ceiling_breached": self.risk_ceiling_breached,
+            "persistence_count": self.persistence_count,
+            "reconsideration_recommended": self.reconsideration_recommended,
+            "explanation": self.explanation,
+            "evidence_window_ids": list(self.evidence_window_ids),
+            "provenance_hash": self.provenance_hash,
+            "created_at": self.created_at.isoformat(),
+        }

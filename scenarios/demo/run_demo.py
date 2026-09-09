@@ -65,7 +65,7 @@ def render_terminal_timeline(event: DemoEvent) -> None:
 
 
 def run_demo(
-    scenario_name: str = "demo_recon_15s",
+    scenario_name: str = "demo_golden_attack",
     output_dir: str | Path | None = None,
     no_sleep: bool = True,
     speed: float = 1.0,
@@ -146,7 +146,7 @@ def run_demo(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="SIH 26153 Live Telemetry Demo Runner")
-    parser.add_argument("--scenario", type=str, default="demo_recon_15s", help="Scenario name (demo_recon_15s, demo_recon, demo_dos, demo_exfiltration, demo_ambiguous)")
+    parser.add_argument("--scenario", type=str, default="demo_golden_attack", help="Scenario name (demo_golden_attack, demo_recon_15s, demo_recon, demo_dos, demo_exfiltration, demo_ambiguous)")
     parser.add_argument("--speed", type=float, default=1.0, help="Wall-clock replay speed multiplier")
     parser.add_argument("--no-sleep", action="store_true", default=True, help="Execute immediately without wall-clock sleep")
     parser.add_argument("--output-dir", type=str, default=None, help="Custom output directory")

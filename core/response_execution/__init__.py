@@ -24,6 +24,9 @@ from core.response_execution.verification import (
     OutcomeMismatchHandoff,
     OutcomeVerificationResult,
     OutcomeVerifier,
+    TrajectoryOutcomeExpectation,
+    TrajectoryVerificationConfig,
+    TrajectoryVerificationResult,
     VerificationStatus,
 )
 
@@ -41,5 +44,8 @@ __all__ = [
     "OutcomeMismatchHandoff",
     "OutcomeVerificationResult",
     "OutcomeVerifier",
+    "TrajectoryOutcomeExpectation",
+    "TrajectoryVerificationConfig",
+    "TrajectoryVerificationResult",
     "VerificationStatus",
 ]

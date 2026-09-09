@@ -16,12 +16,12 @@ export const badgeDeltaVariants = cva(
     variants: {
       variant: {
         outline:
-          "gap-x-1 rounded-tremor-small px-2 py-1 ring-1 ring-inset ring-border",
-        solid: "gap-x-1 rounded-tremor-small px-2 py-1",
+          "gap-x-1 rounded-full px-2.5 py-1 ring-1 ring-inset ring-border",
+        solid: "gap-x-1 rounded-full px-2.5 py-1",
         solidOutline:
-          "gap-x-1 rounded-tremor-small px-2 py-1 ring-1 ring-inset",
+          "gap-x-1 rounded-full px-2.5 py-1 ring-1 ring-inset",
         complex:
-          "space-x-2.5 rounded-tremor-default bg-tremor-background py-1 pl-2.5 pr-1 ring-1 ring-inset ring-gray-200 dark:ring-gray-800 dark:bg-dark-tremor-background",
+          "space-x-2.5 rounded-full bg-tremor-background py-1 pl-3 pr-1.5 ring-1 ring-inset ring-gray-200 dark:ring-gray-800 dark:bg-dark-tremor-background",
       },
       deltaType: {
         increase: "",
@@ -152,7 +152,7 @@ export function BadgeDelta({
         </span>
         <span
           className={cn(
-            "rounded-tremor-small px-2 py-1 text-tremor-label font-medium",
+            "rounded-full px-2 py-0.5 text-tremor-label font-medium",
             deltaType === "increase" && "bg-[#FFD60A]/10 text-[#FFD60A]",
             deltaType === "decrease" && "bg-[#FF304F]/10 text-[#FF304F]",
             deltaType === "neutral" &&

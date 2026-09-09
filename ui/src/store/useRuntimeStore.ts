@@ -13,6 +13,7 @@ import type {
   ConnectionState,
   RuntimeSnapshot,
   ReconsiderationState,
+  ScenarioInfo,
 } from '../types/runtime';
 
 export interface RuntimeStoreState {
@@ -23,14 +24,16 @@ export interface RuntimeStoreState {
   error: string | null;
   lastHeartbeat: string | null;
   isInitialized: boolean;
+  availableScenarios: ScenarioInfo[];
+  selectedScenario: string;
 }
 
 const INITIAL_DEMO_STATUS: DemoStatus = {
   session_id: 'sess-init',
-  scenario: 'demo_recon_15s',
+  scenario: 'scenario_dos_flooding',
   status: 'IDLE',
   current_step: -1,
-  total_steps: 16,
+  total_steps: 18,
   history_count: 0,
   updated_at: new Date().toISOString(),
   speed: 1.0,
@@ -51,6 +54,8 @@ let globalRuntimeState: RuntimeStoreState = {
   error: null,
   lastHeartbeat: null,
   isInitialized: false,
+  availableScenarios: [],
+  selectedScenario: 'scenario_dos_flooding',
 };
 
 const listeners = new Set<(state: RuntimeStoreState) => void>();
@@ -277,11 +282,36 @@ export function useRuntimeStore() {
     }
   };
 
-  const startDemo = async (scenario = 'demo_recon_15s', speed = 1.0) => {
+  const setSelectedScenario = (scenarioId: string) => {
+    globalRuntimeState = {
+      ...globalRuntimeState,
+      selectedScenario: scenarioId,
+    };
+    notify();
+  };
+
+  const loadScenarios = async () => {
     try {
-      const status = await apiClient.startDemo(scenario, speed);
+      const scenarios = await apiClient.getScenarios();
+      if (Array.isArray(scenarios) && scenarios.length > 0) {
+        globalRuntimeState = {
+          ...globalRuntimeState,
+          availableScenarios: scenarios,
+        };
+        notify();
+      }
+    } catch (err) {
+      console.warn('[RuntimeStore] Failed to load scenarios:', err);
+    }
+  };
+
+  const startDemo = async (scenario?: string, speed = 1.0) => {
+    const targetScenario = scenario || globalRuntimeState.selectedScenario || 'scenario_dos_flooding';
+    try {
+      const status = await apiClient.startDemo(targetScenario, speed);
       globalRuntimeState = {
         ...globalRuntimeState,
+        selectedScenario: targetScenario,
         demoStatus: status,
         snapshot: {
           ...globalRuntimeState.snapshot,
@@ -352,13 +382,18 @@ export function useRuntimeStore() {
   const resetDemo = async () => {
     try {
       const status = await apiClient.resetDemo();
+      const preservedScenario = globalRuntimeState.selectedScenario || status.scenario;
+      const cleanStatus: DemoStatus = {
+        ...status,
+        scenario: preservedScenario,
+      };
       globalRuntimeState = {
         ...globalRuntimeState,
         eventHistory: [],
-        demoStatus: status,
+        demoStatus: cleanStatus,
         snapshot: {
           event: null,
-          demo: status,
+          demo: cleanStatus,
           reconsideration: null,
           lastUpdated: new Date().toISOString(),
         },
@@ -394,10 +429,16 @@ export function useRuntimeStore() {
     if (globalRuntimeState.isInitialized) return;
 
     try {
-      // 1. Fetch current demo status
-      const status = await apiClient.getDemoStatus();
+      // 1. Fetch available scenarios
+      await loadScenarios();
 
-      // 2. Fetch current event if one exists
+      // 2. Fetch current demo status
+      const status = await apiClient.getDemoStatus();
+      if (status && status.scenario) {
+        globalRuntimeState.selectedScenario = status.scenario;
+      }
+
+      // 3. Fetch current event if one exists
       let currentEvent: DemoEvent | null = null;
       try {
         const fetched = await apiClient.getCurrentState();
@@ -408,7 +449,7 @@ export function useRuntimeStore() {
         // No current event active yet
       }
 
-      // 3. Fetch event history if active
+      // 4. Fetch event history if active
       let history: DemoEvent[] = [];
       try {
         const fetchedHistory = await apiClient.getEvents();
@@ -433,7 +474,7 @@ export function useRuntimeStore() {
       };
       notify();
 
-      // 4. Connect SSE stream
+      // 5. Connect SSE stream
       connectStream();
     } catch (err) {
       // Backend might still be starting, connect SSE anyway
@@ -448,6 +489,8 @@ export function useRuntimeStore() {
 
   return {
     ...state,
+    setSelectedScenario,
+    loadScenarios,
     startDemo,
     pauseDemo,
     resumeDemo,
